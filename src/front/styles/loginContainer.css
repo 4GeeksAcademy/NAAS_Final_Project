@@ -1,0 +1,61 @@
+.title{
+  color: white;
+  margin-bottom: 10px;
+}
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-form{
+  background-color: #3b3b3b;
+  padding: 20px;
+  border-radius: 20px;
+  width: 300px;
+}
+.form-label,
+.form-control {
+  color: white; /* Color del texto en los inputs y labels */
+}
+
+.form-control {
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .confirm-btn {
+    width: 80%; 
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #64C247;
+    color: white;
+  }
+
+  .confirm-btn:hover{
+    border: 1px solid black;
+  }
+  .input-icon{
+    position: relative
+  }
+  .input-icon i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+  }
+  .input-icon input {
+    padding-left: 35px;
+  }
+  
+  .forgot-password-btn{
+    color: #FE5201;
+    text-decoration: underline;
+    background-color: transparent;
+    border: none; 
+    padding: 0;
+    cursor: pointer; 
+    margin-top: 10px;
+  }
