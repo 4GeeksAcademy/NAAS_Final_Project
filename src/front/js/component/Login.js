@@ -13,9 +13,7 @@ function Login() {
             <input
               type="email"
               className="form-control"
-              id="InputEmail"
-              aria-describedby="emailHelp"
-              title="&#xf0e0 Email address"  
+              id="InputEmail"  
               placeholder="Email address"
             />
           </div>

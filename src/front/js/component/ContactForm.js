@@ -1,11 +1,11 @@
 import React from 'react'
-import "../../styles/loginContainer.css";
+import "../../styles/contactForm.css"
 
-function SignUpForm() {
+function ContactForm() {
   return (
     <div className="login-container">
-    <form className="login-form">
-    <h2 className='title'>Crea una nueva cuenta</h2>
+      <form className="login-form">
+      <h2 className='title'>Contacto</h2>
       <div className="mb-3">
         <div className="input-icon">
         <i className="fa-regular fa-user" style={{color: "#7f7f7f"}}/>
@@ -29,26 +29,19 @@ function SignUpForm() {
         </div>
       </div>
       <div className="mb-3">
-        <div className="input-icon">
-          <i className="fa-solid fa-lock" style={{ color: "#7f7f7f" }} />
-          <input
-            type="password"
-            className="form-control"
-            id="CreatePassword"
-            placeholder="password"
-          />
+  <label htmlFor="comentarios" className="form-label">Comentarios</label>
+  <textarea className="form-control" id="comentarios" rows="3"/>
+</div>
+        <button type="submit" className="btn confirm-btn">
+          Enviar
+          <i className="fa-regular fa-circle-check" style={{marginLeft: '8px' }}/>
+        </button>
+        <div className="mb-3">
+         
         </div>
-      </div>
-      <button type="submit" className="btn confirm-btn" style={{background: "#FE5201"}}>
-      <i className="fa-solid fa-rocket" style={{ marginRight: '8px' }}/>
-       Registrarme
-      </button>
-      <div className="mb-3">
-      
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>
   )
 }
 
-export default SignUpForm
+export default ContactForm
