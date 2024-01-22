@@ -42,3 +42,24 @@ class User_data(db.Model):
             "phone": self.phone,
             "country": self.country,
         }
+    
+class Followers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+ 
+    ## RELATIONSHIP user_id
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id_relationship = db.relationship('Users', foreign_keys=[user_id])
+
+    ## RELATIONSHIP following_user_id
+    following_user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    following_user_id_relationship = db.relationship('Users', foreign_keys=[following_user_id])
+
+    def __repr__(self):
+        return f'<Followers {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "following_user_id": self.following_user_id,
+        }
