@@ -3,7 +3,11 @@ import "../../styles/background.css";
 import rigoImageUrl from "../../img/logo1.jpeg";
 import { Link } from 'react-router-dom';
 
-export const NavbarLoginAdmin = () => {
+export const NavbarLoginAdmin = ({ onNavbarChange }) => {
+    const handleReturnToNavbar = () => {
+        onNavbarChange("default"); // Cambia el estado a "default" para volver al Navbar común
+    };
+
     return (
         <nav className="navbar navbar-dark bg-dark fixed-top px-5">
             <div className="container-fluid px-5">
@@ -114,7 +118,7 @@ export const NavbarLoginAdmin = () => {
                         </form>
                         <form className="mt-2 d-flex color-text drop-nav" role="search">
                             <h5>Cerrar Sesión</h5>
-                            <button className="btn btn-outline-warning" type="submit"><i className="avatar-login fa-solid fa-person-walking-arrow-right"></i></button>
+                            <button className="btn btn-outline-warning" onClick={handleReturnToNavbar} type="button"><i className="avatar-login fa-solid fa-person-walking-arrow-right"></i></button>
                         </form>
                     </div>
                 </div>
