@@ -2,3 +2,23 @@
     background-color: #0b0b0b98;
     width: 35%;
 }
+
+.name-container{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+.login-form{
+    background-color: #3b3b3b;
+    padding: 20px;
+    border-radius: 20px;
+    width: 40%
+  }
+  

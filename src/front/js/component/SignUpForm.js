@@ -1,54 +1,107 @@
-import React from 'react'
-import "../../styles/loginContainer.css";
+import React from 'react';
+import "../../styles/contactForm.css";
 
 function SignUpForm() {
   return (
-    <div className="login-container">
-    <form className="login-form">
-    <h2 className='title'>Crea una nueva cuenta</h2>
-      <div className="mb-3">
-        <div className="input-icon">
-        <i className="fa-regular fa-user" style={{color: "#7f7f7f"}}/>
+    <div className="login-container mt-4">
+      <form className="login-form">
+        <h2 className='title mb-5'>Crea una nueva cuenta</h2>
+        <div className='name-container'>
+        <div className="mb-3">
+          <div className="input-icon">
+            <i className="fa-regular fa-user" style={{color: "#7f7f7f"}}/>
             <input
-            type="email"
-            className="form-control"
-            id="username"
-            placeholder="Username"
-          />
+              type="text"
+              className="form-control"
+              id="firstName"
+              placeholder="First Name"
+            />
+          </div>
         </div>
-      </div>
-      <div className="mb-3">
-        <div className="input-icon">
-        <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />
-          <input
-            type="password"
-            className="form-control"
-            id="email"
-            placeholder="Email address"
-          />
+        
+        <div className="mb-3">
+          <div className="input-icon">
+            <i className="fa-regular fa-user" style={{color: "#7f7f7f"}}/>
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              placeholder="Last Name"
+            />
+          </div>
         </div>
-      </div>
-      <div className="mb-3">
-        <div className="input-icon">
-          <i className="fa-solid fa-lock" style={{ color: "#7f7f7f" }} />
-          <input
-            type="password"
-            className="form-control"
-            id="CreatePassword"
-            placeholder="password"
-          />
         </div>
-      </div>
-      <button type="submit" className="btn confirm-btn" style={{background: "#FE5201"}}>
-      <i className="fa-solid fa-rocket" style={{ marginRight: '8px' }}/>
-       Registrarme
-      </button>
-      <div className="mb-3">
-      
-      </div>
-    </form>
-  </div>
-  )
+        <div className="mb-3">
+          <div className="input-icon">
+            <i className="fa-regular fa-user" style={{color: "#7f7f7f"}}/>
+            <input
+              type="email"
+              className="form-control"
+              id="username"
+              placeholder="Username"
+            />
+          </div>
+        </div>
+      <div className='name-container'>
+        <div className="mb-3">
+          <div className="input-icon">
+            <i className="fa-regular fa-user" style={{color: "#7f7f7f"}}/>
+            <input
+              type="number"
+              className="form-control"
+              id="phone"
+              placeholder="Phone number"
+            />
+          </div>
+        </div>
+
+        <div className="mb-3 ">
+          <div className="dropdown">
+            <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Country
+            </a>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" href="#">Action</a></li>
+              <li><a className="dropdown-item" href="#">Another action</a></li>
+              <li><a className="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+        <div className="mb-3">
+          <div className="input-icon">
+            <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Email address"
+            />
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <div className="input-icon">
+            <i className="fa-solid fa-lock" style={{ color: "#7f7f7f" }} />
+            <input
+              type="password"
+              className="form-control"
+              id="CreatePassword"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="btn confirm-btn" style={{background: "#FE5201"}}>
+          <i className="fa-solid fa-rocket" style={{ marginRight: '8px' }}/>
+          Registrarme
+        </button>
+
+        <div className="mb-3">
+        </div>
+      </form>
+    </div>
+  );
 }
 
-export default SignUpForm
+export default SignUpForm;
