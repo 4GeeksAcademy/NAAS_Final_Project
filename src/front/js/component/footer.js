@@ -39,7 +39,7 @@ export const Footer = () => (
 					<div className="input-group mb-3">
 						<input type="text" className="form-control" placeholder="Enter your email here" aria-label="Enter your email here">
 						</input>
-						<button type="button" className=" px-5 btn color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscribe</button>
+						<button type="button" className=" px-5 btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscribe</button>
 					</div>
 				</div>
 			</div>
