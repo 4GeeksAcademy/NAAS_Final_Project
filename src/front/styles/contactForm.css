@@ -1,0 +1,23 @@
+
+
+.register-form{
+    background-color: #3B3B3B;
+    width: 40%;
+    text-align: center;
+    color: white;
+    padding: 30px;
+    
+}
+.name-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.title-color{
+    color: #FE5201;
+    margin-bottom: 20px;
+}
+.btn-container{
+    display: flex;
+    justify-content: center;
+}
