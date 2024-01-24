@@ -16,7 +16,6 @@ import { Footer } from "./component/footer";
 import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
-import Tips from "./component/Tips";
 
 import "../styles/home.css";
 
