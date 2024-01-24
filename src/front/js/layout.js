@@ -11,6 +11,10 @@ import injectContext from "./store/appContext";
 import getNavbarComponent from "./component/navbarManager"; // Importa la función
 
 import { Footer } from "./component/footer";
+import ForgotPassword from "./component/ForgotPassword"
+import SignUpForm from "./component/SignUpForm";
+import ContactForm from "./component/ContactForm";
+import Tips from "./component/Tips";
 
 import "../styles/home.css";
 
@@ -37,6 +41,10 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<ForgotPassword />} path="/forgot-password" />
+                        <Route element={<SignUpForm />} path="/signUp" />
+                        <Route element={<ContactForm/>} path="/contact"/>
+                        <Route element={<Tips/>} path="/tips"/>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
