@@ -30,7 +30,7 @@ class User_data(db.Model):
 
     ## RELATIONSHIP
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user_id_relationship = db.relationship(Users)
+    user_relationship = db.relationship(Users)
 
     def __repr__(self):
         return '{}'.format(self.username)
