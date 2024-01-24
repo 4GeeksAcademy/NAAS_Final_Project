@@ -1,11 +1,12 @@
 import React from 'react';
 import "../../styles/contactForm.css";
+import { Link } from 'react-router-dom';
 
 function SignUpForm() {
   return (
     <div className="login-container mt-4">
-      <form className="login-form">
-        <h2 className='title mb-5'>Crea una nueva cuenta</h2>
+      <form className="login-form register-form">
+        <h2 className='title-color mb-5'>Crea una nueva cuenta</h2>
         <div className='name-container'>
         <div className="mb-3">
           <div className="input-icon">
@@ -91,14 +92,17 @@ function SignUpForm() {
             />
           </div>
         </div>
-
+        <div className='btn-container'>
         <button type="submit" className="btn confirm-btn" style={{background: "#FE5201"}}>
           <i className="fa-solid fa-rocket" style={{ marginRight: '8px' }}/>
           Registrarme
         </button>
-
+      </div>
         <div className="mb-3">
         </div>
+        <p>Ya tengo cuenta.  
+          <Link to={"/"}>Log in</Link></p>
+
       </form>
     </div>
   );

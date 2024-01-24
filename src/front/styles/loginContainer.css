@@ -7,14 +7,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     text-align: center;
+    margin-top: 20px;
 }
 .login-form{
   background-color: #3b3b3b;
   padding: 20px;
   border-radius: 20px;
-  width: 300px;
+  width: 50vh;
+
 }
 .form-label,
 .form-control {
@@ -26,7 +28,9 @@
     padding: 10px;
     border-radius: 20px;
     margin-bottom: 10px;
-  }
+    /* width: 90% */
+   }
+
   
   .confirm-btn {
     width: 80%; 

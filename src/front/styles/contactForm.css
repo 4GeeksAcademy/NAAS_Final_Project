@@ -1,24 +1,23 @@
-.login-form{
-    background-color: #0b0b0b98;
-    width: 35%;
-}
 
+
+.register-form{
+    background-color: #3B3B3B;
+    width: 40%;
+    text-align: center;
+    color: white;
+    padding: 30px;
+    
+}
 .name-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 10px;
 }
-.login-container{
+.title-color{
+    color: #FE5201;
+    margin-bottom: 20px;
+}
+.btn-container{
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
 }
-.login-form{
-    background-color: #3b3b3b;
-    padding: 20px;
-    border-radius: 20px;
-    width: 40%
-  }
-  
