@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+import smtplib
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
@@ -17,7 +18,11 @@ from flask_jwt_extended import jwt_required #Protect route requiring token
 from flask_jwt_extended import JWTManager #Link our app with JWT
 
 from flask_bcrypt import Bcrypt
-# from models import Person
+
+# EMAIL
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from api.email_utils import send_password_reset_email, generate_reset_link
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
@@ -26,7 +31,7 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.url_map.strict_slashes = False
 
-app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET')  # Change this!
+app.config["JWT_SECRET_KEY"] = os.environ.get('C08D16F86116A1345802D6A77BE186F662A88B144A72D191BFBD80CACF9BFE20')
 jwt = JWTManager(app)
 
 
@@ -208,7 +213,27 @@ def photo_uploader():
     db.session.commit()
     return jsonify({'msg': 'ok'}), 200
 
+@app.route('/reset_password', methods=['POST'])
+def reset_password():
+    body = request.get_json(silent=True)
+    if body is None or 'email' not in body:
+        return jsonify({'msg': 'Invalid request'}), 400
 
+    user = Users.query.filter_by(email=body['email']).first()
+
+    if user is None:
+        return jsonify({'msg': 'User not found'}), 404
+
+    # Genera un token único para el enlace de restablecimiento de contraseña
+    reset_token = generate_reset_link()
+    reset_link = f'https://jubilant-spork-x4wj5rv54qgfgw7-3000.app.github.dev/forgot-password/{reset_token}'
+
+    # Almacena el token en la base de datos o en un sistema de caché para su verificación posterior
+
+    # Envía el enlace de restablecimiento al correo del usuario
+    send_password_reset_email(user.email, reset_link)
+
+    return jsonify({'msg': 'Password reset link sent successfully'}), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
