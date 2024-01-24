@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import Login from "../component/Login";
+import Categories from "../component/Categories";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -23,6 +24,7 @@ export const Home = () => {
 				</a>
 			</p>
 			<Login/>
+			<Categories/>
 		</div>
 	);
 };
