@@ -41,3 +41,27 @@ linear-gradient(128.15deg, #59FF7E 49.75%, #377DF7 136.56%);
     ;
 
 }
+.brd{
+    border-radius: 20px;
+}
+
+.drop-nav{
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+.avatar-login{
+    color: white;
+    font-size: xx-large;
+}
+.color-text-nav{
+    color: #FFFFFF;
+}
+
+.color-text-nav:hover{
+    color: #FFFFFF;
+}
+
+.color-text-nav:focus {
+    color: #858584; /* Establece el color al pasar el ratón sobre el enlace */
+  }
