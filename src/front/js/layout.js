@@ -17,13 +17,16 @@ import { Footer } from "./component/footer";
 import "../styles/home.css";
 
 const Layout = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
     const [navbarMode, setNavbarMode] = useState("default");
+    const [currentSection, setCurrentSection] = useState("default");
 
     // Función para cambiar el estado del Navbar
     const handleNavbarChange = (mode) => {
         setNavbarMode(mode);
+    };
+
+    const handleSectionChange = (section) => {
+        setCurrentSection(section);
     };
 
     const basename = process.env.BASENAME || "";
@@ -34,7 +37,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    {getNavbarComponent(navbarMode, handleNavbarChange)} {/* Añade handleNavbarChange aquí */}
+                    {getNavbarComponent(navbarMode, handleNavbarChange, handleSectionChange)} {/* Añade handleNavbarChange aquí */}
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
