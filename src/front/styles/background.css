@@ -65,3 +65,18 @@ linear-gradient(128.15deg, #59FF7E 49.75%, #377DF7 136.56%);
 .color-text-nav:focus {
     color: #858584; /* Establece el color al pasar el ratón sobre el enlace */
   }
+
+ /* Estilo inicial para los enlaces en vistaProfile */
+.select{
+    background-color: #2B2B2B;
+    color: white;
+    text-decoration: underline;
+    border: none
+  }
+
+.banner {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+  

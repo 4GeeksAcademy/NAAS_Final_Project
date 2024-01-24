@@ -6,6 +6,8 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import { VistaProfile } from "./pages/vistaProfile";
+import { MyProfile } from "./pages/myProfile";
 import injectContext from "./store/appContext";
 
 import getNavbarComponent from "./component/navbarManager"; // Importa la función
@@ -37,6 +39,8 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<VistaProfile />} path="/vistaProfile" />
+                        <Route element={<MyProfile />} path="/myProfile/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
