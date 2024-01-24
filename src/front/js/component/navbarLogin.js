@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import "../../styles/background.css";
 import rigoImageUrl from "../../img/logo1.jpeg";
-import { Link } from 'react-router-dom';
 
-export const NavbarLogin = ({ onNavbarChange }) => {
+export const NavbarLogin = ({ onNavbarChange, onChangeSection }) => {
     const handleReturnToNavbar = () => {
         console.log("Returning to Navbar");
         onNavbarChange("default"); // Cambia el estado a "default" para volver al Navbar común
+		onChangeSection("default"); // Cambia la sección en VistaProfile
     };
 	return (
 		<nav className="navbar navbar-dark bg-dark fixed-top px-5">
@@ -41,9 +42,10 @@ export const NavbarLogin = ({ onNavbarChange }) => {
 			</div>
 			<div className="offcanvas offcanvas-end text-bg-dark color-back" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
 				<div className="offcanvas-header">
-					<a href="#" className="offcanvas-title color-text-nav" id="offcanvasDarkNavbarLabel">
-						<h5><i className="pe-2 avatar-login fa-solid fa-user-gear"></i>My Profile</h5>
-					</a>
+					<Link to="/vistaProfile">
+					<button className="offcanvas-title color-text-nav color-back" id="offcanvasDarkNavbarLabel">
+						<h5><i className="pe-2 avatar-login fa-solid fa-user-gear"></i>My Profile</h5></button>
+					</Link>
 					<button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 				</div>
 				<div className="offcanvas-body">
@@ -58,8 +60,10 @@ export const NavbarLogin = ({ onNavbarChange }) => {
 							<a className="nav-link" href="#"><i className="pe-2 color-text fa-solid fa-photo-film"></i>Mis Colecciones</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#"><i className="pe-2 color-text fa-solid fa-calendar-days"></i>Mis Eventos</a>
-						</li>
+                        <Link className="nav-link color-text-nav" to="#" onClick={() => onChangeSection("logros")}>
+                            <i className="pe-2 fa-brands fa-space-awesome"></i>Eventos
+                        </Link>
+                    </li>
 						<li className="nav-item">
 							<a className="nav-link" href="#"><i className="pe-2 color-text fa-solid fa-medal"></i>Mis Logros</a>
 						</li>
