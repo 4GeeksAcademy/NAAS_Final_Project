@@ -109,7 +109,7 @@ const TermsAndConditions = () => {
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('good-faith')}>
-                    Fomento de la Buena Fé y Colaboración: Construyendo Comunidad
+                    Fomento de la Buena Fe y Colaboración: Construyendo Comunidad
                 </h5>
                 {section['good-faith'] && (
                     <ul>
