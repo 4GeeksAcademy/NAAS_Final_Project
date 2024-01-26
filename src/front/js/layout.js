@@ -17,6 +17,7 @@ import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
 
+
 import "../styles/home.css";
 
 const Layout = () => {
@@ -46,7 +47,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<SignUpForm />} path="/signUp" />
-                        <Route element={<ContactForm/>} path="/contact"/>
+                        <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<MyProfile />} path="/myProfile/:theid" />
                         <Route element={<h1>Not found!</h1>} />
