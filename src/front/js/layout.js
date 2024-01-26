@@ -16,6 +16,7 @@ import { Footer } from "./component/footer";
 import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
+import TipsPage from "./component/TipsPage"
 
 import "../styles/home.css";
 
@@ -49,6 +50,7 @@ const Layout = () => {
                         <Route element={<ContactForm/>} path="/contact"/>
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<MyProfile />} path="/myProfile/:theid" />
+                        <Route element={<TipsPage />} path="/tips" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
