@@ -16,38 +16,37 @@ const TermsAndConditions = () => {
         <div className='mt-5'>
             <h1 className='text-center mb-4'>Concurso Amateur de Fotografía - Bases y Condiciones</h1>
             &nbsp;
-            <h3 className='mb-4'>¡Sean bienvenidos al Concurso Amateur de Fotografía de Snapify!
-                ¡Estamos emocionados de poder ver el talento y la creatividad de nuestra increíble comunidad en acción!
+            <h3 className='mb-4'>¡Bienvenidos al Concurso Amateur de Fotografía de Snapify! Nos complace enormemente presentar esta oportunidad para que nuestra comunidad exhiba su talento y creatividad a través de la lente de una cámara. ¡Esperamos ansiosos ver las maravillosas imágenes que capturarán!
             </h3>
             <h3>A continuación, detallamos las Bases y Condiciones para poder participar en este evento:</h3>
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('category')}>
-                    Categorías del Concurso
+                    Categorías: Explora tu Pasión
                 </h5>
                 {section['category'] && (
                     <ul>
                         <li>Los participantes pueden enviar hasta 5 fotos por categoría.</li>
-                        <li>Las categorías incluyen—pero no se limitan— a Retrato, Paisaje, Macrofotografía, Vida Salvaje, Arte Abstracto, y cualquier otra Categoría que pueda anunciarse en la plataforma.</li>
+                        <li>Las categorías incluyen, pero no se limitan, a: Retrato, Paisaje, Macrofotografía, Vida Salvaje, Arte Abstracto, y cualquier otra Categoría que pueda anunciarse en la plataforma.</li>
                     </ul>
                 )}
             </div>
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('dates')}>
-                    Fechas Importantes
+                    Fechas Claves: No te Pierdas Nada
                 </h5>
                 {section['dates'] && (
                     <ul>
                         <li>La fecha de inicio y cierre del concurso se anunciará en la web y se notificará a todos los usuarios registrados.</li>
-                        <li>Asegúrate de marcar las fechas en tu calendario para no perder la oportunidad de participar.</li>
+                        <li>Es crucial marcar las fechas en tu calendario para asegurarte no perder la oportunidad de participar.</li>
                     </ul>
                 )}
             </div>
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('votation')}>
-                    Método de Votación
+                    Proceso de Votación: Tu Opinión Cuenta
                 </h5>
                 {section['votation'] && (
                     <ul>
@@ -60,60 +59,62 @@ const TermsAndConditions = () => {
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('prizes')}>
-                    Premios
+                    Reconocimiento Especial: Premios y Logros.
                 </h5>
                 {section['prizes'] && (
                     <ul>
                         <li>No hay premios externos en efectivo o físicos para este concurso.</li>
-                        <li>Los ganadores recibirán insignias especiales para la aplicación, destacando su logro y habilidades fotográficas.</li>
-                        <li>Todos los votos también contribuirán a un ranking general que destacará a los usuarios más talentosos de nuestra comunidad.</li>
+                        <li>Sin embargo, los ganadores recibirán insignias especiales para la plataforma, las cuales destacarán su logro y reconocimiento de habilidades fotográficas.</li>
+                        <li>Además, todos los votos contribuirán a un ranking general que destacará a los usuarios más talentosos de nuestra vibrante comunidad.</li>
                     </ul>
                 )}
             </div>
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('participation')}>
-                    Participación
+                    Requisitos para Participar: Prepara tu SNAP!
                 </h5>
                 {section['participation'] && (
                     <ul>
                         <li>Para participar, los usuarios deben estar registrados en Snapify.</li>
-                        <li>Las fotos deben cumplir con las normas de contenido de la comunidad.</li>
-                        <li>Cada participante es responsable de garantizar que tenga los derechos necesarios para enviar las fotos.</li>
+                        <li>Todas las fotos enviadas deben cumplir con las normas de contenido de la comunidad y no infringir ningún derecho de autor.</li>
+                        <li>Cada participante es responsable de garantizar que tenga los derechos necesarios para enviar las fotos y que estás representen su propio trabajo original.</li>
                     </ul>
                 )}
             </div>
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('results')}>
-                    Publicación de Resultados
+                    Anuncio de Resultados: Descubre a los Ganadores
                 </h5>
                 {section['results'] && (
                     <ul>
-                        <li>Los resultados se anunciarán en la web después de la finalización del concurso.</li>
-                        <li>Los ganadores recibirán notificaciones y tendrán acceso a sus insignias.</li>
+                        <li>Los resultados del concurso se anunciarán en la web después de la finalización del evento.</li>
+                        <li>Los ganadores serán notificados personalmente y recibirán acceso a sus insignias especiales.</li>
                     </ul>
                 )}
             </div>
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('photos-usage')}>
-                    Uso de las Fotos
+                    Uso Responsable de las Fotos: Protegiendo tu Creatividad
                 </h5>
                 {section['photos-usage'] && (
                     <ul>
-                        <li>Al participar, los concursantes otorgan el derecho a Snapify para mostrar sus fotos en la plataforma con fines promocionales y destacar los logros de la comunidad.</li>
+                        <li>Al participar en el evento, los concursantes otorgan a Snapify el derecho a mostrar sus fotos en la plataforma con fines promocionales y para destacar los logros de la comunidad.</li>
+                        <li>Es importante que los participantes estén conscientes de que sus imágenes pueden ser utilizadas con éste propósito una vez enviadas al concurso.</li>
                     </ul>
                 )}
             </div>
             &nbsp;
             <div className='bases-section'>
                 <h5 className='category-title' onClick={() => expandSection('good-faith')}>
-                    Buena Fé y Colaboración
+                    Fomento de la Buena Fé y Colaboración: Construyendo Comunidad
                 </h5>
                 {section['good-faith'] && (
                     <ul>
-                        <li>Fomentamos un ambiente positivo y colaborativo. Respeten las obras de los demás y disfruten del proceso creativo compartido.</li>
+                        <li>Fomentamos un ambiente positivo y colaborativo dentro de nuestra comunidad.</li>
+                        <li>Es fundamental respetar el trabajo de los demás participantes y disfrutar del proceso creativo compartido, manteniendo siempre una actitud de buena fe y apoyo mutuo.</li>
                     </ul>
                 )}
             </div>
