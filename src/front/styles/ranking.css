@@ -1,0 +1,73 @@
+.ranking{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 800px;
+  background-color: #3b3b3b;
+  color: white;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+
+.tabs-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; 
+  }
+  
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #ffffff; 
+  }
+  
+  button.active {
+    border-bottom: 2px solid #007bff;
+  }
+
+  .ranking-container {
+    margin-top: 50px;
+    margin-left: 30px;
+    background-color: #3b3b3b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    width: 100vh;
+    height: 60px;
+    border-radius: 15px;
+    padding: 0 20px;
+}
+
+.ranking-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.ranking-numbers {
+    display: flex;
+    gap: 50px;
+    margin-right: 70px;
+}
+
+.ranking-circle {
+    width: 30px; 
+    height: 30px; 
+    background-color: #64C247; 
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; 
+}
+
+
+.ranking-circle p {
+    margin: 0;
+}
