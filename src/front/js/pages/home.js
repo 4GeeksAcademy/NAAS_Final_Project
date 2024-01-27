@@ -23,6 +23,7 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
+			<Login />
 			<TermsAndConditions />
 		</div>
 	);
