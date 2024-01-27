@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../../styles/background.css";
 import "../../styles/TermsAndConditions.css"
 
 const TermsAndConditions = () => {
@@ -13,7 +14,7 @@ const TermsAndConditions = () => {
     };
 
     return (
-        <div className='mt-5'>
+        <div className='container mt-5'>
             <h1 className='text-center mb-4'>Bases y Condiciones del Concurso de Fotografía Amateur de Snapify</h1>
             &nbsp;
             <h3 className='mb-4'>¡Bienvenidos al Concurso Amateur de Fotografía de Snapify! Nos complace enormemente presentar esta oportunidad para que nuestra comunidad exhiba su talento y creatividad a través de la lente de una cámara. ¡Esperamos ansiosos ver las maravillosas imágenes que capturarán!
@@ -143,7 +144,7 @@ const TermsAndConditions = () => {
                     </div>
                 </div>
             </div>
-            <div className='accordion' id='accordionExample8'>
+            <div className='accordion mb-4' id='accordionExample8'>
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingEight'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseEight' aria-aria-expanded='true' aria-controls='collapseEight' onClick={() => expandSection('good-faith')}>
