@@ -16,7 +16,6 @@ import { Footer } from "./component/footer";
 import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
-
 import TermsAndConditions from "./component/TermsAndConditions";
 
 import "../styles/home.css";
