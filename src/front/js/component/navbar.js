@@ -1,34 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import rigoImageUrl from "../../img/logo1.jpeg";
 import { NavbarLogin } from "./navbarLogin";
 import { NavbarLoginAdmin } from "./navbarLoginAdmin";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+    const { store, actions } = useContext(Context);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-    const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
-
-	const handleNavbarChange = (mode) => {
-        console.log("Changing navbar mode to:", mode);
-        setNavbarMode(mode);
-    };
+    
 
     const handleLoginUser = () => {
-        setIsUserLoggedIn(true);
-        setIsAdminLoggedIn(false);
+        actions.loginUser();
         setShowLoginModal(false);
     };
-
+    
     const handleLoginAdmin = () => {
-        setIsUserLoggedIn(false);
-        setIsAdminLoggedIn(true);
+        actions.loginAdmin();
         setShowLoginModal(false);
     };
 
     const handleOpenModal = () => {
         // Abre el modal y resetea el estado de login
-        setIsUserLoggedIn(false);
-        setIsAdminLoggedIn(false);
         setShowLoginModal(true);
     };
 
@@ -47,13 +39,13 @@ export const Navbar = () => {
                 </div>
                 <ul className="nav justify-content-center">
                     <li className="nav-item">
-                        <a className="nav-link active color-text" aria-current="page" href="#"><i className="pe-2 fa-solid fa-store"></i>Galería</a>
+                        <a className="nav-link active color-text-nav" aria-current="page" href="#"><i className="pe-2 fa-solid fa-store"></i>Galería</a>
                     </li>
                     <li className="nav-item">
-                        <a className="color-text nav-link" href="#"><i className="pe-2 fa-solid fa-arrow-trend-up"></i>Rankings</a>
+                        <a className="color-text-nav nav-link" href="#"><i className="pe-2 fa-solid fa-arrow-trend-up"></i>Rankings</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link color-text" href="#"><i className="pe-2 fa-brands fa-space-awesome"></i>Eventos</a>
+                        <a className="nav-link color-text-nav" href="#"><i className="pe-2 fa-brands fa-space-awesome"></i>Eventos</a>
                     </li>
                     <li className="nav-item">
                         <button
@@ -70,8 +62,8 @@ export const Navbar = () => {
             </div>
 
             {/* Renderiza el componente del usuario o el administrador según el estado */}
-            {isUserLoggedIn && <NavbarLogin onNavbarChange={() => setIsUserLoggedIn(false)} />}
-            {isAdminLoggedIn && <NavbarLoginAdmin onNavbarChange={() => setIsAdminLoggedIn(false)} />}
+            {store.isUserLoggedIn && <NavbarLogin onNavbarChange={() => actions.isUserLoggedIn(false)} />}
+            {store.isAdminLoggedIn && <NavbarLoginAdmin onNavbarChange={() => actions.isAdminLoggedIn(false)} />}
 			<div className={`modal fade ${showLoginModal ? 'show' : ''}`} id="staticBackdrop" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden={!showLoginModal}>
 				<div className="modal-dialog">
 					<div className="modal-content">
