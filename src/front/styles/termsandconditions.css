@@ -11,21 +11,22 @@
 .main-title, .secondary-title, .third-title {
     color: white;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 /* Accordion Box */
 .accordion-item {
     background: #E8F0FE;
     border: 1px solid #dee2e6;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 /* Accordion Storage of Text */
 
 .accordion-body ul{
-    list-style: circle;
+    list-style: disc;
     text-align: left;
-    padding: 20px;
+    padding: 10px 20px;
 }
 
 
@@ -36,6 +37,20 @@
     font-size: 16px;
     line-height: 1.5;
     color: #333;
+    transition: 0.3s ease;
+    opacity: 0;
+    animation: fadeInListItem 0.5s ease forwards;
+}
+
+@keyframes fadeInListItem {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .accordion-body ul li:last-child {
@@ -48,12 +63,14 @@
     font-size: 17px;
     text-align: left;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     font-weight: bold;
 }
 
+
 .accordion-button:hover {
     background-color: #64C247;
+    color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -74,4 +91,5 @@
 .accordion-button:not(.collapsed)::after{
     transform: rotate(0deg); /*Rotate the arrow upwards when expanded */
 }
+
 

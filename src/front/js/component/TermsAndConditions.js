@@ -31,7 +31,7 @@ const TermsAndConditions = () => {
                         <div className='accordion-body'>
                             <ul>
                                 <li>Los participantes pueden enviar hasta 5 fotos por categoría.</li>
-                                <li>Las categorías incluyen, pero no se limitan, a: Retrato, Paisaje, Macrofotografía, Vida Salvaje, Arte Abstracto, y cualquier otra Categoría que pueda anunciarse en la plataforma.</li>
+                                <li>Las categorías incluyen, pero no se limitan, a: <em>Retrato</em>, <em>Paisaje</em>, <em>Macrofotografía</em>, <em>Vida Salvaje</em>, <em>Arte Abstracto</em>, y cualquier otra Categoría que pueda anunciarse en la plataforma.</li>
                             </ul>
                         </div>
                     </div>
