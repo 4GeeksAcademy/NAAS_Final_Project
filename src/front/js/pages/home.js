@@ -24,6 +24,7 @@ export const Home = () => {
 				</a>
 			</p>
 			<Login />
+			<TermsAndConditions />
 		</div>
 	);
 };

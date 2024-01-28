@@ -51,7 +51,7 @@ const Layout = () => {
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<MyProfile />} path="/myProfile/:theid" />
-                        <Route element={<TermsAndConditions />} path="/terms-conditions" />
+                        <Route element={<TermsAndConditions />} path="/terms" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
