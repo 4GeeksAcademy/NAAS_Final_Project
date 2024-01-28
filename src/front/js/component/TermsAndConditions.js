@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import "../../styles/background.css";
-import "../../styles/TermsAndConditions.css"
+import "../../styles/termsandconditions.css"
 
 const TermsAndConditions = () => {
 
@@ -14,18 +13,18 @@ const TermsAndConditions = () => {
     };
 
     return (
-        <div className='container mt-5'>
-            <h1 className='text-center mb-4'>Bases y Condiciones del Concurso de Fotografía Amateur de Snapify</h1>
+        <div className='terms-conditions container-fluid mt-5'>
+            <h1 className='main-title text-center mb-4'>Bases y Condiciones del Concurso de Fotografía Amateur de Snapify</h1>
             &nbsp;
-            <h3 className='mb-4'>¡Bienvenidos al Concurso Amateur de Fotografía de Snapify! Nos complace enormemente presentar esta oportunidad para que nuestra comunidad exhiba su talento y creatividad a través de la lente de una cámara. ¡Esperamos ansiosos ver las maravillosas imágenes que capturarán!
+            <h3 className='secondary-title mb-4'>¡Bienvenidos al Concurso Amateur de Fotografía de Snapify! Nos complace enormemente presentar esta oportunidad para que nuestra comunidad exhiba su talento y creatividad a través de la lente de una cámara. ¡Esperamos ansiosos ver las maravillosas imágenes que capturarán!
             </h3>
-            <h3>A continuación, detallamos las Bases y Condiciones para poder participar en este evento:</h3>
+            <h3 className='third-title'>A continuación, detallamos las Bases y Condiciones para poder participar en este evento:</h3>
             &nbsp;
             <div className='accordion' id='accordionExample1'>
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingOne'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-aria-expanded='true' aria-controls='collapseOne' onClick={() => expandSection('category')}>
-                            1.Categorías: Explora tu Pasión Fotográfica
+                            1. Categorías: Explora tu Pasión Fotográfica
                         </button>
                     </h5>
                     <div id='collapseOne' className={`accordion-collapse collapse${section['category'] ? ' show' : ''}`} aria-labelledly='headingOne' data-bs-parent='#accordionExample'>
@@ -42,7 +41,7 @@ const TermsAndConditions = () => {
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingTwo'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseTwo' aria-aria-expanded='true' aria-controls='collapseTwo' onClick={() => expandSection('participation')}>
-                            2.Requisitos para Participar: Prepara tu SNAP!
+                            2. Requisitos para Participar: Prepara tu SNAP!
                         </button>
                     </h5>
                     <div id='collapseTwo' className={`accordion-collapse collapse${section['participation'] ? ' show' : ''}`} aria-labelledly='headingTwo' data-bs-parent='#accordionExample'>
@@ -61,7 +60,7 @@ const TermsAndConditions = () => {
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingThree'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseThree' aria-aria-expanded='true' aria-controls='collapseThree' onClick={() => expandSection('dates')}>
-                            3.Fechas Claves: No te Pierdas Ningún Evento
+                            3. Fechas Claves: No te Pierdas Ningún Evento
                         </button>
                     </h5>
                     <div id='collapseThree' className={`accordion-collapse collapse${section['dates'] ? ' show' : ''}`} aria-labelledly='headingThree' data-bs-parent='#accordionExample'>
@@ -78,7 +77,7 @@ const TermsAndConditions = () => {
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingFour'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseFour' aria-aria-expanded='true' aria-controls='collapseFour' onClick={() => expandSection('votation')}>
-                            4.Proceso de Votación: Tu Opinión Importa
+                            4. Proceso de Votación: Tu Opinión Importa
                         </button>
                     </h5>
                     <div id='collapseFour' className={`accordion-collapse collapse${section['votation'] ? ' show' : ''}`} aria-labelledly='headingFour' data-bs-parent='#accordionExample'>
@@ -96,7 +95,7 @@ const TermsAndConditions = () => {
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingFive'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseFive' aria-aria-expanded='true' aria-controls='collapseFive' onClick={() => expandSection('prizes')}>
-                            5.Reconocimiento Especial: Premios y Logros.
+                            5. Reconocimiento Especial: Premios y Logros.
                         </button>
                     </h5>
                     <div id='collapseFive' className={`accordion-collapse collapse${section['prizes'] ? ' show' : ''}`} aria-labelledly='headingFive' data-bs-parent='#accordionExample'>
@@ -114,7 +113,7 @@ const TermsAndConditions = () => {
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingSix'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseSix' aria-aria-expanded='true' aria-controls='collapseSix' onClick={() => expandSection('results')}>
-                            6.Anuncio de Resultados: Conoce a los Ganadores
+                            6. Anuncio de Resultados: Conoce a los Ganadores
                         </button>
                     </h5>
                     <div id='collapseSix' className={`accordion-collapse collapse${section['results'] ? ' show' : ''}`} aria-labelledly='headingSix' data-bs-parent='#accordionExample'>
@@ -131,7 +130,7 @@ const TermsAndConditions = () => {
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingSeven'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseSeven' aria-aria-expanded='true' aria-controls='collapseSeven' onClick={() => expandSection('photos-usage')}>
-                            7.Uso Responsable de las Fotos: Protegiendo tu Creatividad
+                            7. Uso Responsable de las Fotos: Protegiendo tu Creatividad
                         </button>
                     </h5>
                     <div id='collapseSeven' className={`accordion-collapse collapse${section['photos-usage'] ? ' show' : ''}`} aria-labelledly='headingSeven' data-bs-parent='#accordionExample'>
@@ -144,11 +143,11 @@ const TermsAndConditions = () => {
                     </div>
                 </div>
             </div>
-            <div className='accordion mb-4' id='accordionExample8'>
+            <div className='accordion' id='accordionExample8'>
                 <div className='bases-section accordion-item'>
                     <h5 className='category-title accordion-header' id='headingEight'>
                         <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseEight' aria-aria-expanded='true' aria-controls='collapseEight' onClick={() => expandSection('good-faith')}>
-                            8.Fomento de la Buena Fe y Colaboración: Construyendo Comunidad
+                            8. Fomento de la Buena Fe y Colaboración: Construyendo Comunidad
                         </button>
                     </h5>
                     <div id='collapseEight' className={`accordion-collapse collapse${section['good-faith'] ? ' show' : ''}`} aria-labelledly='headingEight' data-bs-parent='#accordionExample'>

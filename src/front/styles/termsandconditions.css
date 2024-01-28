@@ -1,0 +1,40 @@
+.terms-conditions {
+    box-sizing: border-box;
+    background-color: #3b3b3b;
+    width: 100%;
+    padding: 0 15px;
+}
+
+
+/* Titles */
+
+.main-title, .secondary-title, .third-title {
+    color: white;
+}
+
+/* Accordion Box */
+.accordion-item {
+    background: #E8F0FE;
+}
+
+/* Accordion Content */
+
+.accordion-body ul{
+    list-style: circle;
+    text-align: left;
+    padding: 10px;
+}
+
+
+/* Accordion Text */
+
+.accordion-body ul li {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.accordion-body ul li:last-child {
+    margin-bottom: 10px;
+}
