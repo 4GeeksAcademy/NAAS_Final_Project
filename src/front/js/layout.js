@@ -17,6 +17,7 @@ import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
 
+import TermsAndConditions from "./component/TermsAndConditions";
 
 import "../styles/home.css";
 
@@ -50,6 +51,7 @@ const Layout = () => {
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<MyProfile />} path="/myProfile/:theid" />
+                        <Route element={<TermsAndConditions />} path="/terms-conditions" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
