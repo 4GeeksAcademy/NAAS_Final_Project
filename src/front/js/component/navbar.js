@@ -1,34 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import rigoImageUrl from "../../img/logo1.jpeg";
 import { NavbarLogin } from "./navbarLogin";
 import { NavbarLoginAdmin } from "./navbarLoginAdmin";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+    const { store, actions } = useContext(Context);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-    const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
-
-	const handleNavbarChange = (mode) => {
-        console.log("Changing navbar mode to:", mode);
-        setNavbarMode(mode);
-    };
+    
 
     const handleLoginUser = () => {
-        setIsUserLoggedIn(true);
-        setIsAdminLoggedIn(false);
+        actions.loginUser();
         setShowLoginModal(false);
     };
-
+    
     const handleLoginAdmin = () => {
-        setIsUserLoggedIn(false);
-        setIsAdminLoggedIn(true);
+        actions.loginAdmin();
         setShowLoginModal(false);
     };
 
     const handleOpenModal = () => {
         // Abre el modal y resetea el estado de login
-        setIsUserLoggedIn(false);
-        setIsAdminLoggedIn(false);
         setShowLoginModal(true);
     };
 
@@ -70,8 +62,8 @@ export const Navbar = () => {
             </div>
 
             {/* Renderiza el componente del usuario o el administrador según el estado */}
-            {isUserLoggedIn && <NavbarLogin onNavbarChange={() => setIsUserLoggedIn(false)} />}
-            {isAdminLoggedIn && <NavbarLoginAdmin onNavbarChange={() => setIsAdminLoggedIn(false)} />}
+            {store.isUserLoggedIn && <NavbarLogin onNavbarChange={() => actions.isUserLoggedIn(false)} />}
+            {store.isAdminLoggedIn && <NavbarLoginAdmin onNavbarChange={() => actions.isAdminLoggedIn(false)} />}
 			<div className={`modal fade ${showLoginModal ? 'show' : ''}`} id="staticBackdrop" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden={!showLoginModal}>
 				<div className="modal-dialog">
 					<div className="modal-content">
