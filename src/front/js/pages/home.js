@@ -25,7 +25,7 @@ export const Home = () => {
 				</a>
 			</p>
 			<Login/>
-			<Categories/
+			<Categories/>
 			<TermsAndConditions />
 		</div>
 	);
