@@ -249,6 +249,11 @@ class Favorite_Photos(db.Model):
             "user": self.user_relationship.email,
         }
 
+class Blacklist_Token(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    expiration_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
 
 
 
