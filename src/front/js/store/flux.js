@@ -3,34 +3,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
-			vistaProfile: [
-				{
-					title: "Galería",
-				},
-				{
-					title: "Mis Eventos",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "Mis Logros",
-					background: "white",
-					initial: "white"
-				}
-			],
-			favorites: [],
 			userRankings: [
 				//ejemplo de rankings
 				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'Usuario 1', numbers: [456, 789, 123] },
@@ -41,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'nombre 1', numbers: [45, 7, 12] },
 				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'nombre 2', numbers: [3, 2, 62] },
 
-			]
+			],
 			vistaProfile: null,
 			favorites: [],
 			isUserLoggedIn: false,

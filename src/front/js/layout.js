@@ -6,11 +6,10 @@ import { Context } from "./store/appContext";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import { VistaProfile } from "./pages/vistaProfile";
-import { MyProfile } from "./pages/myProfile";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
+import { Landing } from "./pages/landing";
 
 import { Footer } from "./component/footer";
 import ForgotPassword from "./component/ForgotPassword"
@@ -36,13 +35,13 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Home />} path="/" />
+                        <Route element={<Home />} path="/home" />
+                        <Route element={<Landing />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
-                        <Route element={<MyProfile />} path="/myProfile/:theid" />
                         <Route element={<Ranking title="Top fotografias" description="Explore las fotografías de la comunidad mejor clasificados en la galería" />}path="/ranking-photo" />
                         <Route element={<Ranking title="Top creadores" description="Explore a los artistas de la comunidad mejor clasificados en la galería" />}path="/ranking-user" />
                         <Route element={<TermsAndConditions />} path="/terms" />

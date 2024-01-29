@@ -10,6 +10,9 @@
 .color-text{
     color: #FFFFFF;
 }
+.color-text2{
+   color:  #FE5201
+}
 .color-call{
     background: #64C247;
 }
@@ -102,4 +105,34 @@ linear-gradient(128.15deg, #59FF7E 49.75%, #377DF7 136.56%);
 
 body, html {
     overflow-y: auto;
+}
+.card-info{
+    padding: 10px 20px 20px 20px;
+    gap: 10px;
+    background-color: #3B3B3B;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.fondo{
+    background-image: url('../img/ojo.jpg'); /* Reemplaza 'ruta-de-la-imagen.jpg' con la ruta de tu imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen */
+    height: 500px; /* Ajusta la altura según sea necesario */
+}
+
+.timer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    background-color: rgba(169, 169, 169, 0.6);
+    font-size: x-large;
+    color: #FFFFFF;
+    height: 150px;
+    margin: 20px;
+    padding: 20px;
+    border: 5px solid #64C247;
 }
