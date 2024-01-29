@@ -16,6 +16,7 @@ import { Footer } from "./component/footer";
 import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
+import TermsAndConditions from "./component/TermsAndConditions";
 import TipsPage from "./component/TipsPage"
 
 import "../styles/home.css";
@@ -38,9 +39,10 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<SignUpForm />} path="/signUp" />
-                        <Route element={<ContactForm/>} path="/contact"/>
+                        <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<MyProfile />} path="/myProfile/:theid" />
+                        <Route element={<TermsAndConditions />} path="/terms" />
                         <Route element={<Ranking/>} path="/ranking-user" />
                         <Route element={<TipsPage />} path="/tips" />
                         <Route element={<h1>Not found!</h1>} />

@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import Login from "../component/Login";
+import TermsAndConditions from "../component/TermsAndConditions";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -22,7 +23,8 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
-			<Login/>
+			<Login />
+			<TermsAndConditions />
 		</div>
 	);
 };
