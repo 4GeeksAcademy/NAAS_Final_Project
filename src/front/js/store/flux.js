@@ -29,7 +29,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			favorites: []
+			favorites: [],
+			rankings: [
+				//ejemplo de rankings
+				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'Usuario 1', numbers: [456, 789, 123] },
+				{ rank: 2, imageUrl: 'URL_DEL_USUARIO_2', username: 'Usuario 2', numbers: [789, 456, 123] },
+				// ... más datos
+			  ],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
