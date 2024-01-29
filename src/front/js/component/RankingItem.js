@@ -4,6 +4,10 @@ import "../../styles/ranking.css"
 
 function RankingItem() {
     const {store, actions} = useContext(Context)
+    // Determinar el tipo de ranking basándote en la ruta
+    const isUserRanking = window.location.pathname === "/ranking-user";
+
+    const rankings = isUserRanking ? store.userRankings : store.photoRankings;
   return (
     <div>
          <div className="user-info">
@@ -14,7 +18,7 @@ function RankingItem() {
                     <p>Publicaciones</p>
                 </div>
             </div>
-            {store.rankings.map((userData, index) => (
+            {rankings.map((userData, index) => (
                 <div className='ranking-container' key={index}>
                     <div className="ranking-info">
                         <div className="ranking-circle">

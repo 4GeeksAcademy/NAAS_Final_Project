@@ -50,7 +50,8 @@ const Layout = () => {
                         <Route element={<ContactForm/>} path="/contact"/>
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<MyProfile />} path="/myProfile/:theid" />
-                        <Route element={<Ranking/>} path="/ranking-user" />
+                        <Route element={<Ranking title="Top fotografias" description="Explore las fotografías de la comunidad mejor clasificados en la galería" />}path="/ranking-photo" />
+                        <Route element={<Ranking title="Top creadores" description="Explore a los artistas de la comunidad mejor clasificados en la galería" />}path="/ranking-user" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

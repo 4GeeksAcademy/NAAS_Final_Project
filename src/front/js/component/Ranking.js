@@ -5,7 +5,7 @@ import WeekContent from "./WeekContent";
 import MonthContent from "./MonthContent";
 import AllTimeContent from "./AllTimeContent";
 
-const Ranking = () => {
+const Ranking = ({title, description}) => {
   const [activeTab, setActiveTab] = useState('today');
 
   const handleTabChange = (tab) => {
@@ -15,8 +15,8 @@ const Ranking = () => {
       <div className="container ranking">
       <div className="ranking-user">
       <div style={{marginBottom: "30px"}}>
-        <h2>Top Creadores</h2>
-        <p className="lead">Explore a los artistas de la comunidad mejor clasificados en la galería</p>
+        <h2>{title}</h2>
+        <p className="lead">{description}</p>
       </div>
 
       {/* Pestañas */}
