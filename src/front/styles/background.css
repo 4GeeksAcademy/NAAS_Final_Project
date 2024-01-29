@@ -99,3 +99,7 @@ linear-gradient(128.15deg, #59FF7E 49.75%, #377DF7 136.56%);
     border-radius: 25%;
     border: 5px solid #64C247;
 }
+
+body, html {
+    overflow-y: auto;
+}
