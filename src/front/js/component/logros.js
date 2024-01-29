@@ -1,7 +1,9 @@
 // Achievements.js
-import React from "react";
+import React, { useContext }from "react"
+import { Context } from "../store/appContext"
 
 export const Logros = () => {
+  const { store, actions } = useContext(Context);
   return (
     <div>
       {/* Contenido de la sección de logros */}

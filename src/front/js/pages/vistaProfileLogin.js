@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Route } from "react-router-dom";
 import { Context } from "../store/appContext";
 import banner from "../../img/banner.png";
 import avatar from "../../img/avatar.png";
@@ -7,8 +7,9 @@ import { PhotoCard } from "../component/photoCard";
 import { Logros } from "../component/logros";
 import { Eventos, Status, Favoritos } from "../component/eventos";
 
-export const VistaProfile = () => {
+export const VistaProfileLogin = () => {
   const { store, actions } = useContext(Context);
+  const [currentSection, setCurrentSection] = useState("photos"); // Estado por defecto
 
   // Datos de prueba para las tarjetas
   const testData = [
@@ -20,30 +21,9 @@ export const VistaProfile = () => {
     { photo: "Nombre foto6", name: "Animakid", index: 6, likes: 18, favorites: 9 },
   ];
 
-// useEffect para establecer la vista por defecto al montar el componente
-useEffect(() => {
-  // Solo establecer la vista por defecto si no hay una vista seleccionada
-  if (!store.vistaProfile) {
-    actions.setVistaElement("Photos");
-  }
-}, [store.vistaProfile]); // Ejecutar el efecto cuando store.vistaProfile cambie
-
-
-  const renderComponent = () => {
-    switch (store.vistaProfile) {
-      case "Photos": // Cambiado de "Logros" a "logros"
-        return (testData.map((data, index) => <PhotoCard key={index} {...data} />));
-      case "Logros": // Cambiado de "Logros" a "logros"
-        return <Logros />;
-      case "Eventos": // Cambiado de "Eventos" a "eventos"
-        return <Eventos />;
-      case "Status": // Cambiado de "Status" a "status"
-        return <Status />;
-      case "Favoritos": // Cambiado de "Favoritos" a "favoritos"
-        return <Favoritos />;
-      default:
-        return null;
-    }
+  // Función para cambiar la sección actual
+  const changeSection = (section) => {
+    setCurrentSection(section);
   };
 
   return (
@@ -57,23 +37,38 @@ useEffect(() => {
       </div>
       <ul className="list-group flex-row justify-content-evenly mb-5">
         <li className={`list-group-item d-flex justify-content-between select`}>
-          <Link to="#" onClick={() => actions.setVistaElement("Photos")}>
+          <Link to="#" onClick={() => changeSection("photos")}>
             <span className="select">Fotos</span>
           </Link>
         </li>
         <li className={`list-group-item d-flex justify-content-between select`}>
-          <Link to="#" onClick={() => actions.setVistaElement("Eventos")}>
+          <Link to="#" onClick={() => changeSection("eventos")}>
             <span className="select">Eventos</span>
           </Link>
         </li>
         <li className={`list-group-item d-flex justify-content-between select`}>
-          <Link to="#" onClick={() => actions.setVistaElement("Logros")}>
+          <Link to="#" onClick={() => changeSection("logros")}>
             <span className="select">Logros</span>
           </Link>
         </li>
       </ul>
       <div className="bg-dark d-flex justify-content-evenly flex-wrap pt-3">
-        {renderComponent()}
+        {currentSection === "photos" ? (
+          // Renderiza las tarjetas de fotos si la sección actual es "photos"
+          testData.map((data, index) => <PhotoCard key={index} {...data} />)
+        ) : currentSection === "logros" ? (
+          // Renderiza la sección de logros si la sección actual es "logros"
+          <Logros />
+        ) : currentSection === "eventos" ? (
+          // Renderiza la sección de eventos si la sección actual es "eventos"
+          <Eventos />
+        ) : currentSection === "status" ? (
+          // Renderiza la sección de status si la sección actual es "status"
+          <Status />
+        ) : currentSection === "favoritos" ? (
+          // Renderiza la sección de favoritos si la sección actual es "favoritos"
+          <Favoritos />
+        ) : null}
       </div>
       <br />
       <Link to="/">

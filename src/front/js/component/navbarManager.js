@@ -4,14 +4,14 @@ import { Navbar } from "./navbar";
 import { NavbarLogin } from "./navbarLogin";
 import { NavbarLoginAdmin } from "./navbarLoginAdmin";
 
-const getNavbarComponent = (mode, onNavbarChange, onChangeSection) => {
+const getNavbarComponent = (mode, onNavbarChange) => {
     switch (mode) {
         case "user":
             return <Navbar />;
         case "admin":
             return <NavbarLoginAdmin />;
         case "login":
-            return <NavbarLogin onNavbarChange={onNavbarChange} onChangeSection={onChangeSection} />;
+            return <NavbarLogin onNavbarChange={onNavbarChange} />;
         default:
             return <Navbar />;
     }

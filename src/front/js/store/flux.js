@@ -1,3 +1,4 @@
+import React from "react";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -41,6 +42,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'nombre 2', numbers: [3, 2, 62] },
 
 			]
+			vistaProfile: null,
+			favorites: [],
+			isUserLoggedIn: false,
+			isAdminLoggedIn: false,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -60,20 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
+			
 			addFavorite: (item) => {
 				const store = getStore();
                 const favorite = store.favorites.concat(item);
@@ -87,20 +79,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                 });
                 setStore({ favorites: favorite });
 			},
-			changeColor1: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const vistaProfile = store.vistaProfile.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ vistaProfile: vistaProfile });
-			}
+			
+			setVistaElement: (componentType) => {
+				setStore({ vistaProfile: componentType });
+				},
+			clearVista: () => {
+				setStore({ vistaProfile: null });
+				},	
+				loginUser: () => setStore({ isUserLoggedIn: true, isAdminLoggedIn: false }),
+				loginAdmin: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: true }),
+				logout: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: false }),
 		}
 	};
 };
