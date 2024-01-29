@@ -1,3 +1,4 @@
+import React from "react";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -13,12 +14,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
+			],
+			vistaProfile: [
+				{
+					title: "Galería",
+				},
+				{
+					title: "Mis Eventos",
+					background: "white",
+					initial: "white"
+				},
+				{
+					title: "Mis Logros",
+					background: "white",
+					initial: "white"
+				}
+			],
+			favorites: [],
+			userRankings: [
+				//ejemplo de rankings
+				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'Usuario 1', numbers: [456, 789, 123] },
+				{ rank: 2, imageUrl: 'URL_DEL_USUARIO_2', username: 'Usuario 2', numbers: [789, 456, 123] },
+				// ... más datos
+			  ],
+			photoRankings: [
+				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'nombre 1', numbers: [45, 7, 12] },
+				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'nombre 2', numbers: [3, 2, 62] },
+
 			]
+			vistaProfile: null,
+			favorites: [],
+			isUserLoggedIn: false,
+			isAdminLoggedIn: false,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+				getActions().changeColor1(0, "green");
 			},
 
 			getMessage: async () => {
@@ -33,20 +65,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
+			
+			addFavorite: (item) => {
 				const store = getStore();
+                const favorite = store.favorites.concat(item);
+                setStore({ favorites: favorite });
+			},
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			deleteFavorite: (index) => {
+				const store = getStore();
+                const favorite = store.favorites.filter((_c, i) => {
+                    return index !== i
+                });
+                setStore({ favorites: favorite });
+			},
+			
+			setVistaElement: (componentType) => {
+				setStore({ vistaProfile: componentType });
+				},
+			clearVista: () => {
+				setStore({ vistaProfile: null });
+				},	
+				loginUser: () => setStore({ isUserLoggedIn: true, isAdminLoggedIn: false }),
+				loginAdmin: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: true }),
+				logout: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: false }),
 		}
 	};
 };

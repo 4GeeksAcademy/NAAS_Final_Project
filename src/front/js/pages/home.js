@@ -4,6 +4,7 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import Login from "../component/Login";
 import Categories from "../component/Categories";
+import TermsAndConditions from "../component/TermsAndConditions";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -24,7 +25,8 @@ export const Home = () => {
 				</a>
 			</p>
 			<Login/>
-			<Categories/>
+			<Categories/
+			<TermsAndConditions />
 		</div>
 	);
 };
