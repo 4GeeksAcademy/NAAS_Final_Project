@@ -9,6 +9,7 @@ import { Demo } from "./pages/demo";
 import { VistaProfile } from "./pages/vistaProfile";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
+import { Landing } from "./pages/landing";
 
 import { Footer } from "./component/footer";
 
@@ -27,7 +28,8 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Home />} path="/" />
+                        <Route element={<Home />} path="/home" />
+                        <Route element={<Landing />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<h1>Not found!</h1>} />
