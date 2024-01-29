@@ -1,8 +1,11 @@
 import React from 'react'
+import RankingItem from './RankingItem'
 
 function AllTimeContent() {
   return (
-    <div>AllTimeContent</div>
+    <div>
+      <RankingItem/>
+    </div>
   )
 }
 

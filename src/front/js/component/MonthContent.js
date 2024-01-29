@@ -1,8 +1,11 @@
 import React from 'react'
+import RankingItem from './RankingItem'
 
 function MonthContent() {
   return (
-    <div>MonthContent</div>
+    <div>
+      <RankingItem/>
+    </div>
   )
 }
 

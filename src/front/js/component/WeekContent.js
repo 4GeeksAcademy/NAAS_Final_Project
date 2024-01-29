@@ -1,8 +1,11 @@
 import React from 'react'
+import RankingItem from './RankingItem'
 
 function WeekContent() {
   return (
-    <div>WeekContent</div>
+    <div>
+      <RankingItem/>
+    </div>
   )
 }
 
