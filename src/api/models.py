@@ -7,7 +7,8 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
+    role = db.Column(db.String(50), nullable=False, default='user')
 
     user_data = db.relationship('User_data', back_populates='user_relationship', uselist=False)
 
@@ -19,6 +20,7 @@ class Users(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "role": self.role
             # do not serialize the password, its a security breachs
         }
 
