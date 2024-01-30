@@ -5,6 +5,7 @@ import "../../styles/home.css";
 import Login from "../component/Login";
 import Categories from "../component/Categories";
 import TermsAndConditions from "../component/TermsAndConditions";
+import {Timer} from "../component/Timer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -24,6 +25,7 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
+			<Timer eventEndDate={"2024-2-1"}/>
 			<Login/>
 			<Categories/>
 			<TermsAndConditions />

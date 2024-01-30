@@ -122,17 +122,38 @@ body, html {
     height: 500px; /* Ajusta la altura según sea necesario */
 }
 
-.timer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    background-color: rgba(169, 169, 169, 0.6);
-    font-size: x-large;
-    color: #FFFFFF;
-    height: 150px;
-    margin: 20px;
+.timer {
+    background-color: #3b3b3b8c;
+    width: 300px;
+    text-align: start;
     padding: 20px;
-    border: 5px solid #64C247;
-}
+    border-radius: 20px;
+    color: white;
+    margin: 0 auto;
+  }
+  
+  .timer-digits {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .digit {
+    margin: 0 10px;
+    text-align: center;
+  }
+  
+  .value {
+    font-size: 40px; 
+    font-weight: bold;
+  }
+  
+  .label {
+    font-size: 14px;
+    display: block;
+  }
+  .points{
+    font-size: 40px;
+    font-weight: bold;
+    margin: 2px 2px;
+  }

@@ -13,7 +13,7 @@ import board from "../../img/board.jpg";
 import { ArtistCard } from "../component/artistCard";
 import { testData, testData2 } from "../component/testData";
 import { CategoryCard } from "../component/categoryCard";
-import { Timer } from "../component/timer";
+import { Timer } from "../component/Timer";
 
 
 
@@ -202,7 +202,7 @@ export const Landing = () => {
                         <button type="button" className="px-5 btn rounded color-call color-text">
                             <i className="pe-2 fa-regular fa-eye"></i>Ver Evento
                         </button>
-                        <Timer />
+                        <Timer/>
                     </div>
                 </div>
             </div>
