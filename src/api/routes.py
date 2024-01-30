@@ -87,7 +87,7 @@ def register():
         user_data.lastname = body['lastname']
         user_data.phone = body['phone']
         user_data.country = body['country']
-        user_data.user_relationship = user
+        user_data.user_relationship = user 
 
         db.session.add(user_data)
         db.session.commit()
@@ -192,10 +192,10 @@ def reset_password():
     if 'email' not in body:
         return jsonify({'message': 'Required fields are missing'}), 400
 
-    # Check if email exists
-    existing_user = Users.query.filter_by(email=body['email']).options(db.joinedload('user_data')).first()
+    existing_user = Users.query.filter_by(email=body['email']).first()
 
-    if existing_user and existing_user.user_data:
+    if existing_user:
+        existing_user = db.session.query(Users).filter_by(id=existing_user.id).options(db.joinedload('user_data')).first()
         print(existing_user.serialize())
         send_password_reset_email(existing_user.email, existing_user.user_data.firstname)
         return jsonify({'message': 'Request received. If the email is registered, you will receive a link to reset your password.'}), 200
@@ -207,6 +207,7 @@ def reset_password():
 def password_update():
     try:
         body = request.get_json(silent=True)
+
         if body is None:
             return jsonify({'error': 'No JSON data provided in the request'}), 400
     
@@ -216,10 +217,11 @@ def password_update():
         new_password = body['password']
         current_user = get_jwt_identity()
 
-        user = Users.query.filter_by(email = current_user).first()
+        user = Users.query.filter_by(email=current_user).first()
 
         if not user:
             return jsonify({"message": "User not found"}), 404
+        
         user.password = bcrypt.generate_password_hash(new_password).decode('utf-8')
 
         db.session.commit()
