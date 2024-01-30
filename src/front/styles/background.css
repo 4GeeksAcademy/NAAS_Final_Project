@@ -23,10 +23,19 @@
     background: linear-gradient(0deg, #000000, #000000),
 linear-gradient(128.15deg, #59FF7E 49.75%, #377DF7 136.56%);
 }
+
 .color-grad2{
     background: linear-gradient(100.92deg, #59FF60 13.57%, #FF6250 97.65%);
-
 }
+
+.color-grad3{
+    background: linear-gradient(to bottom, rgb(255, 232, 117) 1%,rgb(255, 164, 67) 42%,rgba(255,124,0,1) 84%);
+}
+
+.color-grad4{
+    background: linear-gradient(135deg, rgba(110,122,121,0.3) 0%,rgba(104,118,119,1) 28%,rgba(99,114,117,0.36) 52%,rgba(93,109,115,1) 82%,rgba(89,106,114,0.3) 100%);
+}
+
 .text1{
     font-family: Space Mono;
     font-weight: 700;

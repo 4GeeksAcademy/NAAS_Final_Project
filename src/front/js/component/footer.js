@@ -30,7 +30,7 @@ export const Footer = () => (
 					<nav className="nav flex-column">
 						<a className="p-0 fs-5 text-white nav-link" href="#">Galería</a>
 						<a className="p-0 fs-5 text-white nav-link" href="#">Rankings</a>
-						<a className="p-0 fs-5 text-white nav-link" href="#">Registrarse</a>
+						<Link to="/signUp" className="p-0 fs-5 text-white nav-link">Registrarse</Link>
 					</nav>
 				</div>
 				<div className="text-start col-5">

@@ -12,6 +12,7 @@ import { Navbar } from "./component/navbar";
 import { Landing } from "./pages/landing";
 
 import { Footer } from "./component/footer";
+import Login from "./component/Login";
 import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
@@ -38,6 +39,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/home" />
                         <Route element={<Landing />} path="/" />
                         <Route element={<Demo />} path="/demo" />
+                        <Route element={<Login />} path="/login" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
