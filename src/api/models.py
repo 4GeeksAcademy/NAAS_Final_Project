@@ -9,6 +9,8 @@ class Users(db.Model):
     password = db.Column(db.String(200), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
+    user_data = db.relationship('User_data', back_populates='user', uselist=False)
+
     def __repr__(self):
         return '{}'.format(self.email)
 
@@ -30,8 +32,8 @@ class User_data(db.Model):
 
     ## RELATIONSHIP
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user_relationship = db.relationship(Users)
-
+    user = db.relationship('Users', back_populates='user_data')
+    
     def __repr__(self):
         return '{}'.format(self.username)
 

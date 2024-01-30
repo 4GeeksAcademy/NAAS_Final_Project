@@ -17,8 +17,7 @@ from flask_bcrypt import Bcrypt
 # SMTP Email Sent
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from api.email_utils import send_password_reset_email, generate_reset_link
-
+from api.email_utils import send_password_reset_email
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
@@ -123,7 +122,7 @@ def login():
     access_token = create_access_token(identity=user.id) 
     return jsonify({'msg': 'Login successful!', 'token': access_token}), 200
 
-@api.route('/photo_uploader', methods=['POST'])
+@api.route('/photo-uploader', methods=['POST'])
 def photo_uploader():
     
     body = request.get_json(silent=True)
@@ -175,30 +174,25 @@ def photo_uploader():
     return jsonify({'msg': 'ok'}), 200
 
 
-@api.route('/reset_password', methods=['POST'])
+@api.route('/reset-password', methods=['POST'])
 def reset_password():
     body = request.get_json(silent=True)
 
-    if body is None or 'email' not in body:
-        return jsonify({'msg': 'Invalid request'}), 400
-
-    user = Users.query.filter_by(email=body['email']).first()
-
-    if user is None:
-        return jsonify({'msg': 'User not found'}), 404
-
-    # Generacion del token para restablecer la pass
-
-    reset_token = generate_reset_link()
-    reset_link = f'https://jubilant-spork-x4wj5rv54qgfgw7-3000.app.github.dev/forgot-password/{reset_token}'
-
-    # Correo al usuario
-    send_password_reset_email(user.email, reset_link)
-
-    # lista negra después de utilizarlo
-    #blacklist_token(body['token'])
+    if body is None:
+        return jsonify({'error': 'No JSON data provided in the request'}), 400
     
-    return jsonify({'msg': 'Password reset link sent successfully'}), 200
+    if 'email' not in body:
+        return jsonify({'message': 'Required fields are missing'}), 400
+
+    # Check if email exists
+    existing_user = Users.query.filter_by(email=body['email']).options(db.joinedload('user_data')).first()
+
+    if existing_user and existing_user.user_data:
+        print(existing_user.serialize())
+        send_password_reset_email(existing_user.email, existing_user.user_data.firstname)
+        return jsonify({'message': 'Request received. If the email is registered, you will receive a link to reset your password.'}), 200
+    return jsonify({'message': 'Request received. If the email is registered, you will receive a link to reset your password.'}), 200
+
 
 
 @api.route('/protected', methods=['GET'])
