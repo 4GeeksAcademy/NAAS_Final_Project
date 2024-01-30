@@ -1,31 +1,53 @@
 import smtplib
+from smtplib import SMTPException
+from flask import render_template
+import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import secrets
 
-SMTP_SERVER = 'smtp.gmail.com'
-SMTP_PORT = 587
-SMTP_USERNAME = 'snapify.adm.mail@gmail.com'
-SMTP_PASSWORD = 'xylp xcej aekn gwxz'
+def send_password_reset_email(recipient, firstname):
+    from api.routes import generate_change_password_token
+    server = None  # Initialize the server variable outside the try block
+    try:
+        SMTP_SERVER = os.environ.get('SMTP_SERVER')
+        SMTP_PORT = os.environ.get('SMTP_PORT')
+        SMTP_USERNAME = os.environ.get('SMTP_USERNAME')
+        SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD')
 
-def send_password_reset_email(user_email, reset_link):
-    sender_email = 'snapify.adm.mail@gmail.com'
-    receiver_email = user_email
-
-    subject = 'Password Reset'
-    body = f'Click the following link to reset your password: {reset_link}'
-
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = receiver_email
-    msg['Subject'] = subject
-
-    msg.attach(MIMEText(body, 'plain'))
-
-    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+        # SMTP server configuration
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
         server.login(SMTP_USERNAME, SMTP_PASSWORD)
-        server.sendmail(sender_email, receiver_email, msg.as_string())
 
-def generate_reset_link():
-    return secrets.token_urlsafe(32)
+        # Create the email message
+        message = MIMEMultipart('alternative')
+        message["Subject"] = "Instrucciones para cambiar tu contraseña en Snapify"
+        message["From"] = SMTP_USERNAME
+        message["To"] = recipient
+
+        # Password reset link and token creation
+        generated_token = generate_change_password_token(recipient)
+        password_reset_url = f"https://jubilant-spork-x4wj5rv54qgfgw7-3000.app.github.dev/password-reset?token={generated_token}"
+
+        # Render HTML Template
+        html_content = render_template("email_template.html", firstname=firstname, password_reset_url=password_reset_url)
+
+        html_part = MIMEText(html_content, 'html')
+
+        # Attach the HTML content
+        message.attach(html_part)
+
+        # Send the email
+        server.sendmail(SMTP_USERNAME, recipient, message.as_string())
+        print("Email sent successfully!")
+        return "Email sent successfully!"
+    
+    except SMTPException as e:
+        print(f"Error sending email: {e}")
+        return f"Error sending email: {e}"
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return f"An error occurred: {e}"
+    finally:
+        if server:
+            server.quit()
