@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from api.models import *
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
+import datetime
 
 ## JWT, PassWord Encrypt
 from flask_jwt_extended import create_access_token #Token creation
@@ -18,6 +19,7 @@ from flask_bcrypt import Bcrypt
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from api.email_utils import send_password_reset_email
+
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
@@ -174,6 +176,12 @@ def photo_uploader():
     return jsonify({'msg': 'ok'}), 200
 
 
+def generate_change_password_token(email):
+    expire = datetime.timedelta(hours=1)
+    token = create_access_token(identity=email, expires_delta=expire)
+    return token
+
+
 @api.route('/reset-password', methods=['POST'])
 def reset_password():
     body = request.get_json(silent=True)
@@ -194,6 +202,33 @@ def reset_password():
     return jsonify({'message': 'Request received. If the email is registered, you will receive a link to reset your password.'}), 200
 
 
+@api.route('/password-update', methods=['POST'])
+@jwt_required()
+def password_update():
+    try:
+        body = request.get_json(silent=True)
+        if body is None:
+            return jsonify({'error': 'No JSON data provided in the request'}), 400
+    
+        if 'password' not in body:
+            return jsonify({'message': 'Required fields are missing'}), 400
+        
+        new_password = body['password']
+        current_user = get_jwt_identity()
+
+        user = Users.query.filter_by(email = current_user).first()
+
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+        user.password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+
+        db.session.commit()
+
+        return jsonify({"message": "Password update successfully"}), 200
+    
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": "Error updating password"})
 
 @api.route('/protected', methods=['GET'])
 @jwt_required()
