@@ -1,11 +1,13 @@
 import React from 'react';
 import "../../styles/contactForm.css";
 import { Link } from 'react-router-dom';
+import { Welcome } from './welcome';
 
 function SignUpForm() {
   return (
-    <div className="login-container mt-4">
-      <form className="login-form register-form">
+    <div className='contaniner-fluid d-flex color-back'>
+    <div className="login-container p-5 col-6">
+      <form className="">
         <h2 className='title-color mb-5'>Crea una nueva cuenta</h2>
         <div className='name-container'>
         <div className="mb-3">
@@ -100,10 +102,14 @@ function SignUpForm() {
       </div>
         <div className="mb-3">
         </div>
-        <p>Ya tengo cuenta.  
+        <p className='p-2 color-text'>Ya tengo cuenta.  
           <Link to={"/"}>Log in</Link></p>
 
       </form>
+    </div>
+    <div className='container-fluid col-6' style={{ display: "contents" }}>
+      <Welcome />
+    </div>
     </div>
   );
 }

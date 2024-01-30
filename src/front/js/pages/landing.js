@@ -26,11 +26,13 @@ export const Landing = () => {
                 <div className="text-center col-6 p-4">
                     <h1>Descubre Una Comunidad De Artistas</h1>
                     <h4 className="p-3">Para fotógrafos aficionados y profesionales, con categorías que abarcan desde retratos hasta fotografía de paisajes.</h4>
+                    <Link to="/signUp">
                     <button
                         type="button"
                         className="px-5 btn brd color-call color-text mt-5">
                         <i className="pe-2 fa-solid fa-rocket"></i>Get Started
                     </button>
+                    </Link>
                 </div>
                 <div className="col-6">
                     <img src={loro} className="card-img-top" alt="Photo" />
@@ -41,11 +43,13 @@ export const Landing = () => {
                     <h2 className="color-text2 px-5">Como Funciona</h2>
                     <h3 className="color-text px-5">Descubra Cómo Empezar</h3>
                 </div>
+                <Link to="/signUp">
                 <button
                     type="button"
                     className="px-5 btn btn-outline-success color-text brd mt-5">
                     <i className="pe-2 fa-solid fa-rocket"></i>Get Started
                 </button>
+                </Link>
             </div>
             <div className="d-flex justify-content-around color-back color-text container-fluid">
                 <div className="card card-info">
