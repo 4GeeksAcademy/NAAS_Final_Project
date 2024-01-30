@@ -103,7 +103,7 @@ function SignUpForm() {
         <div className="mb-3">
         </div>
         <p className='p-2 color-text'>Ya tengo cuenta.  
-          <Link to={"/"}>Log in</Link></p>
+          <Link to={"/login"}>Log in</Link></p>
 
       </form>
     </div>

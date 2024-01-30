@@ -43,11 +43,11 @@ export const Landing = () => {
                     <h2 className="color-text2 px-5">Como Funciona</h2>
                     <h3 className="color-text px-5">Descubra Cómo Empezar</h3>
                 </div>
-                <Link to="/signUp">
+                <Link to="/tips">
                 <button
                     type="button"
                     className="px-5 btn btn-outline-success color-text brd mt-5">
-                    <i className="pe-2 fa-solid fa-rocket"></i>Get Started
+                    <i className="pe-2 fa-solid fa-rocket"></i>Ver Consejos
                 </button>
                 </Link>
             </div>

@@ -1,11 +1,17 @@
 import React from 'react'
 import "../../styles/loginContainer.css";
+import { Link } from 'react-router-dom';
+import { Welcome } from './welcome';
 
 function ForgetPassword() {
   return (
-         <div className="login-container">
-      <form className="login-form">
-      <h2 className='title'>Restablecer mi contraseña</h2>
+    <div className='contaniner-fluid d-flex color-back'>
+      <div className='container-fluid col-6' style={{ display: "contents" }}>
+      <Welcome />
+    </div>
+         <div className="login-container p-5 col-6">
+      <form className="">
+      <h1 className='color-text p-5'>Restablecer mi contraseña</h1>
         <div className="mb-3">
           <div className="input-icon">
             <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />
@@ -48,6 +54,8 @@ function ForgetPassword() {
         
         </div>
       </form>
+    </div>
+    
     </div>
   )
 }
