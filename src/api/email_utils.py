@@ -13,6 +13,7 @@ def send_password_reset_email(recipient, firstname):
         SMTP_PORT = os.environ.get('SMTP_PORT')
         SMTP_USERNAME = os.environ.get('SMTP_USERNAME')
         SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD')
+        FRONT_URL = os.environ.get('FRONT_URL')
 
         # SMTP server configuration
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
@@ -27,7 +28,7 @@ def send_password_reset_email(recipient, firstname):
 
         # Password reset link and token creation
         generated_token = generate_change_password_token(recipient)
-        password_reset_url = f"https://jubilant-spork-x4wj5rv54qgfgw7-3000.app.github.dev/password-reset?token={generated_token}"
+        password_reset_url = f"{FRONT_URL}password-reset?token={generated_token}"
 
         # Render HTML Template
         html_content = render_template("email_template.html", firstname=firstname, password_reset_url=password_reset_url)
