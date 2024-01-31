@@ -28,7 +28,7 @@ def send_password_reset_email(recipient, firstname):
 
         # Password reset link and token creation
         generated_token = generate_change_password_token(recipient)
-        password_reset_url = f"{FRONT_URL}password-reset?token={generated_token}"
+        password_reset_url = f"{FRONT_URL}password-update?token={generated_token}"
 
         # Render HTML Template
         html_content = render_template("email_template.html", firstname=firstname, password_reset_url=password_reset_url)

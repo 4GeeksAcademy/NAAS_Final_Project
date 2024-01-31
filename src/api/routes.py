@@ -230,6 +230,7 @@ def password_update():
     
     except Exception as e:
         db.session.rollback()
+        print(f"Error updating password: {str(e)}")
         return jsonify({"message": "Error updating password"})
 
 @api.route('/protected', methods=['GET'])

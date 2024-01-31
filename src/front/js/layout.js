@@ -24,6 +24,7 @@ import TipsPage from "./component/TipsPage"
 
 import "../styles/home.css";
 import Ranking from "./component/Ranking";
+import PasswordUpdate from "./component/PasswordUpdate";
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -43,6 +44,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />
+                        <Route element={<PasswordUpdate />} path="/password-update" />
                         <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
