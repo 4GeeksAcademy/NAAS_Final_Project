@@ -1,49 +1,31 @@
-.first-achievement {
+.achievement-container .d-flex {
+    flex-grow: 1;
+}
+
+.tier-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.tier-container img {
+    margin-right: 70px;
+}
+
+h4 {
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.achievement-title {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.achievement {
     width: 150px;
     height: 150px;
 }
 
-.second-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.third-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.fourth-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.fifth-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.sixth-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.seventh-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.eighth-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.ninth-achievement {
-    width: 150px;
-    height: 150px;
-}
-
-.tenth-achievement {
-    width: 150px;
-    height: 150px;
-}
