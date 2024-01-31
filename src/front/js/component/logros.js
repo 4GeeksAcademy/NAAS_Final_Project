@@ -19,7 +19,7 @@ export const Logros = () => {
   return (
     <div className="achievement-container">
       {/* Contenido de la sección de logros */}
-      <h3 className="color-text d-flex justify-content-center mt-5 mb-5">Logros</h3>
+      <h3 className="color-text d-flex justify-content-center mt-5 mb-2 logros-title">Logros</h3>
       <div className="bg-dark color-text d-flex flex-column align-items-center">
         <div className="tier-container">
           <h4>Tier Iniciado</h4>
