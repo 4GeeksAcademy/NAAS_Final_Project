@@ -202,7 +202,7 @@ export const Landing = () => {
                         <button type="button" className="px-5 btn rounded color-call color-text">
                             <i className="pe-2 fa-regular fa-eye"></i>Ver Evento
                         </button>
-                        <Timer/>
+                        {/* <Timer/> */}
                     </div>
                 </div>
             </div>

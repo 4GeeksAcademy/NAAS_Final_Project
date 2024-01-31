@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import "../../styles/background.css"
+import "../../styles/events.css"
 import { Context } from "../store/appContext";
 
 export const Timer = ({eventEndDate}) => {
@@ -26,10 +26,9 @@ export const Timer = ({eventEndDate}) => {
   const hours = Math.floor((timeRemaining % (24 * 60 * 60)) / 3600);
   const minutes = Math.floor((timeRemaining % 3600) / 60);
   // const seconds = timeRemaining % 60;
-
   return (
     <div className="timer">
-    <p className="lead">Tiempo Restante:</p>
+    <p className="lead color-text2">Tiempo Restante:</p>
     <div className="timer-digits">
       <div className="digit">
         <span className="value">{days}</span>
