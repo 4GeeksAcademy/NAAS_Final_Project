@@ -1,17 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import loro from "../../img/loro.jpg";
-import emprende from "../../img/emprende.jpg";
-import people from "../../img/people.jpg";
-import cameraBoy from "../../img/cameraBoy.jpg";
-import buho from "../../img/buho.jpg";
-import boyPaper from "../../img/boyPaper.jpg";
-import ojo from "../../img/ojo.jpg";
-import photographer from "../../img/photographer.jpg";
-import board from "../../img/board.jpg";
 import { ArtistCard } from "../component/artistCard";
-import { testData, testData2 } from "../component/testData";
+import { testData, testData2, testData3 } from "../component/testData";
 import { CategoryCard } from "../component/categoryCard";
 import { Timer } from "../component/timer";
 
@@ -35,7 +26,7 @@ export const Landing = () => {
                     </Link>
                 </div>
                 <div className="col-6">
-                    <img src={loro} className="card-img-top" alt="Photo" />
+                    <img src={testData3[10].fotoUrl} className="card-img-top" alt="Photo" />
                 </div>
             </div>
             <div className="d-flex px-5 py-5 color-back container-fluid justify-content-between">
@@ -53,7 +44,7 @@ export const Landing = () => {
             </div>
             <div className="d-flex justify-content-around color-back color-text container-fluid">
                 <div className="card card-info">
-                    <img src={cameraBoy} className="card-img-top" style={{ height: "350px", objectFit: "cover" }} alt="..." />
+                    <img src={testData3[6].fotoUrl} className="card-img-top" style={{ height: "350px", objectFit: "cover" }} alt="..." />
                     <div className="card-body">
                         <h4>Elige Tu Cámara</h4>
                         <p>
@@ -63,7 +54,7 @@ export const Landing = () => {
                     </div>
                 </div>
                 <div className="card card-info">
-                    <img src={people} className="card-img-top" style={{ height: "350px", objectFit: "cover" }} alt="..." />
+                    <img src={testData3[13].fotoUrl} className="card-img-top" style={{ height: "350px", objectFit: "cover" }} alt="..." />
                     <div className="card-body">
                         <h4>Crea Una Colección</h4>
                         <p>
@@ -73,7 +64,7 @@ export const Landing = () => {
                     </div>
                 </div>
                 <div className="card card-info">
-                    <img src={emprende} className="card-img-top" style={{ height: "350px", objectFit: "cover" }} alt="..." />
+                    <img src={testData3[9].fotoUrl} className="card-img-top" style={{ height: "350px", objectFit: "cover" }} alt="..." />
                     <div className="card-body">
                         <h4>Comienza A Recibir Logros</h4>
                         <p>
@@ -97,10 +88,10 @@ export const Landing = () => {
                 </div>
                 <div className="d-flex justify-content-around color-back color-text container-fluid">
                     <div className="card card-info">
-                        <img src={buho} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
+                        <img src={testData3[5].fotoUrl} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
                         <div className="d-flex justify-content-between" >
-                            <img src={buho} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
-                            <img src={loro} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[5].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[10].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
                             <button
                                 type="button"
                                 className="btn color-call color-text brd fs-4" style={{ height: "100px", width: "100px" }}>
@@ -115,10 +106,10 @@ export const Landing = () => {
                         </div>
                     </div>
                     <div className="card card-info">
-                        <img src={ojo} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
+                        <img src={testData3[11].fotoUrl} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
                         <div className="d-flex justify-content-between" >
-                            <img src={ojo} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
-                            <img src={people} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[11].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[13].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
                             <button
                                 type="button"
                                 className="btn color-call color-text brd fs-4" style={{ height: "100px", width: "100px" }}>
@@ -133,10 +124,10 @@ export const Landing = () => {
                         </div>
                     </div>
                     <div className="card card-info">
-                        <img src={boyPaper} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
+                        <img src={testData3[4].fotoUrl} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
                         <div className="d-flex justify-content-between" >
-                            <img src={boyPaper} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
-                            <img src={cameraBoy} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[4].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[6].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
                             <button
                                 type="button"
                                 className="btn color-call color-text brd fs-4" style={{ height: "100px", width: "100px" }}>
@@ -181,7 +172,7 @@ export const Landing = () => {
             <div className="container-fluid p-5 color-back justify-content-around align-items-center">
                 <div className="d-flex rounded-3 px-5 py-5 color-text color-back2 container align-items-center">
                     <div className="col-6">
-                        <img src={board} className="card-img-top rounded-3" alt="Photo" />
+                        <img src={testData3[3].fotoUrl} className="card-img-top rounded-3" alt="Photo" />
                     </div>
                     <div className="text-center col-6 p-5">
                         <h2>Únase A Nuestro Boletín Semanal</h2>
@@ -196,7 +187,7 @@ export const Landing = () => {
             </div>
             <div className="container-fluid color-back">
                 <div className="container position-relative pb-5">
-                    <img src={photographer} className="w-100" alt="Photo" />
+                    <img src={testData3[14].fotoUrl} className="w-100" alt="Photo" />
 
                     <div className="position-absolute d-flex-column justify-content-center text-center m-5 top-0 end-0">
                         <h1>Magic Mashrooms</h1>

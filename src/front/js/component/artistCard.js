@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
-import banner from "../../img/banner.png";
-import avatar from "../../img/avatar.png";
 
 export const ArtistCard = (props) => {
 	const { store, actions } = useContext(Context);

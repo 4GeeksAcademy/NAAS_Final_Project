@@ -18,6 +18,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: [],
 			isUserLoggedIn: false,
 			isAdminLoggedIn: false,
+			statusActive: false,
+			likesCount: 0,
+      		favoritesCount: 0,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -38,19 +41,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			
-			addFavorite: (item) => {
+			// Incrementa el contador de likes
+			incrementLikesCount: () => {
 				const store = getStore();
-                const favorite = store.favorites.concat(item);
-                setStore({ favorites: favorite });
-			},
+				setStore({ likesCount: store.likesCount + 1 });
+			  },
+		
+			  // Incrementa el contador de favoritos
+			  incrementFavoritesCount: () => {
+				const store = getStore();
+				setStore({ favoritesCount: store.favoritesCount + 1 });
+			  },
 
-			deleteFavorite: (index) => {
+			addFavoritePhoto: (photo) => {
 				const store = getStore();
-                const favorite = store.favorites.filter((_c, i) => {
-                    return index !== i
-                });
-                setStore({ favorites: favorite });
-			},
+				const updatedFavorites = store.favorites.some((fav) => fav.index === photo.index)
+				  ? store.favorites.filter((fav) => fav.index !== photo.index)
+				  : [...store.favorites, photo];
+			  
+				setStore({ favorites: updatedFavorites });
+			  },
+			  
+			  
+
+			  deleteFavoritePhoto: (index) => {
+				const store = getStore();
+				const updatedFavorites = store.favorites.filter((fav, i) => i !== index);
+				setStore({ favorites: updatedFavorites });
+			  },
+
+			toggleStatus: () => {
+				const store = getStore();
+				setStore({ statusActive: !store.statusActive });
+			  },
 			
 			setVistaElement: (componentType) => {
 				setStore({ vistaProfile: componentType });

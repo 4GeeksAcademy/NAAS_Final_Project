@@ -125,7 +125,7 @@ body, html {
 }
 
 .fondo{
-    background-image: url('../img/ojo.jpg'); /* Reemplaza 'ruta-de-la-imagen.jpg' con la ruta de tu imagen */
+    background-image: url('https://raw.githubusercontent.com/4GeeksAcademy/final_prueba/main/src/front/img/ojo.jpg'); /* Reemplaza 'ruta-de-la-imagen.jpg' con la ruta de tu imagen */
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
     background-position: center; /* Centra la imagen */
     height: 500px; /* Ajusta la altura según sea necesario */

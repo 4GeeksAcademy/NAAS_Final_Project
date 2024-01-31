@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/background.css";
 import rigoImageUrl from "../../img/logo1.jpeg";
@@ -62,12 +62,12 @@ export const NavbarLogin = () => {
         <div className="offcanvas-body">
           <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 mx-5">
             <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Status")} className="nav-link" aria-current="page">
-                <i className="pe-2 fa-solid fa-user-clock color-text"></i>Set Status
-              </Link>
+            <button onClick={() => actions.toggleStatus()}className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
+          <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Set Status
+        </button>
             </li>
             <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Status")} className="nav-link">
+              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("PersonalDataForm")} className="nav-link">
                 <i className="pe-2 fa-solid fa-user-pen color-text"></i>Mis Datos
               </Link>
             </li>
