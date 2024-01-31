@@ -1,16 +1,17 @@
-.achievement-container .d-flex {
-    flex-grow: 1;
+.achievement-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tier-container {
     margin-bottom: 30px;
+    margin-top: 30px;
 }
-
 
 h4 {
     text-align: center;
-    margin-top: 70px;
-    margin-bottom: 70px;
+    margin-top: 70px 0;
 }
 
 .achievement-title {
@@ -26,13 +27,15 @@ h4 {
 
 .achievement-title img {
     display: block;
-    margin: 0 70px auto;
+    margin: 0 auto 10px;
+    width: 150px;
+    height: 150px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .achievement-text {
-    display: none;
     position: absolute;
-    bottom: -20px;
+    top: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.8);
@@ -40,12 +43,21 @@ h4 {
     padding: 10px 20px;
     border-radius: 10px;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    visibility: hidden;
+    min-width: 150px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+    z-index: 1;
 }
 
 .achievement-title:hover .achievement-text {
-    display: block;
+    visibility: visible;
     opacity: 1;
+    transition: opacity 0.3s  ease-in-out, visibility 0s linear;
+}
+
+.achievement-title:hover .achievement {
+    transform: scale(1.1);
 }
 
 .achievement {
@@ -54,7 +66,4 @@ h4 {
     transition: transform 0.3s ease-in-out;
 }
 
-.achievement-title:hover .achievement {
-    transform: scale(1.1);
-}
 
