@@ -37,16 +37,24 @@ h4 {
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .achievement-title:hover .achievement-text {
     display: block;
+    opacity: 1;
 }
 
 .achievement {
     width: 150px;
     height: 150px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.achievement-title:hover .achievement {
+    transform: scale(1.1);
 }
 
