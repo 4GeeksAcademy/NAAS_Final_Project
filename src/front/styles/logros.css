@@ -3,13 +3,9 @@
 }
 
 .tier-container {
-    margin-top: 30px;
     margin-bottom: 30px;
 }
 
-.tier-container img {
-    margin-right: 70px;
-}
 
 h4 {
     text-align: center;
@@ -18,10 +14,17 @@ h4 {
 }
 
 .achievement-title {
-    display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 10px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.achievement-title h5 {
+    margin-bottom: 35px;
+}
+
+.achievement-title img {
+    display: block;
+    margin: 0 70px auto;
 }
 
 .achievement {
