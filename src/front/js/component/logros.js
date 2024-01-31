@@ -1,11 +1,21 @@
 // Achievements.js
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { Context } from "../store/appContext"
 
 import "../../styles/logros.css"
 
 export const Logros = () => {
   const { store, actions } = useContext(Context);
+  const [hoverAchievement, setHoverAchievement] = useState(null);
+
+  const handleMouseEnter = (achievement) => {
+    setHoverAchievement(achievement);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverAchievement(null);
+  };
+
   return (
     <div className="achievement-container">
       {/* Contenido de la sección de logros */}
@@ -14,9 +24,12 @@ export const Logros = () => {
         <div className="tier-container">
           <h4>Tier Iniciado</h4>
           <div className="d-flex justify-content-center">
-            <div className="achievement-title">
+            <div className="achievement-title" onMouseEnter={() => handleMouseEnter('Nuevo Usuario')} onMouseLeave={() => handleMouseLeave}>
               <h5>Nuevo Usuario</h5>
               <img src="https://i.imgur.com/3mUKHYV.png" alt="new user of Snapify" className="achievement " />
+              {hoverAchievement === 'Nuevo Usuario' && (
+                <div className="achievement-text">Otorgado al registrarse.</div>
+              )}
             </div>
             <div className="achievement-title">
               <h5>Primer SNAP!</h5>

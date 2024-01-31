@@ -16,7 +16,9 @@ h4 {
 .achievement-title {
     text-align: center;
     margin-right: 10px;
+    position: relative;
 }
+
 
 .achievement-title h5 {
     margin-bottom: 35px;
@@ -25,6 +27,22 @@ h4 {
 .achievement-title img {
     display: block;
     margin: 0 70px auto;
+}
+
+.achievement-text {
+    display: none;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.achievement-title:hover .achievement-text {
+    display: block;
 }
 
 .achievement {
