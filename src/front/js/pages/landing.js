@@ -80,11 +80,13 @@ export const Landing = () => {
                         <h2 className="color-text2 px-5">Colecciones Populares</h2>
                         <h3 className="color-text px-5">Consulte Nuestra Colección De Tendencias Actualizada Semanalmente</h3>
                     </div>
+                    <Link to="/galeria">
                     <button
                         type="button"
                         className="px-5 btn btn-outline-success color-text brd mt-5">
                         <i className="pe-2 fa-solid fa-rocket"></i>Ver Colecciones
                     </button>
+                    </Link>
                 </div>
                 <div className="d-flex justify-content-around color-back color-text container-fluid">
                     <div className="card card-info">
@@ -148,11 +150,13 @@ export const Landing = () => {
                     <h2 className="color-text2 px-5">Top Creadores</h2>
                     <h3 className="color-text px-5">Consulte A Los Creadores Mejor Calificados En Snapify</h3>
                 </div>
+                <Link to="/ranking-user">
                 <button
                     type="button"
                     className="px-5 btn btn-outline-success color-text brd mt-5">
                     <i className="pe-2 fa-solid fa-rocket"></i>Ver Rankings
                 </button>
+                </Link>
             </div>
             <div className="color-back pb-5 d-flex justify-content-evenly flex-wrap pt-3">
                 {testData.map((data, index) => (
@@ -177,11 +181,11 @@ export const Landing = () => {
                     <div className="text-center col-6 p-5">
                         <h2>Únase A Nuestro Boletín Semanal</h2>
                         <h4 className="p-3">Obtenga Promociones Y Actualizaciones Exclusivas Directamente En Su Bandeja De Entrada.</h4>
-                        <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Enter your email here" aria-label="Enter your email here">
-                            </input>
-                            <button type="button" className=" px-5 btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscribe</button>
-                        </div>
+                        <div className="input-group d-flex align-items-baseline">
+						<input type="text" className="form-control" placeholder="Enter your email here" aria-label="Enter your email here">
+						</input>
+						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscribe</button>
+					</div>
                     </div>
                 </div>
             </div>
@@ -191,9 +195,7 @@ export const Landing = () => {
 
                     <div className="position-absolute d-flex-column justify-content-center text-center m-5 top-0 end-0">
                         <h1>Magic Mashrooms</h1>
-                        <button type="button" className="zIndex-1 px-5 btn rounded btn-secondary color-text m-5">
-                            <i className="pe-2 fa-solid fa-bullseye"></i>Categoría
-                        </button>
+                        
                         <button type="button" className="px-5 btn rounded color-call color-text">
                             <i className="pe-2 fa-regular fa-eye"></i>Ver Evento
                         </button>

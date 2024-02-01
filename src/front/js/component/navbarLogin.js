@@ -24,7 +24,7 @@ export const NavbarLogin = () => {
               alt="logo"
               style={{ width: '40px', borderRadius: '100%', marginRight: '10px' }}
             />
-            SNAPIFY
+            <Link to="/" className="color-text-nav text-decoration-none ">SNAPIFY</Link>
           </h4>
         </div>
         <ul className="nav justify-content-center">
@@ -33,10 +33,14 @@ export const NavbarLogin = () => {
               <i className="pe-2 fa-solid fa-store"></i>Galería
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to="/ranking-photo" className="color-text-nav nav-link">
-              <i className="pe-2 fa-solid fa-arrow-trend-up"></i>Rankings
-            </Link>
+          <li class="nav-item dropdown">
+            <a class="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Rankings
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><Link to="ranking-photo" class="dropdown-item" >Ranking de fotografias</Link></li>
+              <li><Link to="ranking-user" class="dropdown-item">Ranking de usuarios</Link></li>
+            </ul>
           </li>
           <li className="nav-item">
             <Link to="/" className="nav-link color-text-nav">
@@ -62,9 +66,9 @@ export const NavbarLogin = () => {
         <div className="offcanvas-body">
           <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 mx-5">
             <li className="nav-item">
-            <button onClick={() => actions.toggleStatus()}className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
-          <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Set Status
-        </button>
+              <button onClick={() => actions.toggleStatus()} className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
+                <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Set Status
+              </button>
             </li>
             <li className="nav-item">
               <Link to="/vistaProfile" onClick={() => actions.setVistaElement("PersonalDataForm")} className="nav-link">
@@ -103,11 +107,11 @@ export const NavbarLogin = () => {
             </li>
             <li className="nav-item dropdown">
               <Link to="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i className="pe-2 color-text fa-solid fa-envelopes-bulk"></i>Buzón
+                <i className="pe-2 color-text fa-solid fa-envelopes-bulk"></i>Buzón<span class="p-2 badge bg-secondary">4</span>
               </Link>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li><Link to="#" className="dropdown-item"><i className="pe-2 color-text fa-solid fa-inbox"></i>Recibidos</Link></li>
-                <li><Link to="#" className="dropdown-item"><i className="pe-2 color-text fa-solid fa-envelope-circle-check"></i>Sin leer</Link></li>
+                <li><Link to="#" className="dropdown-item"><i className="pe-2 color-text fa-solid fa-envelope-circle-check"></i>Sin leer<span class="p-2 badge bg-secondary">4</span></Link></li>
                 <li>
                   <hr className="dropdown-divider"></hr>
                 </li>
@@ -120,7 +124,7 @@ export const NavbarLogin = () => {
             <form className="mt-2 d-flex color-text drop-nav" role="search">
               <h6>Soporte</h6>
               <Link to="/contact">
-              <button className="btn btn-outline-success" type="submit"><i className="avatar-login fa-solid fa-headset"></i></button>
+                <button className="btn btn-outline-success" type="submit"><i className="avatar-login fa-solid fa-headset"></i></button>
               </Link>
             </form>
             <form className="mt-2 mb-5 d-flex color-text drop-nav" role="search">

@@ -75,3 +75,12 @@ export const testData5 = [
   { photo: "Nombre foto5", name: "Animakid", index: 4, likes: 12, favorites: 6, photoUrl: "https://picsum.photos/id/254/400/500" },
   { photo: "Nombre foto6", name: "Animakid", index: 5, likes: 18, favorites: 9, photoUrl: "https://picsum.photos/id/255/400/500" },
 ];
+
+export const testData6 = [
+  { photo: "Nombre foto1", name: "Animakid", index: 0, likes: 10, favorites: 5, photoUrl: "https://picsum.photos/id/250/400/500" },
+  { photo: "Nombre foto2", name: "Animakid", index: 1, likes: 15, favorites: 8, photoUrl: "https://picsum.photos/id/251/400/500" },
+  { photo: "Nombre foto3", name: "Animakid", index: 2, likes: 20, favorites: 12, photoUrl: "https://picsum.photos/id/252/400/500" },
+  { photo: "Nombre foto4", name: "Animakid", index: 3, likes: 8, favorites: 3, photoUrl: "https://picsum.photos/id/253/400/500" },
+  { photo: "Nombre foto5", name: "Animakid", index: 4, likes: 12, favorites: 6, photoUrl: "https://picsum.photos/id/254/400/500" },
+  { photo: "Nombre foto6", name: "Animakid", index: 5, likes: 18, favorites: 9, photoUrl: "https://picsum.photos/id/256/400/500" },
+];
