@@ -29,12 +29,12 @@ export const NavbarLogin = () => {
         </div>
         <ul className="nav justify-content-center">
           <li className="nav-item">
-            <Link to="/" className="nav-link active color-text-nav">
+            <Link to="/galeria" className="nav-link active color-text-nav">
               <i className="pe-2 fa-solid fa-store"></i>Galería
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/" className="color-text-nav nav-link">
+            <Link to="/ranking-photo" className="color-text-nav nav-link">
               <i className="pe-2 fa-solid fa-arrow-trend-up"></i>Rankings
             </Link>
           </li>
@@ -119,7 +119,9 @@ export const NavbarLogin = () => {
           <div className="drop-nav">
             <form className="mt-2 d-flex color-text drop-nav" role="search">
               <h6>Soporte</h6>
+              <Link to="/contact">
               <button className="btn btn-outline-success" type="submit"><i className="avatar-login fa-solid fa-headset"></i></button>
+              </Link>
             </form>
             <form className="mt-2 mb-5 d-flex color-text drop-nav" role="search">
               <h6>Dar de baja mi cuenta</h6>

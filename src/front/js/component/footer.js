@@ -28,8 +28,8 @@ export const Footer = () => (
 				<div className="text-start col-3">
 					<h4>Explorar</h4>
 					<nav className="nav flex-column">
-						<a className="p-0 fs-5 text-white nav-link" href="#">Galería</a>
-						<a className="p-0 fs-5 text-white nav-link" href="#">Rankings</a>
+					<Link to="/galeria" className="p-0 fs-5 text-white nav-link">Galeria</Link>
+						<Link to="/ranking-photo" className="p-0 fs-5 text-white nav-link">Ranking</Link>
 						<Link to="/signUp" className="p-0 fs-5 text-white nav-link">Registrarse</Link>
 					</nav>
 				</div>

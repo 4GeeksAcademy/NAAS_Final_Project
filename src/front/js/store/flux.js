@@ -14,13 +14,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				{ rank: 1, imageUrl: 'URL_DEL_USUARIO_1', username: 'nombre 2', numbers: [3, 2, 62] },
 
 			],
+			cardLikes: {},
+			likes: [],
+			cardFavorites: {},
 			vistaProfile: null,
 			favorites: [],
 			isUserLoggedIn: false,
 			isAdminLoggedIn: false,
 			statusActive: false,
-			likesCount: 0,
-      		favoritesCount: 0,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -40,36 +41,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			
-			// Incrementa el contador de likes
-			incrementLikesCount: () => {
-				const store = getStore();
-				setStore({ likesCount: store.likesCount + 1 });
-			  },
-		
-			  // Incrementa el contador de favoritos
-			  incrementFavoritesCount: () => {
-				const store = getStore();
-				setStore({ favoritesCount: store.favoritesCount + 1 });
-			  },
 
 			addFavoritePhoto: (photo) => {
 				const store = getStore();
 				const updatedFavorites = store.favorites.some((fav) => fav.index === photo.index)
 				  ? store.favorites.filter((fav) => fav.index !== photo.index)
 				  : [...store.favorites, photo];
-			  
-				setStore({ favorites: updatedFavorites });
+		
+				const updatedCardFavorites = {
+				  ...store.cardFavorites,
+				  [photo.index]: updatedFavorites.filter((fav) => fav.index === photo.index).length,
+				};
+		
+				setStore({
+				  favorites: updatedFavorites,
+				  cardFavorites: updatedCardFavorites,
+				});
 			  },
-			  
-			  
-
+		
 			  deleteFavoritePhoto: (index) => {
 				const store = getStore();
 				const updatedFavorites = store.favorites.filter((fav, i) => i !== index);
-				setStore({ favorites: updatedFavorites });
+		
+				// Actualiza el recuento de favoritos por tarjeta
+				const updatedCardFavorites = {
+				  ...store.cardFavorites,
+				  [index]: updatedFavorites.length,
+				};
+		
+				setStore({
+				  favorites: updatedFavorites,
+				  cardFavorites: updatedCardFavorites,
+				});
 			  },
 
+			  addLikePhoto: (photo) => {
+				const store = getStore();
+				const updatedLikes = store.likes.some((like) => like.index === photo.index)
+				  ? store.likes.filter((like) => like.index !== photo.index)
+				  : [...store.likes, photo];
+		
+				const updatedCardLikes = {
+				  ...store.cardLikes,
+				  [photo.index]: updatedLikes.filter((like) => like.index === photo.index).length,
+				};
+		
+				setStore({
+				  likes: updatedLikes,
+				  cardLikes: updatedCardLikes,
+				});
+			  },
+			  
 			toggleStatus: () => {
 				const store = getStore();
 				setStore({ statusActive: !store.statusActive });

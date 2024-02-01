@@ -42,12 +42,16 @@ useEffect(() => {
       <div>
         <img className="banner" src={testData3[2].fotoUrl} alt="Banner" />
       </div>
+      <div className="d-flex align-items-center justify-content-between">
+
       <div className="d-flex align-items-center">
         <img className="avatar" src={testData3[1].fotoUrl} alt="Avatar" />
         <h2 className="color-text">Animakid</h2>
         <button onClick={() => actions.toggleStatus()}className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
           <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Status
         </button>
+        <button className="btn btn-primary">Follow</button>
+      </div>
       
       </div>
       <ul className="list-group flex-row justify-content-evenly mb-5">

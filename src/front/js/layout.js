@@ -10,6 +10,7 @@ import { VistaProfile } from "./pages/vistaProfile";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Landing } from "./pages/landing";
+import { Galeria } from "./pages/galeria";
 
 import { Footer } from "./component/footer";
 import Login from "./component/Login";
@@ -38,6 +39,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/home" />
                         <Route element={<Landing />} path="/" />
+                        <Route element={<Galeria />} path="/galeria" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />

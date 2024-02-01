@@ -1,27 +1,47 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { testData3 } from "./testData";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
 export const PhotoCard = (props) => {
 	const { store, actions } = useContext(Context);
+  const [favoriteCount, setFavoriteCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
 
-	const handleFavoriteClick = () => {
-		actions.addFavoritePhoto({
-		  photo: props.photo,
-		  url: props.url,
-		  name: props.name,
-		  index: props.index,
-		});
-	  };
-	  
-	  
-	  
+  const handleFavoriteClick = () => {
+    actions.addFavoritePhoto({
+      photo: props.photo,
+      name: props.name,
+      index: props.index,
+	  photoUrl: props.photoUrl,
+      likes: props.likes,
+      favorites: props.favorites + 1,
+    });
+  };
+
+  const handleLikeClick = () => {
+    actions.addLikePhoto({
+      photo: props.photo,
+      name: props.name,
+      index: props.index,
+      likes: isLiked ? props.likes - 1 : props.likes + 1,
+      favorites: props.favorites,
+	  photoUrl: props.photoUrl,
+    });
+  };
+
+  useEffect(() => {
+    setFavoriteCount(store.cardFavorites[props.index] || 0);
+    setLikeCount(store.cardLikes[props.index] || 0);
+    setIsLiked(store.likes && store.likes.some((like) => like.index === props.index));
+  }, [store.cardFavorites, store.cardLikes, store.likes, props.index]);
+  
 
 	return (
 		<div className="mx-3 bg-gra">
 			<div className="card mb-2" style={{ width: "18rem" }}>
-				<img src={testData3[2].fotoUrl} className="card-img-top" alt="Photo" />
+				<img src={props.photoUrl} className="card-img-top" alt="Photo" />
 
 				<div className="card-body color-back px-4">
 					<h4 className="color-text">{props.photo}</h4>
@@ -39,36 +59,31 @@ export const PhotoCard = (props) => {
 					<div className="buttons d-flex justify-content-between mt-3">
 						{/* Botón de Like */}
 						<button
-							onClick={() => {
-								// Lógica para manejar el like
-							}}
-							type="button"
-							className="btn p-1 btn-outline-success border-2"
-						>
-							<i className="far fa-thumbs-up"></i> Like
-						</button>
+  onClick={handleLikeClick}
+  type="button"
+  className={`btn p-1 border-2 ${isLiked ? "btn-danger" : "btn-outline-success"}`}
+>
+  <i className={`far fa-thumbs-up ${isLiked ? "text-danger" : ""}`}></i> Like
+</button>
 
 						{/* Botón de Favorito */}
 						<button
-							onClick={handleFavoriteClick}
-							type="button"
-							className={`btn p-1 border-2 ${store.favorites.some(
-								(fav) => fav.index === props.index
-							)
-									? "btn-danger" // Cambia a color danger si está en favoritos
-									: "btn-outline-success" // De lo contrario, color verde
-								}`}
-						>
-							<i className="far fa-heart"></i> Favorito
-						</button>
+      onClick={handleFavoriteClick}
+      type="button"
+      className={`btn p-1 border-2 ${store.favorites.some((fav) => fav.index === props.index)
+        ? "btn-danger"
+        : "btn-outline-success"}`}
+    >
+      <i className="far fa-heart"></i> Favorito
+    </button>
 					</div>
 
 					<div className="d-flex justify-content-between mt-3 color-text">
-						{/* Contador de Likes */}
-						<p>Likes: {props.likes}</p>
+						 {/* Contador de Likes */}
+						 <p>Likes: {likeCount}</p>
 
-						{/* Contador de Favoritos */}
-						<p>Favorites: {props.favorites}</p>
+{/* Contador de Favoritos */}
+<p>Favorites: {favoriteCount}</p>
 					</div>
 
 				</div>
@@ -80,12 +95,13 @@ export const PhotoCard = (props) => {
 PhotoCard.propTypes = {
 	photo: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
-	// Elimina "index" de las PropTypes ya que no lo necesitas aquí
 	likes: PropTypes.number.isRequired,
 	favorites: PropTypes.number.isRequired,
-};
-
-PhotoCard.defaultProps = {
+	photoUrl: PropTypes.string.isRequired, // Asegúrate de incluir photoUrl en las PropTypes
+  };
+  
+  
+  PhotoCard.defaultProps = {
 	likes: 0,
 	favorites: 0,
-};
+  };
