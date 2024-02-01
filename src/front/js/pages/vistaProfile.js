@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import banner from "../../img/banner.png";
 import avatar from "../../img/avatar.png";
-import { PhotoCard } from "../component/photoCard";
+import { PhotoCard } from "../component/PhotoCard";
 import { Logros } from "../component/logros";
-import { Eventos, Status, Favoritos } from "../component/eventos";
+import { Eventos, Status, Favoritos } from "../component/Eventos";
 import { testData1 } from "../component/testData";
 
 export const VistaProfile = () => {
   const { store, actions } = useContext(Context);
 
-  
-// useEffect para establecer la vista por defecto al montar el componente
-useEffect(() => {
-  // Solo establecer la vista por defecto si no hay una vista seleccionada
-  if (!store.vistaProfile) {
-    actions.setVistaElement("Photos");
-  }
-}, [store.vistaProfile]); // Ejecutar el efecto cuando store.vistaProfile cambie
+
+  // useEffect para establecer la vista por defecto al montar el componente
+  useEffect(() => {
+    // Solo establecer la vista por defecto si no hay una vista seleccionada
+    if (!store.vistaProfile) {
+      actions.setVistaElement("Photos");
+    }
+  }, [store.vistaProfile]); // Ejecutar el efecto cuando store.vistaProfile cambie
 
 
   const renderComponent = () => {
@@ -30,9 +30,9 @@ useEffect(() => {
       case "Eventos": // Cambiado de "Eventos" a "eventos"
         return <Eventos />;
       case "Status": // Cambiado de "Status" a "status"
-        return <Status />;
+      // return <Status />;
       case "Favoritos": // Cambiado de "Favoritos" a "favoritos"
-        return <Favoritos />;
+      // return <Favoritos />;
       default:
         return null;
     }

@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 import smtplib
-from flask import Flask, request, jsonify, url_for, send_from_directory
+from flask import Flask, request, jsonify, url_for, send_from_directory, make_response
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
@@ -11,6 +11,7 @@ from api.models import *
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_cors import CORS
 
 from flask_jwt_extended import create_access_token #Token creation
 from flask_jwt_extended import get_jwt_identity #Get User ID that created token
@@ -28,6 +29,7 @@ ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+CORS(app)
 bcrypt = Bcrypt(app)
 app.url_map.strict_slashes = False
 
@@ -162,6 +164,40 @@ def login():
 def protected():
     current_user = get_jwt_identity()
     return jsonify({'msg': 'Ok', 'user': current_user}), 200
+
+@app.route('/events', methods=['GET'])
+def get_all_events():
+    try:
+        events = Events.query.all()
+        if not events: 
+            return jsonify({'msg': 'No hay eventos disponibles'})
+        
+        serialized_events = [event.serialize() for event in events]
+        response = jsonify(serialized_events)
+        response.headers['Content-Type'] = 'application/json'
+
+        return response, 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+@app.route('/events/<int:event_id>', methods=['GET'])
+def get_event(event_id):
+    try:
+        event = Events.query.get(event_id)
+        if not event:
+            return jsonify({'msg': 'Evento no encontrado'}), 404
+
+        serialized_event = event.serialize()
+
+        response = make_response(jsonify(serialized_event))
+        response.headers['Content-Type'] = 'application/json'
+
+        return response, 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 @app.route('/photo_uploader', methods=['POST'])
 def photo_uploader():

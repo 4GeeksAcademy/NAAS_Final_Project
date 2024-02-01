@@ -58,6 +58,7 @@
   }
   .btn-icon{
     display: flex;
+
   }
   .btn-icon i {
     margin-right: 10px; 
@@ -68,7 +69,43 @@
     gap: 20px;
 
   }
-  .btn.color-call {
+  .button-event {
+    margin-top: 10px;
     color: white;
     width: 100%;
+    border-radius: 20px;
   }
+
+  .description{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+
+  }
+  .main-container{
+    padding: 30px;
+   
+  }
+  #eventContainer{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    
+  }
+ 
+  .mini-container{
+    flex: 1; 
+    text-align: center;
+    /* margin: 10px; */
+    background-color: #3B3B3B;
+    border-radius: 15px;
+    /* padding: 5px; */
+    color: white;
+    
+  }
+  .info{
+    display: flex;
+    gap: 5px;
+  }
+

@@ -25,7 +25,7 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
-			<Timer eventEndDate={"2024-2-1"}/>
+			<Timer />
 			<Login/>
 			<Categories/>
 			<TermsAndConditions />
