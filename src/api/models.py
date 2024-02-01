@@ -30,7 +30,7 @@ class User_data(db.Model):
     firstname = db.Column(db.String(50), nullable=False)
     lastname = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(20), nullable=True)
-    country = db.Column(db.String(50))
+    country = db.Column(db.String(50), nullable=False)
 
     ## RELATIONSHIP
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

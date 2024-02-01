@@ -23,7 +23,7 @@ from api.email_utils import send_password_reset_email
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
-CORS(api, methods=['POST', 'GET'])
+CORS(api)
 
 # Create a Bcrypt object
 bcrypt = Bcrypt()
@@ -49,7 +49,7 @@ def register():
     if 'email' not in body or 'password' not in body:
         return jsonify({'msg': 'Email and password fields are obligatory'}), 400
     
-    required_fields = ['username', 'firstname', 'lastname', 'phone', 'country']
+    required_fields = ['username', 'firstname', 'lastname', 'country']
 
     if any(field not in body or not body[field] for field in required_fields):
         return jsonify({'msg': 'Missing or empty values for required fields'}), 400
@@ -121,7 +121,7 @@ def login():
     check_password = bcrypt.check_password_hash(user.password, body['password'])
     if check_password == False:
         return jsonify({'msg': 'Invalid email or password'}), 400
-    access_token = create_access_token(identity=user.id) 
+    access_token = create_access_token(identity=user.id, additional_claims={'role': user.role})
     return jsonify({'msg': 'Login successful!', 'token': access_token}), 200
 
 @api.route('/photo-uploader', methods=['POST'])
