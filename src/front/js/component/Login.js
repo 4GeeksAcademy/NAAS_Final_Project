@@ -36,13 +36,11 @@ function Login() {
       if (response.ok) {
         toast.success('Login successfully');
         const { token } = responseJson;
-        // Guardar el token en sessionStorage
+        //token en sessionStorage
         sessionStorage.setItem('token', token);
-        // Login exitoso, puedes manejar el token o redirigir aquí
         navigate("/");
         console.log('Login successful!', responseJson);
       } else {
-        // Manejar errores de autenticación
         toast.error(`${responseJson.msg}`);
         console.error('Error en el login:', responseJson.msg);
       }
@@ -85,10 +83,10 @@ function Login() {
               <input
                 type="email"
                 className="form-control"
-                id="email"  // Cambiado de "InputEmail" a "email"
+                id="email"
                 placeholder="Email address"
-                value={formData.email}  // Agregado para vincular el valor del estado
-                onChange={handleChange} // Agregado para manejar los cambios en el estado
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -99,10 +97,10 @@ function Login() {
               <input
                 type="password"
                 className="form-control"
-                id="password" // Cambiado de "Password" a "password"
+                id="password"
                 placeholder="Password"
-                value={formData.password}  // Agregado para vincular el valor del estado
-                onChange={handleChange} // Agregado para manejar los cambios en el estado
+                value={formData.password}
+                onChange={handleChange}
               />
             </div>
           </div>
