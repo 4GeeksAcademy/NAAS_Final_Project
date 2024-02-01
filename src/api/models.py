@@ -7,7 +7,10 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
+    role = db.Column(db.String(50), nullable=False, default='user')
+
+    user_data = db.relationship('User_data', back_populates='user_relationship', uselist=False)
 
     def __repr__(self):
         return '{}'.format(self.email)
@@ -17,6 +20,7 @@ class Users(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "role": self.role
             # do not serialize the password, its a security breachs
         }
 
@@ -26,7 +30,7 @@ class User_data(db.Model):
     firstname = db.Column(db.String(50), nullable=False)
     lastname = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(20), nullable=True)
-    country = db.Column(db.String(50))
+    country = db.Column(db.String(50), nullable=False)
 
     ## RELATIONSHIP
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -248,6 +252,11 @@ class Favorite_Photos(db.Model):
             "favorite_photo": self.favorite_photo_relationship.name,
             "user": self.user_relationship.email,
         }
+
+class Blacklist_Token(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    expiration_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 

@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Context } from "./store/appContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
@@ -10,8 +12,10 @@ import { VistaProfile } from "./pages/vistaProfile";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Landing } from "./pages/landing";
+import { Galeria } from "./pages/galeria";
 
 import { Footer } from "./component/footer";
+import Login from "./component/Login";
 import ForgotPassword from "./component/ForgotPassword"
 import SignUpForm from "./component/SignUpForm";
 import ContactForm from "./component/ContactForm";
@@ -21,6 +25,7 @@ import { EventsDetails } from "./component/EventDetails";
 
 import "../styles/home.css";
 import Ranking from "./component/Ranking";
+import PasswordUpdate from "./component/PasswordUpdate";
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -37,8 +42,11 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/home" />
                         <Route element={<Landing />} path="/" />
+                        <Route element={<Galeria />} path="/galeria" />
                         <Route element={<Demo />} path="/demo" />
+                        <Route element={<Login />} path="/login" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />
+                        <Route element={<PasswordUpdate />} path="/password-update" />
                         <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
@@ -50,6 +58,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
+                    <ToastContainer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
