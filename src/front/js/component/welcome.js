@@ -1,5 +1,5 @@
 import React from 'react';
-import people from "../../img/people.jpg";
+import { testData3 } from './testData';
 
 export const Welcome = () => {
   return (
@@ -9,7 +9,7 @@ export const Welcome = () => {
         <h1 style={{ fontSize: "65px" }}>Bienvenido!</h1>
         <h3 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h3>
       </div>
-      <img src={people} className="card-img-top" style={{ height: "auto", width: "350px", objectFit: "cover" }} alt="..." />
+      <img src={testData3[13].fotoUrl} className="card-img-top" style={{ height: "auto", width: "350px", objectFit: "cover" }} alt="..." />
     </div>
     </div>
   );

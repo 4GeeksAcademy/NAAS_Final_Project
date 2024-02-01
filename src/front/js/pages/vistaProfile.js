@@ -1,17 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import banner from "../../img/banner.png";
-import avatar from "../../img/avatar.png";
 import { PhotoCard } from "../component/photoCard";
 import { Logros } from "../component/logros";
-import { Eventos, Status, Favoritos } from "../component/eventos";
-import { testData1 } from "../component/testData";
+import { Eventos } from "../component/eventos";
+import { Favoritos } from "../component/favoritos";
+import { testData1, testData3 } from "../component/testData";
+import PersonalDataForm from "../component/PersonalDataForm";
 
 export const VistaProfile = () => {
   const { store, actions } = useContext(Context);
 
-  
 // useEffect para establecer la vista por defecto al montar el componente
 useEffect(() => {
   // Solo establecer la vista por defecto si no hay una vista seleccionada
@@ -29,10 +28,10 @@ useEffect(() => {
         return <Logros />;
       case "Eventos": // Cambiado de "Eventos" a "eventos"
         return <Eventos />;
-      case "Status": // Cambiado de "Status" a "status"
-        return <Status />;
+        case "PersonalDataForm": // Cambiado de "Eventos" a "eventos"
+        return <PersonalDataForm />;
       case "Favoritos": // Cambiado de "Favoritos" a "favoritos"
-        return <Favoritos />;
+      return <Favoritos favorites={store.favorites} />;
       default:
         return null;
     }
@@ -41,11 +40,19 @@ useEffect(() => {
   return (
     <div className="container-fluid color-back">
       <div>
-        <img className="banner" src={banner} alt="Banner" />
+        <img className="banner" src={testData3[2].fotoUrl} alt="Banner" />
       </div>
+      <div className="d-flex align-items-center justify-content-between">
+
       <div className="d-flex align-items-center">
-        <img className="avatar" src={avatar} alt="Avatar" />
+        <img className="avatar" src={testData3[1].fotoUrl} alt="Avatar" />
         <h2 className="color-text">Animakid</h2>
+        <button onClick={() => actions.toggleStatus()}className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
+          <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Status
+        </button>
+        <button className="btn btn-primary">Follow</button>
+      </div>
+      
       </div>
       <ul className="list-group flex-row justify-content-evenly mb-5">
         <li className={`list-group-item d-flex justify-content-between select`}>
