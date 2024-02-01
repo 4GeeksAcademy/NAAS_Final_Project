@@ -4,6 +4,9 @@
 .color-back2{
     background: #3B3B3B
 }
+.color-back3{
+    background-color: #3b3b3b8c;
+}
 .color-caption{
     background: #858584;
 }
@@ -131,17 +134,3 @@ body, html {
     height: 500px; /* Ajusta la altura según sea necesario */
 }
 
-.timer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    background-color: rgba(169, 169, 169, 0.6);
-    font-size: x-large;
-    color: #FFFFFF;
-    height: 150px;
-    margin: 20px;
-    padding: 20px;
-    border: 5px solid #64C247;
-}

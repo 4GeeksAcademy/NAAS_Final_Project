@@ -1,0 +1,111 @@
+.timer {
+    background-color: #3b3b3b8c;
+    width: 300px;
+    text-align: start;
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    margin: 0 auto;
+  }
+  
+  .timer-digits {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .digit {
+    margin: 0 10px;
+    text-align: center;
+  }
+  
+  .value {
+    font-size: 40px; 
+    font-weight: bold;
+  }
+  
+  .label {
+    font-size: 14px;
+    display: block;
+  }
+  .points{
+    font-size: 40px;
+    font-weight: bold;
+    margin: 2px 2px;
+  }
+
+  .events{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 10px;
+    
+  }
+  .event-container{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    width: 600px;
+    border-radius: 20px;
+    background-color: #3b3b3b8c
+
+  }
+  .info-container{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .btn-icon{
+    display: flex;
+
+  }
+  .btn-icon i {
+    margin-right: 10px; 
+  }
+  .btn-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+  }
+  .button-event {
+    margin-top: 10px;
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .description{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+
+  }
+  .main-container{
+    padding: 30px;
+   
+  }
+  #eventContainer{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    
+  }
+ 
+  .mini-container{
+    flex: 1; 
+    text-align: center;
+    /* margin: 10px; */
+    background-color: #3B3B3B;
+    border-radius: 15px;
+    /* padding: 5px; */
+    color: white;
+    
+  }
+  .info{
+    display: flex;
+    gap: 5px;
+  }
+
