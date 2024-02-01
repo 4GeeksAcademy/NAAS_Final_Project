@@ -1,8 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "../../styles/loginContainer.css";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(process.env.BACKEND_URL + '/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const responseJson = await response.json();
+
+      if (response.ok) {
+        toast.success('Login successfully');
+        const { token } = responseJson;
+        // Guardar el token en sessionStorage
+        sessionStorage.setItem('token', token);
+        // Login exitoso, puedes manejar el token o redirigir aquí
+        navigate("/");
+        console.log('Login successful!', responseJson);
+      } else {
+        // Manejar errores de autenticación
+        toast.error(`${responseJson.msg}`);
+        console.error('Error en el login:', responseJson.msg);
+      }
+    } catch (error) {
+      toast.error(`Error haciendo la solicitud: ${error}`);
+      console.error('Error haciendo la solicitud:', error);
+    }
+  };
+
+
   return (
     <div className='contaniner-fluid d-flex color-back'>
       <div className='container-fluid d-flex-column col-6' style={{ display: "contents" }}>
@@ -27,7 +77,7 @@ function Login() {
         </div>
       </div>
       <div className="login-container p-5 col-6">
-        <form className="login-form">
+        <form onSubmit={handleSubmit} className="login-form">
           <h2 className='title'>Login</h2>
           <div className="mb-3">
             <div className="input-icon">
@@ -35,22 +85,28 @@ function Login() {
               <input
                 type="email"
                 className="form-control"
-                id="InputEmail"
+                id="email"  // Cambiado de "InputEmail" a "email"
                 placeholder="Email address"
+                value={formData.email}  // Agregado para vincular el valor del estado
+                onChange={handleChange} // Agregado para manejar los cambios en el estado
               />
             </div>
           </div>
+
           <div className="mb-3">
             <div className="input-icon">
               <i className="fa-solid fa-lock" style={{ color: "#7f7f7f" }} />
               <input
                 type="password"
                 className="form-control"
-                id="Password"
+                id="password" // Cambiado de "Password" a "password"
                 placeholder="Password"
+                value={formData.password}  // Agregado para vincular el valor del estado
+                onChange={handleChange} // Agregado para manejar los cambios en el estado
               />
             </div>
           </div>
+
           <button type="submit" className="btn confirm-btn">
             Confirmar
           </button>
