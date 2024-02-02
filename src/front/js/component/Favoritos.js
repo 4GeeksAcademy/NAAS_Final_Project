@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { PhotoCard } from "./photoCard";
+import { PhotoCard } from "./PhotoCard";
 
 export const Favoritos = ({ favorites }) => {
   const { store, actions } = useContext(Context);

@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import banner from "../../img/banner.png";
-import avatar from "../../img/avatar.png";
+// import banner from "../../img/banner.png";
+// import avatar from "../../img/avatar.png";
 import { PhotoCard } from "../component/PhotoCard";
+// import { Logros } from "../component/logros";
+// import { Eventos, Status, Favoritos } from "../component/Eventos";
+// import { testData1 } from "../component/testData";
+// import { photoCard } from "../component/photoCard";
 import { Logros } from "../component/logros";
-import { Eventos, Status, Favoritos } from "../component/Eventos";
-import { testData1 } from "../component/testData";
-import { PhotoCard } from "../component/photoCard";
-import { Logros } from "../component/logros";
-import { Eventos } from "../component/eventos";
-import { Favoritos } from "../component/favoritos";
+import { Eventos } from "../component/Eventos";
+import { Favoritos } from "../component/Favoritos";
 import { testData1, testData3 } from "../component/testData";
 import PersonalDataForm from "../component/PersonalDataForm";
 
