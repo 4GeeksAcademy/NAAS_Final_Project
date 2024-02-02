@@ -152,7 +152,7 @@ class Events(db.Model):
         }
 
 # tabla de relacion usuario evento
-class UserEvents(db.Model):
+class User_events(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
