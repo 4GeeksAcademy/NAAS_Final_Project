@@ -3,6 +3,7 @@ import "../../styles/loginContainer.css";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { verifyToken } from './navbarManager';
 
 function Login() {
   const navigate = useNavigate();
@@ -36,9 +37,15 @@ function Login() {
       if (response.ok) {
         toast.success('Login successfully');
         const { token } = responseJson;
-        //token en sessionStorage
+        // token en sessionStorage
         sessionStorage.setItem('token', token);
-        navigate("/");
+
+        // Fetch user role after successful login
+        const userRole = await verifyToken();
+
+        // Manually trigger a re-render of NavbarManager
+        forceUpdateNavbar.current();
+
         console.log('Login successful!', responseJson);
       } else {
         toast.error(`${responseJson.msg}`);
