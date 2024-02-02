@@ -10,7 +10,7 @@ export const Eventos = () => {
   const { store, actions } = useContext(Context);
   useEffect(()=>{
     const eventos= actions.getAllEvents()
-  })
+  },[])
   return (
     <div className="events">
       <div className="event-container">
