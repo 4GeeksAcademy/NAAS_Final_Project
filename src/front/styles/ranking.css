@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   margin-top: 40px;
-  width: 800px;
   background-color: #2B2B2B;
   color: white;
   margin-bottom: 30px;
@@ -91,4 +90,42 @@
   /* margin-right: 50px; */
   display: flex;
   gap: 20px;
+}
+
+body {
+  background:#3b3b3b;
+}
+
+/* Media query para móviles (hasta 767px) */
+@media screen and (max-width: 767px) {
+
+  /* Ajustes específicos para la sección especial en móviles */
+  .mobile-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centra horizontalmente */
+      justify-content: center; /* Centra verticalmente */
+      text-align: center;
+      width: 100%;
+      padding: 10px;
+  }
+
+  .ghost{
+      display: none;
+  }
+
+  .no-pad{
+      padding: 10px !important;
+  }
+  .no-mar{
+      margin: 10px !important;
+  }
+
+  .ranking-container{
+    gap: 0px;
+    height: auto;
+  }
+  .ranking {
+    margin: 0px;
+  }
 }

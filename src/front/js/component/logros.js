@@ -17,13 +17,13 @@ export const Logros = () => {
   };
 
   return (
-    <div className="achievement-container container-fluid">
+    <div className="mobile-column achievement-container container-fluid">
       {/* Contenido de la sección de logros */}
-      <h3 className="color-text d-flex justify-content-center mt-5 mb-2 logros-title">Logros</h3>
-      <div className="bg-dark color-text d-flex flex-column align-items-center">
-        <div className="tier-container">
+      <h3 className="mobile-colum color-text d-flex justify-content-center mt-5 mb-2 logros-title">Logros</h3>
+      <div className="mobile-column bg-dark color-text d-flex flex-column align-items-center">
+        <div className="mobile-column tier-container">
           <h4>Tier Iniciado</h4>
-          <div className="d-flex justify-content-center">
+          <div className="mobile-column d-flex justify-content-center">
             <div className="achievement-title" onMouseEnter={() => handleMouseEnter('Nuevo Usuario')} onMouseLeave={() => handleMouseLeave}>
               <h5>Nuevo Usuario</h5>
               <img src="https://i.imgur.com/3mUKHYV.png" alt="new user of Snapify" className="achievement " />
@@ -54,9 +54,9 @@ export const Logros = () => {
             </div>
           </div>
         </div>
-        <div className="tier-container">
+        <div className="tier-container mobile-column ">
           <h4>Tier Intermedio</h4>
-          <div className="d-flex justify-content-center">
+          <div className="mobile-column d-flex justify-content-center">
             <div className="achievement-title" onMouseEnter={() => handleMouseEnter('Ingeniero de la Imagen')} onMouseLeave={() => handleMouseLeave}>
               <h5>Ingeniero de la Imagen</h5>
               <img src="https://i.imgur.com/Xi9pu83.png" alt="perspective" className="achievement" />
@@ -80,9 +80,9 @@ export const Logros = () => {
             </div>
           </div>
         </div>
-        <div className="tier-container">
+        <div className="mobile-column tier-container">
           <h4>Tier Avanzado</h4>
-          <div className="d-flex justify-content-center">
+          <div className="mobile-column d-flex justify-content-center">
             <div className="achievement-title" onMouseEnter={() => handleMouseEnter('King')} onMouseLeave={() => handleMouseLeave}>
               <h5>Rey de Corazones</h5>
               <img src="https://i.imgur.com/g41w1dC.png" alt="king of hearts" className="achievement" />

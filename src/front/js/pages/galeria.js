@@ -10,8 +10,8 @@ export const Galeria = () => {
   const allPhotos = [...testData1, ...testData4, ...testData5, testData6];
 
   // Define el número de tarjetas por fila y tarjetas por página
-  const cardsPerRow = 3;
-  const cardsPerPage = 15;
+  const cardsPerRow = 2;
+  const cardsPerPage = 12;
 
   // Estado para mantener el índice de la página actual
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,16 +34,16 @@ export const Galeria = () => {
   };
 
   return (
-    <div className="container-fluid color-back">
+    <div className="container-fluid color-back mobile-column">
       <div className="container-fluid color-back d-flex-column p-5 color-text">
         <h1 className="text-center pt-2">Navegar En La Galeria</h1>
         <h3 className="text-center pt-2">Explore más de 50.000 Fotografías en nuestra galeria libre</h3>
-        <form class=" container-fluid pt-2 pb-5 d-flex w-75 text-center justtify-align-center">
-          <input class="form-control m-0" type="search" placeholder="Search" aria-label="Search" />
+        <form class="mobile-column container-fluid pt-2 pb-5 d-flex w-75 text-center justtify-align-center">
+          <input class="form-control mb-2" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-success ms-3" type="submit">Search</button>
         </form>
       </div>
-      <div className="container-fluid color-back2 p-2">
+      <div className="mobile-column container color-back2 p-2">
         <div className="row justify-content-center">
           {currentPhotos.map((data, index) => (
             <div key={index} className={`col-md-${12 / cardsPerRow} mb-4`}>
@@ -52,7 +52,7 @@ export const Galeria = () => {
           ))}
         </div>
       </div>
-      <nav aria-label="Page navigation example" className="p-5">
+      <nav aria-label="Page navigation example" className="p-3">
         <ul className="pagination justify-content-center">
           <li className={`page-item ${currentPage === 1 && "disabled"}`}>
             <a className="page-link" href="#" tabIndex="-1" aria-disabled="true" onClick={prevPage}>

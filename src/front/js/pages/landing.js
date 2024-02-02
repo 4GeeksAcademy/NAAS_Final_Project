@@ -13,23 +13,23 @@ export const Landing = () => {
 
     return (
         <div>
-            <div className="d-flex px-4 py-5 color-text color-back container-fluid">
-                <div className="text-center col-6 p-4">
+            <div className="mobile-column d-flex px-4 py-5 color-text color-back container-fluid">
+                <div className="text-center">
                     <h1>Descubre Una Comunidad De Artistas</h1>
                     <h4 className="p-3">Para fotógrafos aficionados y profesionales, con categorías que abarcan desde retratos hasta fotografía de paisajes.</h4>
                     <Link to="/signUp">
                     <button
                         type="button"
-                        className="px-5 btn brd color-call color-text mt-5">
+                        className="px-5 btn brd color-call color-text m-3">
                         <i className="pe-2 fa-solid fa-rocket"></i>Get Started
                     </button>
                     </Link>
                 </div>
-                <div className="col-6">
+                <div className="">
                     <img src={testData3[10].fotoUrl} className="card-img-top" alt="Photo" />
                 </div>
             </div>
-            <div className="d-flex px-5 py-5 color-back container-fluid justify-content-between">
+            <div className="mobile-column d-flex px-5 py-5 color-back container-fluid justify-content-between">
                 <div>
                     <h2 className="color-text2 px-5">Como Funciona</h2>
                     <h3 className="color-text px-5">Descubra Cómo Empezar</h3>
@@ -42,7 +42,7 @@ export const Landing = () => {
                 </button>
                 </Link>
             </div>
-            <div className="d-flex justify-content-around color-back color-text container-fluid">
+            <div className="mobile-column d-flex justify-content-around color-back color-text container-fluid">
                 <div className="card card-info">
                     <img src={testData3[6].fotoUrl} className="card-img-top" style={{ height: "350px", objectFit: "cover" }} alt="..." />
                     <div className="card-body">
@@ -75,7 +75,7 @@ export const Landing = () => {
                 </div>
             </div>
             <div>
-                <div className="d-flex px-5 py-5 color-back container-fluid justify-content-between">
+                <div className="mobile-column d-flex px-5 py-5 color-back container-fluid justify-content-between">
                     <div>
                         <h2 className="color-text2 px-5">Colecciones Populares</h2>
                         <h3 className="color-text px-5">Consulte Nuestra Colección De Tendencias Actualizada Semanalmente</h3>
@@ -88,15 +88,15 @@ export const Landing = () => {
                     </button>
                     </Link>
                 </div>
-                <div className="d-flex justify-content-around color-back color-text container-fluid">
-                    <div className="card card-info">
-                        <img src={testData3[5].fotoUrl} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
+                <div className="mobile-column d-flex justify-content-around color-back color-text container-fluid">
+                    <div className="ghost2 card card-info">
+                        <img src={testData3[5].fotoUrl} className="card-img-top" style={{ height: "280px", width: "280px", objectFit: "cover" }} alt="..." />
                         <div className="d-flex justify-content-between" >
-                            <img src={testData3[5].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
-                            <img src={testData3[10].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[5].fotoUrl} className="card-img-top brd" style={{ width: "90px", height: "90px" }} alt="..." />
+                            <img src={testData3[10].fotoUrl} className="card-img-top brd" style={{ width: "90px", height: "90px" }} alt="..." />
                             <button
                                 type="button"
-                                className="btn color-call color-text brd fs-4" style={{ height: "100px", width: "100px" }}>
+                                className="btn color-call color-text brd fs-4" style={{ height: "90px", width: "90px" }}>
                                 1025+
                             </button>
                         </div>
@@ -108,13 +108,13 @@ export const Landing = () => {
                         </div>
                     </div>
                     <div className="card card-info">
-                        <img src={testData3[11].fotoUrl} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
+                        <img src={testData3[11].fotoUrl} className="card-img-top" style={{ height: "280px", width: "280px", objectFit: "cover" }} alt="..." />
                         <div className="d-flex justify-content-between" >
-                            <img src={testData3[11].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
-                            <img src={testData3[13].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[11].fotoUrl} className="card-img-top brd" style={{ width: "90px", height: "90px" }} alt="..." />
+                            <img src={testData3[13].fotoUrl} className="card-img-top brd" style={{ width: "90px", height: "90px" }} alt="..." />
                             <button
                                 type="button"
-                                className="btn color-call color-text brd fs-4" style={{ height: "100px", width: "100px" }}>
+                                className="btn color-call color-text brd fs-4" style={{ height: "90px", width: "90px" }}>
                                 1025+
                             </button>
                         </div>
@@ -126,13 +126,13 @@ export const Landing = () => {
                         </div>
                     </div>
                     <div className="card card-info">
-                        <img src={testData3[4].fotoUrl} className="card-img-top" style={{ height: "320px", width: "320px", objectFit: "cover" }} alt="..." />
+                        <img src={testData3[4].fotoUrl} className="card-img-top" style={{ height: "280px", width: "280px", objectFit: "cover" }} alt="..." />
                         <div className="d-flex justify-content-between" >
-                            <img src={testData3[4].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
-                            <img src={testData3[6].fotoUrl} className="card-img-top brd" style={{ width: "100px", height: "100px" }} alt="..." />
+                            <img src={testData3[4].fotoUrl} className="card-img-top brd" style={{ width: "90px", height: "90px" }} alt="..." />
+                            <img src={testData3[6].fotoUrl} className="card-img-top brd" style={{ width: "90px", height: "90px" }} alt="..." />
                             <button
                                 type="button"
-                                className="btn color-call color-text brd fs-4" style={{ height: "100px", width: "100px" }}>
+                                className="btn color-call color-text brd fs-4" style={{ height: "90px", width: "90px" }}>
                                 1025+
                             </button>
                         </div>
@@ -145,7 +145,7 @@ export const Landing = () => {
                     </div>
                 </div>
             </div>
-            <div className="d-flex px-5 py-5 color-back container-fluid justify-content-between">
+            <div className="mobile-column d-flex px-5 py-5 color-back container-fluid justify-content-between">
                 <div>
                     <h2 className="color-text2 px-5">Top Creadores</h2>
                     <h3 className="color-text px-5">Consulte A Los Creadores Mejor Calificados En Snapify</h3>
@@ -173,12 +173,12 @@ export const Landing = () => {
                     <CategoryCard key={index} {...data} />
                 ))}
             </div>
-            <div className="container-fluid p-5 color-back justify-content-around align-items-center">
-                <div className="d-flex rounded-3 px-5 py-5 color-text color-back2 container align-items-center">
-                    <div className="col-6">
+            <div className=" mobile-column container-fluid color-back justify-content-around align-items-center">
+                <div className="d-flex rounded-3 color-text color-back2 container align-items-center">
+                    <div className="ghost">
                         <img src={testData3[3].fotoUrl} className="card-img-top rounded-3" alt="Photo" />
                     </div>
-                    <div className="text-center col-6 p-5">
+                    <div className="text-center p-5">
                         <h2>Únase A Nuestro Boletín Semanal</h2>
                         <h4 className="p-3">Obtenga Promociones Y Actualizaciones Exclusivas Directamente En Su Bandeja De Entrada.</h4>
                         <div className="input-group d-flex align-items-baseline">
