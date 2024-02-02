@@ -238,3 +238,31 @@ def password_update():
 def protected():
     current_user = get_jwt_identity()
     return jsonify({'msg': 'Ok', 'user': current_user}), 200
+
+
+# Agregar evento al usuario
+@api.route('/events/int:event_id/join', methods=['POST'])
+@jwt_required()
+def join_event(event_id):
+    try:
+        current_user_id = get_jwt_identity()
+
+        existing_registration = User_events.query.filter_by(user_id=current_user_id,event_id=event_id).first()
+        if existing_registration:
+            return jsonify({'msg': 'User is already registered for this event'}), 400
+        
+        event = Events.query.get(event_id)
+        if not event:
+            return jsonify({'msg': 'Event not found'}), 404
+        
+        user_event = User_events(user_id=current_user_id, event_id=event_id)
+        db.session.add(user_event)
+        db.session.commit()
+
+        return jsonify({'msg': 'Successfully joined the event'}), 200
+    
+    except IntegrityError as e:
+        db.session.rollback()
+        return jsonify({'error': 'An error occurred: IntegrityError'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
