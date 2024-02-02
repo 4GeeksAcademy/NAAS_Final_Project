@@ -1,10 +1,10 @@
 import React from 'react'
-import RankingItem from './RankingItem'
+import RankingItem from '../pages/RankingItem'
 
 function MonthContent() {
   return (
     <div>
-      <RankingItem/>
+      <RankingItem />
     </div>
   )
 }

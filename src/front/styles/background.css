@@ -134,3 +134,51 @@ body, html {
     height: 500px; /* Ajusta la altura según sea necesario */
 }
 
+.gallery{
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 22rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 25rem),1fr));
+}
+
+
+/* Media query para móviles (hasta 767px) */
+@media screen and (max-width: 767px) {
+
+    /* Ajustes específicos para la sección especial en móviles */
+    .mobile-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente */
+        text-align: center;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .ghost{
+        display: none;
+    }
+
+    .no-pad{
+        padding: 10px !important;
+    }
+    .no-mar{
+        margin: 10px !important;
+    }
+}
+
+@media screen and (max-width: 1650px) {
+    .ghost2{
+        display: none;
+    }
+    .tablet-column {
+        display: flex;
+        flex-wrap: wrap;
+        width: 90vw;
+        align-items: center; /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente */
+        text-align: center;
+        padding: 10px;
+    }
+}

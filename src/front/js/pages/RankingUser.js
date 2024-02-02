@@ -3,7 +3,7 @@ import "../../styles/ranking.css";
 
 function RankingUser() {
     return (
-        <div className='ranking-container'>
+        <div className='mobile-column ranking-container'>
             <div className="ranking-info">
             <div className="ranking-circle">
                     <p>1</p>

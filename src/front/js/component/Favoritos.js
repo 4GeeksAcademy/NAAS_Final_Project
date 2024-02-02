@@ -6,11 +6,11 @@ export const Favoritos = ({ favorites }) => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div>
+    <div className="">
       <h1>Mis Fotos Favoritas</h1>
-      <div className="row d-flex justify-content-between">
+      <div className="mobile-column tablet-column d-flex justify-content-between">
         {favorites.map((fav, index) => (
-          <div key={index} className="col-md-3 mb-4">
+          <div key={index} className="">
             {/* Pasa la URL de la imagen del favorito al componente PhotoCard */}
             <PhotoCard
               photo={fav.photo}

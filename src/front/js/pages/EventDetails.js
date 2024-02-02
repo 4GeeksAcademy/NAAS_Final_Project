@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import "../../styles/events.css"
-import { Timer } from "./Timer";
+import { Timer } from "../component/Timer";
 import { Context } from "../store/appContext";
 
 
