@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import "../../styles/events.css"
 import { Timer } from "./Timer";
 import { Context } from "../store/appContext";
-import { PhotoCard } from "./PhotoCard";
+
 
 
 export const EventsDetails = () => {
