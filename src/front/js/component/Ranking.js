@@ -4,6 +4,7 @@ import TodayContent from "./TodayContent";
 import WeekContent from "./WeekContent";
 import MonthContent from "./MonthContent";
 import AllTimeContent from "./AllTimeContent";
+import "../../styles/background.css"
 
 const Ranking = ({title, description}) => {
   const [activeTab, setActiveTab] = useState('today');
@@ -12,15 +13,15 @@ const Ranking = ({title, description}) => {
     setActiveTab(tab);
   };
     return(
-      <div className="container ranking">
-      <div className="ranking-user">
+      <div className="mobile-column container ranking color-back">
+      <div className="mobile-column ranking-user">
       <div style={{marginBottom: "30px"}}>
         <h2>{title}</h2>
         <p className="lead">{description}</p>
       </div>
 
       {/* Pestañas */}
-      <div className="tabs-container">
+      <div className="mobile-column tabs-container">
         <button className={activeTab === 'today' ? 'active' : ''} onClick={() => handleTabChange('today')}>Today</button>
         <button className={activeTab === 'ThisWeek' ? 'active' : ''} onClick={() => handleTabChange('ThisWeek')}>This Week</button>
         <button className={activeTab === 'ThisMonth' ? 'active' : ''} onClick={() => handleTabChange('ThisMonth')}>This Month</button>

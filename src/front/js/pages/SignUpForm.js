@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Welcome } from './welcome';
+import { Welcome } from '../component/welcome';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -110,8 +110,11 @@ function SignUpForm() {
 
 
   return (
-    <div className='container-fluid d-flex color-back'>
-      <div className="login-container p-5 col-6">
+    <div className='mobile-column container-fluid d-flex color-back'>
+      <div className='mobile-column container-fluid col-6' style={{ display: "contents" }}>
+        <Welcome />
+      </div>
+      <div className="login-container p-5 col-6 mobile-column">
         <form onSubmit={handleSubmit}>
           <h2 className='title-color mb-5'>Create a new account</h2>
 
@@ -235,9 +238,6 @@ function SignUpForm() {
             <Link to={"/login"}> Log in </Link>
           </p>
         </form>
-      </div>
-      <div className='container-fluid col-6' style={{ display: "contents" }}>
-        <Welcome />
       </div>
     </div>
   );

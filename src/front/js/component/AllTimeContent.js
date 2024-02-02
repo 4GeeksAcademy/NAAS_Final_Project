@@ -1,10 +1,10 @@
 import React from 'react'
-import RankingItem from './RankingItem'
+import RankingItem from '../pages/RankingItem'
 
 function AllTimeContent() {
   return (
     <div>
-      <RankingItem/>
+      <RankingItem />
     </div>
   )
 }

@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 import smtplib
-from flask import Flask, request, jsonify, url_for, send_from_directory
+from flask import Flask, request, jsonify, url_for, send_from_directory, make_response
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
@@ -70,7 +70,42 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0  # avoid cache memory
     return response
 
-# This only runs if `$ python src/main.py` is executed
+
+
+@app.route('/events', methods=['GET'])
+def get_all_events():
+    try:
+        events = Events.query.all()
+        if not events: 
+            return jsonify({'msg': 'No hay eventos disponibles'})
+        
+        serialized_events = [event.serialize() for event in events]
+        response = jsonify(serialized_events)
+        response.headers['Content-Type'] = 'application/json'
+
+        return response, 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+@app.route('/events/<int:event_id>', methods=['GET'])
+def get_event(event_id):
+    try:
+        event = Events.query.get(event_id)
+        if not event:
+            return jsonify({'msg': 'Evento no encontrado'}), 404
+
+        serialized_event = event.serialize()
+
+        response = make_response(jsonify(serialized_event))
+        response.headers['Content-Type'] = 'application/json'
+
+        return response, 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)

@@ -59,12 +59,12 @@ function Login() {
 
 
   return (
-    <div className='contaniner-fluid d-flex color-back'>
+    <div className='contaniner-fluid d-flex color-back mobile-column'>
       <div className='container-fluid d-flex-column col-6' style={{ display: "contents" }}>
         <div className='container-fluid m-5 color-grad3 rounded-3'>
           <div className="container d-flex-column text-center">
             <div className=" color-text">
-              <h1 style={{ fontSize: "65px" }}>Bienvenido!</h1>
+              <h1 style={{ fontSize: "45px" }}>Bienvenido!</h1>
               <h3 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h3>
               <h2 className='color-text'>
                 Si aún no estas registrado
@@ -81,8 +81,8 @@ function Login() {
           </div>
         </div>
       </div>
-      <div className="login-container p-5 col-6">
-        <form onSubmit={handleSubmit} className="login-form">
+      <div className="login-container no-pad p-5 col-6 mobile-column">
+        <form onSubmit={handleSubmit} className="login-form mobile-column">
           <h2 className='title'>Login</h2>
           <div className="mb-3">
             <div className="input-icon">

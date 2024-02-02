@@ -3,10 +3,10 @@ import "../../styles/contactForm.css"
 
 function ContactForm() {
   return (
-    <div className='contaniner-fluid d-flex text-center color-back'>
-    <div className='container-fluid align-items-center d-flex m-5 color-back rounded-3'>
+    <div className='mobile-column contaniner-fluid d-flex text-center color-back'>
+    <div className='mobile-column container-fluid align-items-center d-flex m-5 color-back rounded-3'>
       <div className="container-fluid">
-      <div className='p-5 color-grad3'>
+      <div className='no-pad p-4 color-grad3 my-2'>
         <form className="container py-3 color-grad4">
           <h2 className='title'>Contacto</h2>
           <div className="mb-3">

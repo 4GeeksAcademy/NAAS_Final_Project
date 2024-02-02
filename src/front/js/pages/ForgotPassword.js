@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../../styles/loginContainer.css";
-import { Welcome } from './welcome';
+import { Welcome } from '../component/welcome';
 import { toast } from 'react-toastify';
 
 function ForgetPassword() {
@@ -56,13 +56,13 @@ function ForgetPassword() {
   };
 
   return (
-    <div className='container-fluid d-flex color-back'>
-      <div className='container-fluid col-6' style={{ display: "contents" }}>
+    <div className='container-fluid d-flex color-back mobile-column'>
+      <div className='mobile-column container-fluid'>
         <Welcome />
       </div>
-      <div className="login-container p-5 col-6">
+      <div className="login-container p-5">
         <form onSubmit={handleResetPassword}>
-          <h1 className='color-text p-5'>Reset My Password</h1>
+          <h1 className='color-text'>Reset My Password</h1>
           <div className="mb-3">
             <div className="input-icon">
               <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />

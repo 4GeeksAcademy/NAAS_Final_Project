@@ -1,10 +1,10 @@
 import React from 'react'
 import "../../styles/ranking.css"
-import RankingItem from './RankingItem'
+import RankingItem from '../pages/RankingItem'
 
 function TodayContent() {
   return (
-    <RankingItem/>
+    <RankingItem />
 
   )
 }
