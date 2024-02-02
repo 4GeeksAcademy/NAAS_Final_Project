@@ -99,6 +99,7 @@ class User_achievements(db.Model):
     ## RELATIONSHIP user_id
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user_relationship = db.relationship('Users')
+   
 
     def __repr__(self):
         return '{} {}'.format(self.id, self.name)
@@ -149,6 +150,13 @@ class Events(db.Model):
             "start_date": self.start_date,
             "end_date": self.end_date,
         }
+
+# tabla de relacion usuario evento
+class UserEvents(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+
 
 class Photos(db.Model):
 

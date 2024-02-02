@@ -238,3 +238,6 @@ def password_update():
 def protected():
     current_user = get_jwt_identity()
     return jsonify({'msg': 'Ok', 'user': current_user}), 200
+
+
+# Agregar evento al usuario
