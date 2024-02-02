@@ -57,8 +57,8 @@ function Login() {
         <div className='container-fluid m-5 color-grad3 rounded-3'>
           <div className="container d-flex-column text-center">
             <div className=" color-text">
-              <h1 style={{ fontSize: "45px" }}>Bienvenido!</h1>
-              <h3 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h3>
+              <h1 style={{ fontSize: "35px" }}>Bienvenido!</h1>
+              <h4 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h4>
               <h2 className='color-text'>
                 Si aún no estas registrado
                 ingresa aquí

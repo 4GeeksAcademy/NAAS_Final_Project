@@ -168,7 +168,7 @@ body, html {
     }
 }
 
-@media screen and (max-width: 1650px) {
+@media only screen and (min-width: 768px) and (max-width: 1650px) {
     .ghost2{
         display: none;
     }
@@ -180,5 +180,9 @@ body, html {
         justify-content: center; /* Centra verticalmente */
         text-align: center;
         padding: 10px;
+    }
+
+    welcome-view {
+        width: 50%;
     }
 }

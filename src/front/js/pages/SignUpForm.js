@@ -111,10 +111,10 @@ function SignUpForm() {
 
   return (
     <div className='mobile-column container-fluid d-flex color-back'>
-      <div className='mobile-column container-fluid col-6' style={{ display: "contents" }}>
+      <div className='mobile-column container-fluid' style={{ display: "contents" }}>
         <Welcome />
       </div>
-      <div className="login-container p-5 col-6 mobile-column">
+      <div className="login-container p-4 mobile-column">
         <form onSubmit={handleSubmit}>
           <h2 className='title-color mb-5'>Create a new account</h2>
 
