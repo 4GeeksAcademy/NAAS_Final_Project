@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import "../../styles/loginContainer.css";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { jwtDecode } from 'jwt-decode';
+import PropTypes from 'prop-types'; // Import PropTypes for type checking
 
-function Login() {
-  const navigate = useNavigate();
+const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -36,9 +35,17 @@ function Login() {
       if (response.ok) {
         toast.success('Login successfully');
         const { token } = responseJson;
-        //token en sessionStorage
+
+        // Decodifica el token para obtener el rol
+        const decodedToken = jwtDecode(token);
+        const userRole = decodedToken ? decodedToken.role : 'default';
+
+        // Almacena el token en el sessionStorage
         sessionStorage.setItem('token', token);
-        navigate("/");
+
+        // Llama a la función proporcionada para actualizar el navbar
+        onLogin(userRole);
+
         console.log('Login successful!', responseJson);
       } else {
         toast.error(`${responseJson.msg}`);
@@ -49,7 +56,6 @@ function Login() {
       console.error('Error haciendo la solicitud:', error);
     }
   };
-
 
   return (
     <div className='contaniner-fluid d-flex color-back mobile-column'>
@@ -120,7 +126,13 @@ function Login() {
       </div>
     </div>
   );
-}
+};
+
+// Add prop types for type checking
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default Login;
+
 

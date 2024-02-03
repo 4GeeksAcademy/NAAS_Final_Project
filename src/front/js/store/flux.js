@@ -105,7 +105,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				},	
 				loginUser: () => setStore({ isUserLoggedIn: true, isAdminLoggedIn: false }),
 				loginAdmin: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: true }),
-				logout: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: false }),
+				logout: () => {
+					setStore({ isUserLoggedIn: false, isAdminLoggedIn: false })
+					sessionStorage.removeItem("token")
+					console.log(sessionStorage.getItem("token"))
+				},
 
 			getEvent: async (event_id) => {
 				try {
@@ -148,5 +152,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							console.error("Error:", err);
 						});
 				}
+				
+				
 }}}
 export default getState;

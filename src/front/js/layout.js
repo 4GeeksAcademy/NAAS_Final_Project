@@ -10,7 +10,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { VistaProfile } from "./pages/vistaProfile";
 import injectContext from "./store/appContext";
-import { Navbar } from "./component/navbar";
+import NavbarManager from "./component/navbarManager";
 import { Landing } from "./pages/landing";
 import { Galeria } from "./pages/galeria";
 
@@ -38,13 +38,13 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                    <NavbarManager />
                     <Routes>
                         <Route element={<Home />} path="/home" />
                         <Route element={<Landing />} path="/" />
                         <Route element={<Galeria />} path="/galeria" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<Login />} path="/login" />
+                        <Route element={<Login onLogin={actions.loginUser} />} path="/login"/>
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<PasswordUpdate />} path="/password-update" />
                         <Route element={<SignUpForm />} path="/signUp" />
@@ -66,4 +66,3 @@ const Layout = () => {
 };
 
 export default injectContext(Layout);
-
