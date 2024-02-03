@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { jwtDecode } from 'jwt-decode';
-import PropTypes from 'prop-types'; // Import PropTypes for type checking
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -45,6 +48,8 @@ const Login = ({ onLogin }) => {
 
         // Llama a la función proporcionada para actualizar el navbar
         onLogin(userRole);
+
+        navigate("/galeria")
 
         console.log('Login successful!', responseJson);
       } else {

@@ -26,6 +26,7 @@ import { EventsDetails } from "./pages/EventDetails";
 import "../styles/home.css";
 import Ranking from "./component/Ranking";
 import PasswordUpdate from "./pages/PasswordUpdate";
+import PhotoUploader from "./pages/PhotoUploader";
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -55,6 +56,7 @@ const Layout = () => {
                         <Route element={<TermsAndConditions />} path="/terms" />
                         <Route element={<TipsPage />} path="/tips" />
                         <Route element={<EventsDetails />} path="/events/:event_id" />
+                        <Route element={<PhotoUploader />} path="/photo-uploader" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

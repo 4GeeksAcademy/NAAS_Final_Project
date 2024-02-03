@@ -12,7 +12,8 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_cors import CORS
-
+from cloudinary.uploader import upload
+from cloudinary import config as cloudinary_config
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 
@@ -20,6 +21,13 @@ ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+
+# Configuración de Cloudinary
+cloudinary_config ( 
+  cloud_name=os.environ.get('CLOUD_NAME'), 
+  api_key=os.environ.get('API_KEY'),
+  api_secret=os.environ.get('API_SECRET'),
+)
 
 app.url_map.strict_slashes = False
 
