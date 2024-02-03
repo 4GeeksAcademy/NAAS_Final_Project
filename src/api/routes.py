@@ -241,7 +241,7 @@ def protected():
 
 
 # Agregar evento al usuario
-@api.route('/events/int:event_id/join', methods=['POST'])
+@api.route('/events/<int:event_id>/join', methods=['POST'])
 @jwt_required()
 def join_event(event_id):
     try:

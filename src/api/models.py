@@ -157,6 +157,16 @@ class User_events(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
+    ## RELATIONSHIP
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_relationship = db.relationship(Users)
+
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+    event_relationship = db.relationship(Events)
+
+    def __repr__(self):
+        return '{} {}'.format(self.user_id, self.event_id)
+
 
 class Photos(db.Model):
 
