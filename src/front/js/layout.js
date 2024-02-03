@@ -44,7 +44,7 @@ const Layout = () => {
                         <Route element={<Landing />} path="/" />
                         <Route element={<Galeria />} path="/galeria" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<Login />} path="/login" />
+                        <Route element={<Login onLogin={actions.loginUser} />} path="/login"/>
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<PasswordUpdate />} path="/password-update" />
                         <Route element={<SignUpForm />} path="/signUp" />
