@@ -41,6 +41,7 @@ const PasswordUpdate = () => {
 
       if (isTokenExpired) {
         console.error('Token expired');
+        toast.error('The token is expired, reset the password again');
         navigate('/');
       }
     } catch (error) {
@@ -76,6 +77,7 @@ const PasswordUpdate = () => {
       if (response.ok) {
         toast.success('Password updated successfully');
         navigate('/login');
+        localStorage.removeItem("authToken")
       } else {
         console.error('Error updating the password');
         console.error('Server error message:', await response.text());

@@ -6,7 +6,10 @@ from sqlalchemy.exc import IntegrityError
 from api.models import *
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
+from flask_cors import cross_origin
+from cloudinary.uploader import *
 import datetime
+import os
 
 ## JWT, PassWord Encrypt
 from flask_jwt_extended import create_access_token #Token creation
@@ -124,56 +127,130 @@ def login():
     access_token = create_access_token(identity=user.id, additional_claims={'role': user.role})
     return jsonify({'msg': 'Login successful!', 'token': access_token}), 200
 
-@api.route('/photo-uploader', methods=['POST'])
-def photo_uploader():
-    
-    body = request.get_json(silent=True)
+## SUBIR FOTO A API CLOUDINARY
+@api.route('/upload-photos', methods=['POST'])
+def upload_photos():
+    try:
+        if 'photos' not in request.files:
+            return jsonify({'msg': 'No files part in the request'}), 400
 
-    if body is None:
-        return jsonify({'msg': 'You must send information in the body'}), 400
-    if 'name' not in body:
-        return jsonify({'msg': 'The name field is required'}), 400
-    if 'img_url' not in body:
-        return jsonify({'msg': 'The img_url field is required'}), 400
-    if 'description' not in body:
-        return jsonify({'msg': 'The description field is required'}), 400
-    if 'category_id' not in body:
-        return jsonify({'msg': 'The category field is required'}), 400
-    if 'user_id' not in body:
-        return jsonify({'msg': 'The user field is required'}), 400
+        files = request.files.getlist('photos')
 
-    # Validation user exists
-    user = Users.query.filter_by(id = body['user_id']).first()
-    
-    if user is None:
-        return jsonify({'msg': 'The user is incorrect or not exist'}), 400
-    
-    # Validation category exists
-    photo_category = Photo_categories.query.filter_by(id = body['category_id']).first()
+        import datetime
+        unique_folder_name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
-    if photo_category is None:
-        return jsonify({'msg': 'The photo category is incorrect or not exist'}), 400
+        img_urls = []
 
-    photo = Photos()
-    photo.name = body['name']
-    photo.img_url = body['img_url']
-    photo.description = body['description']
-    photo.category_id = body['category_id']
-    photo.user_id = body['user_id']
+        for file in files:
+            if file.filename == '':
+                return jsonify({'msg': 'No selected file'}), 400
 
-    # Assign event_id only if present in the request
-    if 'event_id' in body:
-        # Validation event exists
-        event = Events.query.filter_by(id=body['event_id']).first()
+            allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
+            if file.filename.split('.')[-1].lower() not in allowed_extensions:
+                return jsonify({'msg': 'Invalid file format'}), 400
 
-        if event is None:
-            return jsonify({'msg': 'The event is incorrect or not exist'}), 400
+            try:
+                cloudinary_response = upload(file, folder=unique_folder_name)
+                img_url = cloudinary_response['secure_url']
+                img_urls.append(img_url)
+            except cloudinary.api.Error as e:
+                return jsonify({'msg': f'Cloudinary error: {str(e)}'}), 500
 
-        photo.event_id = body['event_id']
+        return jsonify({'msg': 'ok', 'img_urls': img_urls, 'folder_name': unique_folder_name}), 200
 
-    db.session.add(photo)
-    db.session.commit()
-    return jsonify({'msg': 'ok'}), 200
+    except Exception as e:
+        return jsonify({'msg': str(e)}), 500
+
+## CREAR PHOTO EN BD CON URLS DE CLOUDINARY
+@api.route('/create-photos', methods=['POST'])
+@cross_origin() 
+def create_photos():
+    try:
+
+        body = request.get_json(silent=True)
+
+        if body is None:
+            return jsonify({'msg': 'Invalid JSON in request body'}), 400
+
+        name = body.get('name')
+        description = body.get('description')
+        category_id = body.get('category_id')
+        user_id = body.get('user_id')
+        event_id = body.get('event_id')
+        img_urls = body.get('img_urls')
+
+        user = Users.query.filter_by(id=user_id).first()
+        if user is None:
+            return jsonify({'msg': 'The user is incorrect or not exist'}), 400
+
+        photo_category = Photo_categories.query.filter_by(id=category_id).first()
+        if photo_category is None:
+            return jsonify({'msg': 'The photo category is incorrect or not exist'}), 400
+
+        for img_url in img_urls:
+
+            photo = Photos(
+                name=name,
+                img_url=img_url,
+                description=description,
+                category_id=category_id,
+                user_id=user_id,
+                event_id=event_id
+            )
+
+            # Assign event_id only if present in the request
+            if event_id:
+                # Validation event exists
+                event = Events.query.filter_by(id=event_id).first()
+                if event is None:
+                    return jsonify({'msg': 'The event is incorrect or not exist'}), 400
+
+                photo.event_id = event_id
+
+            # Save the Photo instance to the database
+            db.session.add(photo)
+
+        # Commit changes after processing all photos
+        db.session.commit()
+        print("Photos created successfully!")
+
+        return jsonify({'msg': 'ok', 'img_urls': img_urls}), 200
+
+    except Exception as e:
+        print("Error:", str(e))
+        return jsonify({'msg': str(e)}), 500
+
+
+## BUSCAR FOTOS POR USUARIO
+@api.route('/get-user-photos/<int:user_id>', methods=['GET'])
+def get_user_photos(user_id):
+    try:
+        user_photos = Photos.query.filter_by(user_id=user_id).all()
+
+        if not user_photos:
+            return jsonify({'msg': 'No photos found for the user'}), 404
+
+        img_urls = [photo.img_url for photo in user_photos]
+        return jsonify({'msg': 'ok', 'img_urls': img_urls}), 200
+
+    except Exception as e:
+        return jsonify({'msg': str(e)}), 500
+
+## BUSCAR FOTOS POR PUBLICACION PASANDO SEGUNDO PARAMETRO similar a este: 20240203163046
+@api.route('/get-photos-by-post/<string:post_id>', methods=['GET'])
+def get_photos_by_post(post_id):
+    try:
+        post_photos = Photos.query.filter(Photos.img_url.contains(post_id)).all()
+
+        if not post_photos:
+            return jsonify({'msg': 'No photos found for the post'}), 404
+
+        img_urls = [photo.img_url for photo in post_photos]
+        return jsonify({'msg': 'ok', 'img_urls': img_urls}), 200
+
+    except Exception as e:
+        return jsonify({'msg': str(e)}), 500
+
 
 
 def generate_change_password_token(email):
@@ -232,12 +309,6 @@ def password_update():
         db.session.rollback()
         print(f"Error updating password: {str(e)}")
         return jsonify({"message": "Error updating password"})
-
-@api.route('/protected', methods=['GET'])
-@jwt_required()
-def protected():
-    current_user = get_jwt_identity()
-    return jsonify({'msg': 'Ok', 'user': current_user}), 200
 
 
 # Agregar evento al usuario
