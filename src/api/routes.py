@@ -337,3 +337,29 @@ def join_event(event_id):
         return jsonify({'error': 'An error occurred: IntegrityError'}), 400
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+# dar de baja el evento 
+@api.route('/events/<int:event_id>/leave', methods=['DELETE'])
+@jwt_required()
+def leave_event(event_id):
+    try:
+        current_user_id = get_jwt_identity()
+
+        # Buscar la relación entre el usuario y el evento
+        user_event = User_events.query.filter_by(user_id=current_user_id, event_id=event_id).first()
+
+        if not user_event:
+            return jsonify({'msg': 'User is not registered for this event'}), 404
+
+        # Eliminar la relación
+        db.session.delete(user_event)
+        db.session.commit()
+
+        return jsonify({'msg': 'Successfully left the event'}), 200
+
+    except IntegrityError as e:
+        db.session.rollback()
+        return jsonify({'error': 'An error occurred: IntegrityError'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+

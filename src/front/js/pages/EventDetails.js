@@ -20,7 +20,7 @@ const EventsDetails = () => {
     };
 
     return (
-        <div className="main-container color-back3">
+        <div className="main-container color-back3" style={{marginTop: "80px"}}>
             <div id="eventContainer">
                 <div className="description">
                     <h2 style={{ fontSize: "40px", color: "#FE5201" }}>{currentEvent.name}</h2>
