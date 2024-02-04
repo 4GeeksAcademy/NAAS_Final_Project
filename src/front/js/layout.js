@@ -21,7 +21,7 @@ import SignUpForm from "./pages/SignUpForm";
 import ContactForm from "./pages/ContactForm";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import TipsPage from "./pages/TipsPage"
-import { EventsDetails } from "./pages/EventDetails";
+import EventsDetails  from "./pages/EventDetails";
 
 import "../styles/home.css";
 import Ranking from "./component/Ranking";

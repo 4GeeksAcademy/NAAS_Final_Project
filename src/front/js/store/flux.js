@@ -103,14 +103,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			clearVista: () => {
 				setStore({ vistaProfile: null });
-				},	
-				loginUser: () => setStore({ isUserLoggedIn: true, isAdminLoggedIn: false }),
-				loginAdmin: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: true }),
-				logout: () => {
-					setStore({ isUserLoggedIn: false, isAdminLoggedIn: false })
-					sessionStorage.removeItem("token")
-					console.log(sessionStorage.getItem("token"))
-				},
+			},
+			loginUser: () => setStore({ isUserLoggedIn: true, isAdminLoggedIn: false }),
+			loginAdmin: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: true }),
+			logout: () => {
+				setStore({ isUserLoggedIn: false, isAdminLoggedIn: false })
+				sessionStorage.removeItem("token")
+				console.log(sessionStorage.getItem("token"))
+			},
 
 			getEvent: async (event_id) => {
 				try {
@@ -157,7 +157,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			joinEvent: async (event_id) => {
 				try {
 					setStore({ joiningEvent: true })
-					const response = await fetch(`${process.env.BACKEND_URL}/events/${event_id}/join`, {
+
+					// Recuperar el token desde sessionStorage
+					const token = sessionStorage.getItem('token');
+					console.log('Token:', token);
+					if (!token) {
+						console.error("Token no encontrado en sessionStorage");
+						return;
+					}
+
+					const response = await fetch(`${process.env.BACKEND_URL}/api/events/${event_id}/join`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
@@ -171,13 +180,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.error("error al unirse al evento", response.status)
 					}
 				}
-				catch(error){
+				catch (error) {
 					console.error("Error:", error);
 				}
 				finally {
 					setStore({ joiningEvent: false });
 				}
+			}
 		}
 	}
-}}
+}
 export default getState;
