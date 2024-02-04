@@ -38,9 +38,9 @@ export const Galeria = () => {
       <div className="container-fluid color-back d-flex-column p-5 color-text">
         <h1 className="text-center pt-2">Navegar En La Galeria</h1>
         <h3 className="text-center pt-2">Explore más de 50.000 Fotografías en nuestra galeria libre</h3>
-        <form class="mobile-column container-fluid pt-2 pb-5 d-flex w-75 text-center justtify-align-center">
-          <input class="form-control mb-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success ms-3" type="submit">Search</button>
+        <form className="mobile-column container-fluid pt-2 pb-5 d-flex w-75 text-center justtify-align-center">
+          <input className="form-control mb-2" type="search" placeholder="Search" aria-label="Search" />
+          <button className="btn btn-outline-success ms-3" type="submit">Search</button>
         </form>
       </div>
       <div className="mobile-column container color-back2 p-2">
