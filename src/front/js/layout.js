@@ -10,22 +10,23 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { VistaProfile } from "./pages/vistaProfile";
 import injectContext from "./store/appContext";
-import { Navbar } from "./component/navbar";
+import NavbarManager from "./component/navbarManager";
 import { Landing } from "./pages/landing";
 import { Galeria } from "./pages/galeria";
 
 import { Footer } from "./component/footer";
-import Login from "./component/Login";
-import ForgotPassword from "./component/ForgotPassword"
-import SignUpForm from "./component/SignUpForm";
-import ContactForm from "./component/ContactForm";
-import TermsAndConditions from "./component/TermsAndConditions";
-import TipsPage from "./component/TipsPage"
-import { EventsDetails } from "./component/EventDetails";
+import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword"
+import SignUpForm from "./pages/SignUpForm";
+import ContactForm from "./pages/ContactForm";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import TipsPage from "./pages/TipsPage"
+import { EventsDetails } from "./pages/EventDetails";
 
 import "../styles/home.css";
 import Ranking from "./component/Ranking";
-import PasswordUpdate from "./component/PasswordUpdate";
+import PasswordUpdate from "./pages/PasswordUpdate";
+import PhotoUploader from "./pages/PhotoUploader";
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -38,23 +39,24 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                    <NavbarManager />
                     <Routes>
                         <Route element={<Home />} path="/home" />
                         <Route element={<Landing />} path="/" />
                         <Route element={<Galeria />} path="/galeria" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<Login />} path="/login" />
+                        <Route element={<Login onLogin={actions.loginUser} />} path="/login"/>
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<PasswordUpdate />} path="/password-update" />
                         <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
-                        <Route element={<Ranking title="Top fotografias" description="Explore las fotografías de la comunidad mejor clasificados en la galería" />}path="/ranking-photo" />
-                        <Route element={<Ranking title="Top creadores" description="Explore a los artistas de la comunidad mejor clasificados en la galería" />}path="/ranking-user" />
+                        <Route element={<Ranking title="Top fotografias" description="Explore las fotografías de la comunidad mejor clasificados en la galería" />} path="/ranking-photo" />
+                        <Route element={<Ranking title="Top creadores" description="Explore a los artistas de la comunidad mejor clasificados en la galería" />} path="/ranking-user" />
                         <Route element={<TermsAndConditions />} path="/terms" />
                         <Route element={<TipsPage />} path="/tips" />
-                        <Route element={<EventsDetails/>} path="/events/:event_id" />
+                        <Route element={<EventsDetails />} path="/events/:event_id" />
+                        <Route element={<PhotoUploader />} path="/photo-uploader" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
@@ -66,4 +68,3 @@ const Layout = () => {
 };
 
 export default injectContext(Layout);
-

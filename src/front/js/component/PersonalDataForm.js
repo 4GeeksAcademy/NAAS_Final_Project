@@ -6,13 +6,13 @@ import { testData3 } from "../component/testData";
 function PersonalDataForm() {
   const { store, actions } = useContext(Context);
   return (
-    <div className='contaniner-fluid d-flex color-back p-5 m-5'>
-      <div className='container-fluid d-flex align-items-center p-5'>
+    <div className='mobile-column contaniner-fluid d-flex color-back py-5 my-5'>
+      <div className='container-fluid d-flex align-items-center p-1'>
         <div>
       <img className="container" src={testData3[6].fotoUrl} alt="Avatar" />
         </div>
       </div>
-      <div className="container-fluid p-5">
+      <div className="container-fluid p-1">
         <form className="container">
           <h2 className='title'>Datos personales</h2>
           <div className="mb-3">

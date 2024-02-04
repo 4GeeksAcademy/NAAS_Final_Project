@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import "../../styles/loginContainer.css";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { jwtDecode } from 'jwt-decode';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-function Login() {
-  const navigate = useNavigate();
+const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -36,9 +38,19 @@ function Login() {
       if (response.ok) {
         toast.success('Login successfully');
         const { token } = responseJson;
-        //token en sessionStorage
+
+        // Decodifica el token para obtener el rol
+        const decodedToken = jwtDecode(token);
+        const userRole = decodedToken ? decodedToken.role : 'default';
+
+        // Almacena el token en el sessionStorage
         sessionStorage.setItem('token', token);
-        navigate("/");
+
+        // Llama a la función proporcionada para actualizar el navbar
+        onLogin(userRole);
+
+        navigate("/galeria")
+
         console.log('Login successful!', responseJson);
       } else {
         toast.error(`${responseJson.msg}`);
@@ -50,15 +62,14 @@ function Login() {
     }
   };
 
-
   return (
-    <div className='contaniner-fluid d-flex color-back'>
+    <div className='contaniner-fluid d-flex color-back mobile-column'>
       <div className='container-fluid d-flex-column col-6' style={{ display: "contents" }}>
         <div className='container-fluid m-5 color-grad3 rounded-3'>
           <div className="container d-flex-column text-center">
             <div className=" color-text">
-              <h1 style={{ fontSize: "65px" }}>Bienvenido!</h1>
-              <h3 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h3>
+              <h1 style={{ fontSize: "35px" }}>Bienvenido!</h1>
+              <h4 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h4>
               <h2 className='color-text'>
                 Si aún no estas registrado
                 ingresa aquí
@@ -74,8 +85,8 @@ function Login() {
           </div>
         </div>
       </div>
-      <div className="login-container p-5 col-6">
-        <form onSubmit={handleSubmit} className="login-form">
+      <div className="login-container no-pad p-5 col-6 mobile-column">
+        <form onSubmit={handleSubmit} className="login-form mobile-column">
           <h2 className='title'>Login</h2>
           <div className="mb-3">
             <div className="input-icon">
@@ -120,7 +131,13 @@ function Login() {
       </div>
     </div>
   );
-}
+};
+
+// Add prop types for type checking
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default Login;
+
 

@@ -12,9 +12,9 @@ export const Eventos = () => {
     const eventos= actions.getAllEvents()
   },[])
   return (
-    <div className="events">
+    <div className="events mobile-column">
       <div className="event-container">
-        <div className="info-container">
+        <div className="info-container p-2">
           <h3>Nombre del evento</h3>
           <p className="color-text2">Categoria</p>
         </div>

@@ -1,6 +1,5 @@
 .timer {
     background-color: #3b3b3b8c;
-    width: 300px;
     text-align: start;
     padding: 20px;
     border-radius: 20px;
@@ -46,7 +45,7 @@
     display: flex;
     justify-content: space-between;
     padding: 50px;
-    width: 600px;
+   
     border-radius: 20px;
     background-color: #3b3b3b8c
 

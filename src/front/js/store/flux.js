@@ -103,10 +103,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			clearVista: () => {
 				setStore({ vistaProfile: null });
-			},
-			loginUser: () => setStore({ isUserLoggedIn: true, isAdminLoggedIn: false }),
-			loginAdmin: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: true }),
-			logout: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: false }),
+				},	
+				loginUser: () => setStore({ isUserLoggedIn: true, isAdminLoggedIn: false }),
+				loginAdmin: () => setStore({ isUserLoggedIn: false, isAdminLoggedIn: true }),
+				logout: () => {
+					setStore({ isUserLoggedIn: false, isAdminLoggedIn: false })
+					sessionStorage.removeItem("token")
+					console.log(sessionStorage.getItem("token"))
+				},
 
 			getEvent: async (event_id) => {
 				try {
