@@ -6,6 +6,7 @@ import Login from "./Login";
 import Categories from "../component/Categories";
 import TermsAndConditions from "./TermsAndConditions";
 import { Timer } from "../component/Timer";
+import { ActiveEvents } from "./ActiveEvents";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -25,10 +26,6 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
-			<Timer />
-			<Login />
-			<Categories />
-			<TermsAndConditions />
 		</div>
 	);
 };

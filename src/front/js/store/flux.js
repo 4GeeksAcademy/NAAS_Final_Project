@@ -114,7 +114,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				sessionStorage.removeItem("token")
 				console.log(sessionStorage.getItem("token"))
 			},
-
 			getEvent: async (event_id) => {
 				try {
 					const url = `${process.env.BACKEND_URL}/events/${event_id}`;
@@ -147,7 +146,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						if (data && typeof data === 'object') {
 							setStore({ events: data });
-							console.log(data)
 						} else {
 							console.error('La respuesta no es un array JSON válido:', data);
 						}
@@ -224,8 +222,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ leavingEvent: false });
 				}
 			},
-			
+			getUserJoinedEvent: async()=>{
+				try {
+					const token = sessionStorage.getItem('token');
+				
+					if (!token) {
+					  console.error("Token no encontrado en sessionStorage");
+					  return;
+					}
+				
+					const response = await fetch(`${process.env.BACKEND_URL}/api/events/user-joined`, {
+					  method: "GET",
+					  headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`,
+					  },
+					});
+				
+					if (response.ok) {
+					  const data = await response.json();
+					  return data; // Devuelve la lista de eventos a los que el usuario está unido
+					} else {
+					  console.error("Error al obtener eventos del usuario:", response.status);
+					  return [];
+					}
+				  } catch (error) {
+					console.error("Error al obtener eventos del usuario:", error);
+					return [];
+				  }
+				},
+			}
 		}
 	}
-}
+
 export default getState;

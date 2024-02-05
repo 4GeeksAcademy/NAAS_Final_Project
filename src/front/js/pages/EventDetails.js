@@ -25,8 +25,8 @@ const EventsDetails = () => {
     };
 
     return (
-        <div className="main-container color-back3" style={{ marginTop: "80px" }}>
-            <div id="eventContainer">
+        <div className="main-container" style={{ marginTop: "80px" }}>
+            <div id="eventContainer" style={{background: "#2B2B2B", marginTop: "80px"}}>
                 <div className="description">
                     <h2 style={{ fontSize: "40px", color: "#FE5201" }}>{currentEvent.name}</h2>
                     <div className="info">
@@ -34,7 +34,7 @@ const EventsDetails = () => {
                             <p className="mt-2">{currentEvent.photo_category}</p>
                         </div>
                         <div className="mini-container">
-                            <p className="mt-2">Fecha: {currentEvent.date}</p>
+                            <p className="mt-2"> {currentEvent.end_date}</p>
                         </div>
                     </div>
                 </div>

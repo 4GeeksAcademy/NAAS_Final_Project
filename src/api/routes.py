@@ -338,6 +338,9 @@ def join_event(event_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+#crear evento (admin)
+@api.route('/')
+
 # dar de baja el evento 
 @api.route('/events/<int:event_id>/leave', methods=['DELETE'])
 @jwt_required()
@@ -363,3 +366,18 @@ def leave_event(event_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+@api.route('/events/user-joined', methods=['GET'])
+@jwt_required()
+def get_user_joined_events():
+    try:
+        current_user_id = get_jwt_identity()
+
+        # Obtener todos los eventos a los que el usuario se ha unido
+        joined_events = User_events.query.filter_by(user_id=current_user_id).all()
+
+        serialized_events = [event.event_relationship.serialize() for event in joined_events]
+
+        return jsonify(serialized_events), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

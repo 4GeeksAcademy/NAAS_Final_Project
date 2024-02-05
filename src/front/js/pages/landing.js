@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import { ArtistCard } from "../component/artistCard";
 import { testData, testData2, testData3 } from "../component/testData";
 import { CategoryCard } from "../component/categoryCard";
-import { Timer } from "../component/Timer";
+
 
 
 
