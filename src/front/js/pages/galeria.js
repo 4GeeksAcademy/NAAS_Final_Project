@@ -35,8 +35,8 @@ export const Galeria = () => {
 
   return (
     <div className="container-fluid color-back mobile-column">
-      <div className="container-fluid color-back d-flex-column p-5 color-text">
-        <h1 className="text-center pt-2">Navegar En La Galeria</h1>
+      <div className="container-fluid color-back d-flex-column p-5 color-text mt-5">
+        <h1 className="text-center pt-2 mt-5">Navegar En La Galeria</h1>
         <h3 className="text-center pt-2">Explore más de 50.000 Fotografías en nuestra galeria libre</h3>
         <form class="mobile-column container-fluid pt-2 pb-5 d-flex w-75 text-center justtify-align-center">
           <input class="form-control mb-2" type="search" placeholder="Search" aria-label="Search" />

@@ -15,7 +15,7 @@ export const NavbarLoginAdmin = () => {
     };
 
     return (
-        <nav className="navbar navbar-dark bg-dark fixed-top px-5">
+        <nav className="navbar navbar-dark bg-dark px-5">
             <div className="container-fluid px-5">
                 <div className="d-flex pt-2 color-text">
                     <h4>

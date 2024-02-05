@@ -90,27 +90,27 @@ const PasswordUpdate = () => {
   };
 
   return (
-    <div className='container-fluid d-flex color-back'>
+    <div className='container-fluid d-flex justify-content-center color-back color-text'>
       <div className='container-fluid col-6' style={{ display: 'contents' }}>
         {/* Add any additional content you want here */}
       </div>
       <div className='login-container p-5 col-6'>
         <form onSubmit={handlePasswordUpdate}>
           <h2>Update Password</h2>
-          <div className='mb-3'>
+          <div className='mb-3 px-3'>
             <label>
               New Password:
-              <input
+              <input className='mx-5'
                 type='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
           </div>
-          <div className='mb-3'>
+          <div className='mb-3 px-3'>
             <label>
               Confirm Password:
-              <input
+              <input className='mx-5'
                 type='password'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

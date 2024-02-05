@@ -141,6 +141,10 @@ body, html {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 25rem),1fr));
 }
 
+.mSup {
+    margin-top: 150px;
+}
+
 
 /* Media query para móviles (hasta 767px) */
 @media screen and (max-width: 767px) {

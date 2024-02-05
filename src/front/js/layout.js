@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
 import { VistaProfile } from "./pages/vistaProfile";
 import injectContext from "./store/appContext";
 import NavbarManager from "./component/navbarManager";
@@ -44,7 +43,6 @@ const Layout = () => {
                         <Route element={<Home />} path="/home" />
                         <Route element={<Landing />} path="/" />
                         <Route element={<Galeria />} path="/galeria" />
-                        <Route element={<Demo />} path="/demo" />
                         <Route element={<Login onLogin={actions.loginUser} />} path="/login"/>
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<PasswordUpdate />} path="/password-update" />
