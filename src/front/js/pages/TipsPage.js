@@ -37,26 +37,26 @@ function tipsPage() {
   return (
     <div className="container mt-5">
       <h2 className="display-4 orange" >Bienvenido</h2>
-      <p className="lead">
+      <p className="lead color-text">
         Esta es nuestra sección de Consejos para Principiantes en Fotografía, donde te guiaremos en tus primeros pasos hacia la creación de imágenes extraordinarias.
       </p>
       <hr />
       <h2 className="mt-5 orange">Conoce tu equipo</h2>
-      <p className="lead">
+      <p className="lead color-text">
         Conocer tu equipo fotográfico es esencial para aprovechar al máximo sus capacidades. Aquí hay algunos puntos clave para comenzar:
       </p>
       <div className="row mt-4">
         <div className="col-md-4">
           <h4 className="green">Consejos para elegir la cámara adecuada:</h4>
-          <p>Descubre cómo seleccionar la cámara que mejor se adapte a tus necesidades fotográficas. Considera factores como el tipo de fotografía que te interesa, el presupuesto y las características clave de las cámaras.</p>
+          <p className="color-text">Descubre cómo seleccionar la cámara que mejor se adapte a tus necesidades fotográficas. Considera factores como el tipo de fotografía que te interesa, el presupuesto y las características clave de las cámaras.</p>
         </div>
         <div className="col-md-4">
           <h4 className="green">Introducción a los diferentes tipos de lentes y sus usos:</h4>
-          <p>Explora el mundo de las lentes fotográficas. Conoce los distintos tipos de lentes disponibles y aprende cómo cada tipo puede afectar tus fotografías. Descubre cuándo usar un gran angular, teleobjetivo o un objetivo macro.</p>
+          <p className="color-text">Explora el mundo de las lentes fotográficas. Conoce los distintos tipos de lentes disponibles y aprende cómo cada tipo puede afectar tus fotografías. Descubre cuándo usar un gran angular, teleobjetivo o un objetivo macro.</p>
         </div>
         <div className="col-md-4">
           <h4 className="green">Configuración básica de la cámara</h4>
-          <p>Sumérgete en la configuración esencial de tu cámara. Desde ajustes de exposición hasta conceptos clave como apertura, velocidad de obturación e ISO. Obtén una comprensión sólida de estos elementos para mejorar tu creatividad fotográfica.</p>
+          <p className="color-text">Sumérgete en la configuración esencial de tu cámara. Desde ajustes de exposición hasta conceptos clave como apertura, velocidad de obturación e ISO. Obtén una comprensión sólida de estos elementos para mejorar tu creatividad fotográfica.</p>
         </div>
       </div>
       <hr />
@@ -93,14 +93,6 @@ function tipsPage() {
         <p className="card-text">Desafía tus habilidades con proyectos personales. Define temas que te apasionen y trabaja en desarrollar una serie de fotografías coherentes.</p>
       </div>
     </div>
-
-    {/* <div className="card" style={{ width: "18rem" }}>
-      <img src="../img/logo1.jpeg" className="card-img-top" alt="Community" />
-      <div className="card-body">
-        <h5 className="card-title">Conecta con la Comunidad</h5>
-        <p className="card-text">Únete a comunidades de fotografía en línea o participa en eventos locales. Compartir ideas con otros apasionados puede abrir nuevas perspectivas y proporcionar apoyo.</p>
-      </div>
-    </div> */}
   </div>
 </div>
 <hr/>
@@ -110,10 +102,10 @@ function tipsPage() {
         </div>
         <div className="text-container">
           <h2 className="orange">Acerca de las Cámaras</h2>
-          <p className="lead">
+          <p className="lead color-text">
             Elegir tu primera cámara es un paso emocionante. Aquí te dejamos algunas preguntas clave que te ayudarán a tomar la mejor decisión:
           </p>
-          <ul>
+          <ul className="color-text">
             <li>¿Cuál es tu presupuesto?</li>
             <li>¿Cuál es el propósito principal de la cámara (fotografía casual, profesional, etc.)?</li>
             <li>¿Prefieres una cámara compacta o una réflex digital?</li>
@@ -126,39 +118,39 @@ function tipsPage() {
         <div className="frustration-info">
           <div className="box">
             <h3 className="green">Acepta los Desafíos</h3>
-            <p>La frustración es parte del crecimiento. Acepta los desafíos y aprende de cada experiencia, incluso de los momentos difíciles.</p>
+            <p className="color-text">La frustración es parte del crecimiento. Acepta los desafíos y aprende de cada experiencia, incluso de los momentos difíciles.</p>
           </div>
           <div className="box">
             <h3 className="green">Celebra los Pequeños Logros</h3>
-            <p>Reconoce y celebra tus logros, por pequeños que sean. Cada foto capturada es un paso más hacia tu mejora.</p>
+            <p className="color-text">Reconoce y celebra tus logros, por pequeños que sean. Cada foto capturada es un paso más hacia tu mejora.</p>
           </div>
           <div className="box">
             <h3 className="green">Aprende de tus Errores</h3>
-            <p>En lugar de ver los errores como fracasos, concédeles el poder de enseñarte. Analiza tus fotos y descubre áreas de mejora.</p>
+            <p className="color-text">En lugar de ver los errores como fracasos, concédeles el poder de enseñarte. Analiza tus fotos y descubre áreas de mejora.</p>
           </div>
           <div className="box">
             <h3 className="green">Comparte tus Experiencias</h3>
-            <p>Habla con otros fotógrafos sobre tus desafíos. La comunidad puede ofrecer consejos valiosos y apoyo emocional.</p>
+            <p className="color-text">Habla con otros fotógrafos sobre tus desafíos. La comunidad puede ofrecer consejos valiosos y apoyo emocional.</p>
           </div>
         </div>
       </div>
       <hr/>
       <div className="camera-container mt-4">
         <h2 className="orange">Tipos de Cámara</h2>
-        <p className="lead">
+        <p className="lead color-text">
           Descubre el mundo de la fotografía y elige la cámara perfecta para tus primeros pasos. Explora desde cámaras compactas, ideales para principiantes que buscan portabilidad, hasta las potentes DSLR y sin espejo, diseñadas para aquellos que buscan un mayor control creativo. <br />Para quienes inician su viaje fotográfico, recomendamos las cámaras compactas, combinando simplicidad y calidad para capturar momentos inolvidables. ¡Empieza tu aventura fotográfica con la elección adecuada!</p>
         <div className="camera-types-grid mt-3">
           <div className="camera-type">
             <h3 className="green">Cámaras Compactas</h3>
-            <p>Son portátiles y fáciles de usar, ideales para principiantes y para llevarlas a todas partes.</p>
+            <p className="color-text">Son portátiles y fáciles de usar, ideales para principiantes y para llevarlas a todas partes.</p>
           </div>
           <div className="camera-type">
             <h3 className="green">Cámaras DSLR (Réflex)</h3>
-            <p>Ofrecen mayor control sobre la configuración y la calidad de imagen. Son excelentes para fotografía avanzada.</p>
+            <p className="color-text">Ofrecen mayor control sobre la configuración y la calidad de imagen. Son excelentes para fotografía avanzada.</p>
           </div>
           <div className="camera-type">
             <h3 className="green">Cámaras sin Espejo (Mirrorless)</h3>
-            <p>Combinan la calidad de las DSLR con la portabilidad de las compactas. Perfectas para usuarios intermedios y avanzados.</p>
+            <p className="color-text">Combinan la calidad de las DSLR con la portabilidad de las compactas. Perfectas para usuarios intermedios y avanzados.</p>
           </div>
         </div>
 
@@ -166,7 +158,7 @@ function tipsPage() {
       <hr />
       <div className="container mt-5">
         <h2 className="text-center mb-4 orange">Importancia de la Luz</h2>
-        <p className="lead">La luz es esencial en la fotografía, definiendo la atmósfera, el tono y los detalles de una imagen. Aprender a aprovechar la luz de manera efectiva es clave para lograr fotografías impactantes. La dirección, intensidad y temperatura de la luz influyen en cómo se perciben los sujetos, creando sombras y resaltando detalles. Experimentar con diferentes condiciones de luz permite a los fotógrafos expresar creativamente su visión y capturar momentos de manera única. Conocer cómo utilizar la luz natural y artificial de manera estratégica eleva la calidad visual de las fotografías, creando composiciones memorables.</p>
+        <p className="lead color-text">La luz es esencial en la fotografía, definiendo la atmósfera, el tono y los detalles de una imagen. Aprender a aprovechar la luz de manera efectiva es clave para lograr fotografías impactantes. La dirección, intensidad y temperatura de la luz influyen en cómo se perciben los sujetos, creando sombras y resaltando detalles. Experimentar con diferentes condiciones de luz permite a los fotógrafos expresar creativamente su visión y capturar momentos de manera única. Conocer cómo utilizar la luz natural y artificial de manera estratégica eleva la calidad visual de las fotografías, creando composiciones memorables.</p>
         <div className="row">
           <div className="col-md-4">
             <div className="card">

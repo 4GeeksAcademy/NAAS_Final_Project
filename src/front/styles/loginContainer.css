@@ -20,7 +20,7 @@
 }
 .form-label,
 .form-control {
-  color: white; /* Color del texto en los inputs y labels */
+  color: black; /* Color del texto en los inputs y labels */
 }
 
 .form-control {
