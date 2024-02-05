@@ -339,7 +339,19 @@ def join_event(event_id):
         return jsonify({'error': str(e)}), 500
 
 #crear evento (admin)
-@api.route('/')
+@api.route('/create-category', methods=["POST"])
+def create_category():
+    data = request.get_json()
+    new_category = Photo_categories(name=data.get('name'))
+    
+    try: 
+        db.session.add(new_category)
+        db.session.commit()
+        
+        return jsonify({'msg': 'Categoria creada con exito'}),201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}),500
 
 # dar de baja el evento 
 @api.route('/events/<int:event_id>/leave', methods=['DELETE'])
