@@ -33,13 +33,13 @@ export const NavbarLogin = () => {
               <i className="pe-2 fa-solid fa-store"></i>Galería
             </Link>
           </li>
-          <li class="nav-item dropdown">
-            <a class="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li className="nav-item dropdown">
+            <a className="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Rankings
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><Link to="ranking-photo" class="dropdown-item" >Ranking de fotografias</Link></li>
-              <li><Link to="ranking-user" class="dropdown-item">Ranking de usuarios</Link></li>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><Link to="ranking-photo" className="dropdown-item" >Ranking de fotografias</Link></li>
+              <li><Link to="ranking-user" className="dropdown-item">Ranking de usuarios</Link></li>
             </ul>
           </li>
           <li className="nav-item">
@@ -107,11 +107,11 @@ export const NavbarLogin = () => {
             </li>
             <li className="nav-item dropdown">
               <Link to="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i className="pe-2 color-text fa-solid fa-envelopes-bulk"></i>Buzón<span class="p-2 badge bg-secondary">4</span>
+                <i className="pe-2 color-text fa-solid fa-envelopes-bulk"></i>Buzón<span className="p-2 badge bg-secondary">4</span>
               </Link>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li><Link to="#" className="dropdown-item"><i className="pe-2 color-text fa-solid fa-inbox"></i>Recibidos</Link></li>
-                <li><Link to="#" className="dropdown-item"><i className="pe-2 color-text fa-solid fa-envelope-circle-check"></i>Sin leer<span class="p-2 badge bg-secondary">4</span></Link></li>
+                <li><Link to="#" className="dropdown-item"><i className="pe-2 color-text fa-solid fa-envelope-circle-check"></i>Sin leer<span className="p-2 badge bg-secondary">4</span></Link></li>
                 <li>
                   <hr className="dropdown-divider"></hr>
                 </li>

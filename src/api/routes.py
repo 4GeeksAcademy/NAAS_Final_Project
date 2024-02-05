@@ -312,7 +312,7 @@ def password_update():
 
 
 # Agregar evento al usuario
-@api.route('/events/int:event_id/join', methods=['POST'])
+@api.route('/events/<int:event_id>/join', methods=['POST'])
 @jwt_required()
 def join_event(event_id):
     try:
@@ -335,5 +335,61 @@ def join_event(event_id):
     except IntegrityError as e:
         db.session.rollback()
         return jsonify({'error': 'An error occurred: IntegrityError'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+#crear evento (admin)
+@api.route('/create-category', methods=["POST"])
+def create_category():
+    data = request.get_json()
+    new_category = Photo_categories(name=data.get('name'))
+    
+    try: 
+        db.session.add(new_category)
+        db.session.commit()
+        
+        return jsonify({'msg': 'Categoria creada con exito'}),201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}),500
+
+# dar de baja el evento 
+@api.route('/events/<int:event_id>/leave', methods=['DELETE'])
+@jwt_required()
+def leave_event(event_id):
+    try:
+        current_user_id = get_jwt_identity()
+
+        # Buscar la relación entre el usuario y el evento
+        user_event = User_events.query.filter_by(user_id=current_user_id, event_id=event_id).first()
+
+        if not user_event:
+            return jsonify({'msg': 'User is not registered for this event'}), 404
+
+        # Eliminar la relación
+        db.session.delete(user_event)
+        db.session.commit()
+
+        return jsonify({'msg': 'Successfully left the event'}), 200
+
+    except IntegrityError as e:
+        db.session.rollback()
+        return jsonify({'error': 'An error occurred: IntegrityError'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@api.route('/events/user-joined', methods=['GET'])
+@jwt_required()
+def get_user_joined_events():
+    try:
+        current_user_id = get_jwt_identity()
+
+        # Obtener todos los eventos a los que el usuario se ha unido
+        joined_events = User_events.query.filter_by(user_id=current_user_id).all()
+
+        serialized_events = [event.event_relationship.serialize() for event in joined_events]
+
+        return jsonify(serialized_events), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

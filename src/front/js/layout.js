@@ -20,12 +20,13 @@ import SignUpForm from "./pages/SignUpForm";
 import ContactForm from "./pages/ContactForm";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import TipsPage from "./pages/TipsPage"
-import { EventsDetails } from "./pages/EventDetails";
+import EventsDetails  from "./pages/EventDetails";
 
 import "../styles/home.css";
 import Ranking from "./component/Ranking";
 import PasswordUpdate from "./pages/PasswordUpdate";
 import PhotoUploader from "./pages/PhotoUploader";
+import { ActiveEvents } from "./pages/ActiveEvents";
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -53,6 +54,7 @@ const Layout = () => {
                         <Route element={<Ranking title="Top creadores" description="Explore a los artistas de la comunidad mejor clasificados en la galería" />} path="/ranking-user" />
                         <Route element={<TermsAndConditions />} path="/terms" />
                         <Route element={<TipsPage />} path="/tips" />
+                        <Route element={<ActiveEvents/>} path="/events" />
                         <Route element={<EventsDetails />} path="/events/:event_id" />
                         <Route element={<PhotoUploader />} path="/photo-uploader" />
                         <Route element={<h1>Not found!</h1>} />

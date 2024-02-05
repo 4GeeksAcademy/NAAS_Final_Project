@@ -43,7 +43,7 @@ const NavbarManager = () => {
         };
     }, [store.isUserLoggedIn, store.isAdminLoggedIn]); // Only runs on mount
 
-    console.log("UserRole:", userRole);
+    // console.log("UserRole:", userRole);
 
     return (
         <div>

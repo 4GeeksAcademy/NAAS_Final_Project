@@ -50,13 +50,13 @@ export const Navbar = () => {
                             <i className="pe-2 fa-solid fa-store"></i>Galería
                         </Link>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li className="nav-item dropdown">
+                        <a className="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Rankings
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><Link to="ranking-photo" class="dropdown-item" >Ranking de fotografias</Link></li>
-                            <li><Link to="ranking-user" class="dropdown-item">Ranking de usuarios</Link></li>
+                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><Link to="ranking-photo" className="dropdown-item" >Ranking de fotografias</Link></li>
+                            <li><Link to="ranking-user" className="dropdown-item">Ranking de usuarios</Link></li>
                         </ul>
                     </li>
                     <li className="nav-item">
