@@ -338,7 +338,7 @@ def join_event(event_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-#crear evento (admin)
+#crear categoria de foto (admin)
 @api.route('/create-category', methods=["POST"])
 def create_category():
     data = request.get_json()
@@ -352,7 +352,24 @@ def create_category():
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}),500
+    
+#traer categorías de foto 
+@api.route('/categories', methods=["GET"])
+def get_all_categories():
+    try:
+        categories = Photo_categories.query.all()
+        
+        if not categories:
+            return jsonify({'msg': 'No se encontraron categorias'}),404
+        
+        serialized_categories = [category.serialize() for category in categories]
+        response = jsonify(serialized_categories)
+        response.headers['Content-Type'] = 'application/json'
+        return response,200
+    except Exception as e: 
+        return jsonify({'error': str(e) }), 500
 
+    
 # dar de baja el evento 
 @api.route('/events/<int:event_id>/leave', methods=['DELETE'])
 @jwt_required()
