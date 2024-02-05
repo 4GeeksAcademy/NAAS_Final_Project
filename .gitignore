@@ -80,6 +80,3 @@ database.database
 database.db
 diagram.png
 __pycache__/
-
-# Ignore DataBase Migrations
-/migrations/

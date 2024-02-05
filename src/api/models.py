@@ -130,6 +130,7 @@ class Events(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
+    description = db.Column(db.String(255))
 
     ## Relationship photo_categories
     category_id = db.Column(db.Integer, db.ForeignKey('photo_categories.id'))
