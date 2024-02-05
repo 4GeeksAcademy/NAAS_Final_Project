@@ -19,10 +19,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: [],
 			isUserLoggedIn: false,
 			isAdminLoggedIn: false,
+			statusActive: false,
 			events: [],
 			currentEvent: [],
-			statusActive: false,
-			joiningEvent: false
+			joiningEvent: false,
+			leavingEvent: false,
+			userJoinedEvent: false,
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -175,6 +178,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					if (response.ok) {
 						console.log("usuario unido al evento con exito")
+						setStore({ userJoinedEvent: true });
 					}
 					else {
 						console.error("error al unirse al evento", response.status)
@@ -186,7 +190,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				finally {
 					setStore({ joiningEvent: false });
 				}
-			}
+			},
+			leaveEvent: async (event_id) => {
+				try {
+					setStore({ leavingEvent: true });
+
+					// Recuperar el token desde sessionStorage
+					const token = sessionStorage.getItem('token');
+					console.log('Token:', token);
+
+					if (!token) {
+						console.error("Token no encontrado");
+						return;
+					}
+
+					const response = await fetch(`${process.env.BACKEND_URL}/api/events/${event_id}/leave`, {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
+					});
+
+					if (response.ok) {
+						console.log("Usuario dado de baja del evento con éxito");
+						setStore({ userJoinedEvent: false });
+					} else {
+						console.error("Error al darse de baja del evento", response.status);
+					}
+				} catch (error) {
+					console.error("Error:", error);
+				} finally {
+					setStore({ leavingEvent: false });
+				}
+			},
+			
 		}
 	}
 }

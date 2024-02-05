@@ -3,24 +3,29 @@ import { Link, useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import { Timer } from "../component/Timer";
 
+
 const EventsDetails = () => {
     const { store, actions } = useContext(Context);
     const { event_id } = useParams();
     const currentEvent = store.currentEvent || {};
 
-    const handleJoinEvent = async () => {
+    const handleJoinOrLeaveEvent = async () => {
         const token = sessionStorage.getItem('token');
-    console.log('Token:', token);
+        console.log('Token:', token);
         // Evitar intentos adicionales si ya estamos procesando la solicitud
-        if (store.joiningEvent) {
+        if (store.joiningEvent || store.leavingEvent) {
             return;
         }
 
-        actions.joinEvent(event_id);
+        if (store.userJoinedEvent) {
+            actions.leaveEvent(event_id);
+        } else {
+            actions.joinEvent(event_id);
+        }
     };
 
     return (
-        <div className="main-container color-back3" style={{marginTop: "80px"}}>
+        <div className="main-container color-back3" style={{ marginTop: "80px" }}>
             <div id="eventContainer">
                 <div className="description">
                     <h2 style={{ fontSize: "40px", color: "#FE5201" }}>{currentEvent.name}</h2>
@@ -37,14 +42,15 @@ const EventsDetails = () => {
                     <Timer />
                     <button
                         className="btn color-call button-event"
-                        onClick={handleJoinEvent}
-                        disabled={store.joiningEvent}
-                    >
-                        {store.joiningEvent ? (
-                            <span>Uniéndome...</span>
+                        onClick={handleJoinOrLeaveEvent}
+                        disabled={store.joiningEvent || store.leavingEvent}>
+
+                        {store.joiningEvent || store.leavingEvent ? (
+                            <span>{store.joiningEvent ? "Uniéndome..." : "Dándome de baja..."}</span>
                         ) : (
                             <>
-                                <i className="fa-solid fa-plus me-2" style={{ color: "#ffffff" }} />Unirme
+                                <i className="fa-solid fa-plus me-2" style={{ color: "#ffffff" }} />
+                                {store.userJoinedEvent ? "Dar de baja" : "Unirme"}
                             </>
                         )}
                     </button>
