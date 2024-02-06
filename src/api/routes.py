@@ -188,23 +188,21 @@ def create_photos():
             return jsonify({'msg': 'The photo category is incorrect or not exist'}), 400
 
         for img_url in img_urls:
-
             photo = Photos(
                 name=name,
                 img_url=img_url,
                 description=description,
                 category_id=category_id,
                 user_id=user_id,
-                event_id=event_id
+                event_id=None
             )
 
-            # Assign event_id only if present in the request
-            if event_id:
+            # Assign event_id only if present in the request and not an empty string
+            if event_id and event_id.strip():  # Asegúrate de que event_id no sea una cadena vacía
                 # Validation event exists
                 event = Events.query.filter_by(id=event_id).first()
                 if event is None:
                     return jsonify({'msg': 'The event is incorrect or not exist'}), 400
-
                 photo.event_id = event_id
 
             # Save the Photo instance to the database
@@ -279,7 +277,7 @@ def get_all_categories():
         response = jsonify(serialized_categories)
         response.headers['Content-Type'] = 'application/json'
         return response, 200
-    except Exception as e: 
+    except Exception as e:
         return jsonify({'error': str(e) }), 500
 
 

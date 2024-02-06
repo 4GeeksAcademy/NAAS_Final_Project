@@ -1,13 +1,33 @@
 import React, { useState, useEffect } from "react";
+import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const ImageUpload = () => {
+  const [userId, setUserId] = useState(null);
   const [files, setFiles] = useState(null);
   const [previewImages, setPreviewImages] = useState([]);
   const [events, setEvents] = useState([]);
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
+
+  const token = sessionStorage.getItem('token');
+
+  if(!token) {
+      console.error('User not authenticated');
+      toast.error('User not authenticated');
+      navigate('/');
+  }
 
   useEffect(() => {
+
+    const token = sessionStorage.getItem('token');
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setUserId(decodedToken.sub);
+    }
+
     const fetchEventsAndCategories = async () => {
       try {
         const eventsResponse = await fetch(`${process.env.BACKEND_URL}/api/events`);
@@ -16,7 +36,8 @@ const ImageUpload = () => {
           return;
         }
         const eventsData = await eventsResponse.json();
-        setEvents(eventsData);
+        console.log("Events Data:", eventsData);
+        setEvents(eventsData.events || []);
 
         const categoriesResponse = await fetch(`${process.env.BACKEND_URL}/api/categories`);
         if (!categoriesResponse.ok) {
@@ -77,49 +98,48 @@ const ImageUpload = () => {
     uploadFormData.append("name", document.getElementById("name").value);
     uploadFormData.append("description", document.getElementById("description").value);
     uploadFormData.append("category_id", document.getElementById("category_id").value);
-    uploadFormData.append("user_id", document.getElementById("user_id").value);
+    uploadFormData.append("user_id", userId);
     uploadFormData.append("event_id", document.getElementById("event_id").value);
 
     // Validar campos obligatorios
     const name = document.getElementById("name").value;
     const description = document.getElementById("description").value;
     const category_id = document.getElementById("category_id").value;
-    const user_id = document.getElementById("user_id").value;
 
-    if (!name || !description || !category_id || !user_id) {
-      console.error("All fields except 'event_id' are required");
+    if (!name || !description || !category_id) {
       toast.error('Required fields are missing');
       return;
     }
 
     try {
       // Fetch the backend API endpoint for uploading photos
+      console.log(uploadFormData);
       const uploadResponse = await fetch(`${process.env.BACKEND_URL}/api/upload-photos`, {
         method: "POST",
         body: uploadFormData,
       });
-
+    
       if (!uploadResponse.ok) {
         console.error("Image upload failed", uploadResponse.status);
         return;
       }
-
+    
       const uploadData = await uploadResponse.json();
       console.log("Image upload success!", uploadData);
-
+    
       // Extract the img_urls from the response
       const imgUrls = uploadData.img_urls;
-
+    
       // Create a FormData object for creating photos
       const createFormData = new FormData();
-
+    
       // Append other form fields (if needed)
       createFormData.append("name", document.getElementById("name").value);
       createFormData.append("description", document.getElementById("description").value);
       createFormData.append("category_id", document.getElementById("category_id").value);
-      createFormData.append("user_id", document.getElementById("user_id").value);
+      createFormData.append("user_id", userId);;
       createFormData.append("event_id", document.getElementById("event_id").value);
-
+    
       // Create photos using the img_urls
       const createResponse = await fetch(`${process.env.BACKEND_URL}/api/create-photos`, {
         method: "POST",
@@ -130,23 +150,20 @@ const ImageUpload = () => {
           name: document.getElementById("name").value,
           description: document.getElementById("description").value,
           category_id: document.getElementById("category_id").value,
-          user_id: document.getElementById("user_id").value,
           event_id: document.getElementById("event_id").value,
+          user_id: userId,
           img_urls: imgUrls,
         }),
       });
-
+    
       if (!createResponse.ok) {
         console.error("Creating photos failed", createResponse.status);
         return;
       }
-
+    
       const createData = await createResponse.json();
       console.log("Photos creation success!", createData);
 
-      // Handle any additional logic after successful upload and creation
-
-      // Limpieza de previsualización después de la carga exitosa
       setFiles(null);
       setPreviewImages([]);
     } catch (error) {
@@ -155,18 +172,14 @@ const ImageUpload = () => {
     }
   };
 
-  console.log("Rendering with events:", events);
-  console.log("Rendering with categories:", categories);
-
   return (
     <div className="container">
-      <div className="jumbotron">
+      <div className="jumbotron" style={{ marginTop: "100px" }}>
         <h2 className="mb-4">Upload and Create Photos</h2>
         <div className="form-group">
           <label htmlFor="photoInput">Select Photos:</label>
           <input type="file" className="form-control-file" id="photoInput" onChange={handleFileChange} multiple />
         </div>
-        {/* Sección de previsualización */}
         <div className="preview-section">
           {previewImages.map((preview, index) => (
             <img key={index} src={preview} alt={`Preview ${index}`} className="preview-image" style={{ width: "100px", height: "100px" }} />
@@ -183,6 +196,7 @@ const ImageUpload = () => {
         <div className="form-group">
           <label htmlFor="categorySelect">Category:</label>
           <select className="form-control" id="category_id">
+            <option value="">Select a category</option>
             {Array.isArray(categories) && categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -191,12 +205,9 @@ const ImageUpload = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="user_id">User ID:</label>
-          <input type="text" className="form-control" id="user_id" placeholder="Enter user ID" />
-        </div>
-        <div className="form-group">
           <label htmlFor="eventSelect">Event:</label>
           <select className="form-control" id="event_id">
+            <option value="">Select an event</option>
             {Array.isArray(events) && events.map((event) => (
               <option key={event.id} value={event.id}>
                 {event.name}
