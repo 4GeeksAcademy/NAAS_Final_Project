@@ -65,3 +65,8 @@
     cursor: pointer; 
     margin-top: 10px;
   }
+
+  .label-color{
+    color: white;
+    margin-bottom: 5px;
+  }

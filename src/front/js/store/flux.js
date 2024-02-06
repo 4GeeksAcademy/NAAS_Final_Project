@@ -128,6 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// Verificar si data es un objeto JSON válido antes de actualizar el store
 					if (data && typeof data === 'object') {
 						setStore({ currentEvent: data });
+						return data
 					} else {
 						console.error('La respuesta no es un objeto JSON válido:', data);
 					}

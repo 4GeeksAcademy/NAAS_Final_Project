@@ -424,3 +424,51 @@ def get_user_joined_events():
         return jsonify(serialized_events), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@api.route('/user-data', methods=['GET'])
+@jwt_required() 
+def get_user_data():
+    try:
+        current_user_id = get_jwt_identity()
+        user_data = User_data.query.filter_by(user_id=current_user_id).first()
+
+        if not user_data:
+            return jsonify({'msg': 'Datos del usuario no encontrados'}), 404
+
+        serialized_user_data = user_data.serialize()
+
+        return jsonify(serialized_user_data), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@api.route('/update-user-data', methods=['PUT'])
+@jwt_required() 
+def update_user_data():
+    try:
+        current_user_id = get_jwt_identity()
+        new_data = request.json
+        user = User_data.query.get(current_user_id)
+        
+        if not user:
+            return jsonify({'msg': 'usuario no encontrado'}),404
+        
+        user.firstname = new_data.get('firstname', user.firstname)
+        user.lastname = new_data.get('lastname', user.lastname)
+        user.username = new_data.get('username', user.username)
+        user.phone = new_data.get('phone', user.phone)
+        user.country = new_data.get('country', user.country)
+
+        db.session.commit()
+
+        update_user_data = {
+            'firstname': user.firstname,
+            'lastname': user.lastname,
+            'username': user.username,
+            'phone': user.phone,
+            'country': user.country
+        }
+        return jsonify(update_user_data),200
+    
+    except Exception as e: 
+        return jsonify({'error': str(e)}),500
