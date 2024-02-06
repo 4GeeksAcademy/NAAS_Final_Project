@@ -322,6 +322,35 @@ def password_update():
         print(f"Error updating password: {str(e)}")
         return jsonify({"message": "Error updating password"})
 
+## Create event by admin user
+@api.route('/event/create', methods=['POST'])
+@jwt_required()
+def crate_event():
+
+    current_user_id = get_jwt_identity()
+    user = Users.query.filter_by(id=current_user_id).first()
+
+    if user.role != "admin":
+        return {"message": "Unauthorized"}, 403
+
+    try:
+        data = request.get_json()
+
+        new_event = Events(
+            name=data.get("name"),
+            description=data.get("description"),
+            category_id=data.get("category_id"),
+            start_date=data.get("start_date"),
+            end_date=data.get("end_date")
+        )
+
+        db.session.add(new_event)
+        db.session.commit()
+
+        return {"message": "Event created successfully", "event": new_event.serialize()}, 201
+    except Exception as e:
+        return {"message": "Error creating event", "error": str(e)}, 500
+
 
 # Agregar evento al usuario
 @api.route('/events/<int:event_id>/join', methods=['POST'])
