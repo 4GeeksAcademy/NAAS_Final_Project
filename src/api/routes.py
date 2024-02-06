@@ -264,22 +264,6 @@ def get_events():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-#traer categorías de foto 
-@api.route('/categories', methods=["GET"])
-def get_all_categories():
-    try:
-        categories = Photo_categories.query.all()
-
-        if not categories:
-            return jsonify({'msg': 'No se encontraron categorias'}), 404
-
-        serialized_categories = [category.serialize() for category in categories]
-        response = jsonify(serialized_categories)
-        response.headers['Content-Type'] = 'application/json'
-        return response, 200
-    except Exception as e:
-        return jsonify({'error': str(e) }), 500
-
 
 def generate_change_password_token(email):
     expire = datetime.timedelta(hours=1)
