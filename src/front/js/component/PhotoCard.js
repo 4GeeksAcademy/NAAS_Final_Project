@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { testData3 } from "./testData";
 import PropTypes from "prop-types";
-import { Context } from "../store/appContext";
+import { Context } from "../store/appContext"
+import { Link } from "react-router-dom";
 
 export const PhotoCard = (props) => {
   const { store, actions } = useContext(Context);
@@ -41,7 +42,9 @@ export const PhotoCard = (props) => {
   return (
     <div className="d-flex justify-content-center bg-gra">
       <div className="card" style={{ width: "17rem" }}>
-        <img src={props.photoUrl} className="card-img-top" alt="Photo" />
+      <Link to={`/photo-detail/${encodeURIComponent(props.photoUrl)}`} className="photo-link">
+    <img src={props.photoUrl} className="card-img-top" alt="Photo" />
+</Link>
 
         <div className="card-body color-back px-3">
           <h4 className="m-0 color-text">{props.photo}</h4>

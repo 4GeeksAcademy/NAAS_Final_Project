@@ -15,6 +15,13 @@
     border: solid 5px rgb(0, 0, 0) !important 
 }
 
+.img-detail {
+    width: 100vw;
+    height: 75vh;
+    object-fit: fill;
+    border: solid 10px black;
+    border-radius: 15%;
+}
 .color-back{
     background: #2B2B2B;
 }
