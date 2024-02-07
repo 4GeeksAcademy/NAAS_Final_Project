@@ -25,6 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			joiningEvent: false,
 			leavingEvent: false,
 			userJoinedEvent: false,
+			userData: []
 
 		},
 		actions: {
@@ -252,6 +253,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return [];
 				  }
 				},
+				getUserData: async () => {
+					try {
+						const token = sessionStorage.getItem('token');
+				
+						if (!token) {
+							console.error("Token no encontrado en sessionStorage");
+							return;
+						}
+				
+						const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": `Bearer ${token}`
+							}
+						});
+				
+						if (!response.ok) {
+							throw new Error(`Status: ${response.status}`);
+						}
+				
+						const data = await response.json();
+						setStore({ userData: data });
+						console.log(data)
+					} catch (error) {
+						console.error("Error:", error);
+					}
+				},
+				updateUserData: async (UserData) => {
+					try {
+						const token = sessionStorage.getItem('token');
+						if (!token) {
+							console.error("Token no encontrado en sessionStorage");
+							return;
+						}
+	
+						const response = await fetch(`${process.env.BACKEND_URL}/api/update-user-data`, {
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify(UserData),
+						});
+	
+						if (!response.ok) {
+							throw new Error(`Status: ${response.status}`);
+						}
+	
+						const data = await response.json();
+						setStore({ userData: data });
+						console.log("Datos del usuarios actualizados con exito:", data);
+					} catch (error) {
+						console.error("error al actualizar los datos:", error);
+						throw error;
+					}
+				},
+
 			}
 		}
 	}
