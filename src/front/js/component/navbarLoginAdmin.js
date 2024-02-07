@@ -34,12 +34,12 @@ export const NavbarLoginAdmin = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="color-text-nav nav-link">
-                            <i className="pe-2 fa-solid fa-arrow-trend-up"></i>Rankings
+                        <Link to="/ranking-photo" className="nav-link active color-text-nav">
+                            <i className="pe-2 fa-solid fa-store"></i>Ranking
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link color-text-nav">
+                        <Link to="/events" className="nav-link color-text-nav">
                             <i className="pe-2 fa-brands fa-space-awesome"></i>Eventos
                         </Link>
                     </li>
@@ -135,14 +135,6 @@ export const NavbarLoginAdmin = () => {
                     </ul>
                     <p></p>
                     <div className="drop-nav">
-                        <form className="mt-2 d-flex color-text drop-nav" role="search">
-                            <h6>Soporte</h6>
-                            <button className="btn btn-outline-success" type="submit"><i className="avatar-login fa-solid fa-headset"></i></button>
-                        </form>
-                        <form className="mt-2 mb-5 d-flex color-text drop-nav" role="search">
-                            <h6>Dar de baja mi cuenta</h6>
-                            <button className="btn btn-outline-danger" type="submit"><i className="avatar-login fa-solid fa-user-large-slash"></i></button>
-                        </form>
                         <form className="mt-2 d-flex color-text drop-nav" role="search">
                             <h5>Cerrar Sesión</h5>
                             <Link to="/">

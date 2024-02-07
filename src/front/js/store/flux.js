@@ -253,6 +253,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return [];
 				  }
 				},
+
+				toggleGlobalStyle: (className, targetSelector) => {
+					const isStyleActive = !getStore().isStyleActive;
+					const elements = document.querySelectorAll(targetSelector);
+				
+					if (isStyleActive) {
+						elements.forEach(element => {
+							element.classList.add(className);
+						});
+					} else {
+						elements.forEach(element => {
+							element.classList.remove(className);
+						});
+					}
+				
+					localStorage.setItem("isStyleActive", isStyleActive.toString());
+					setStore({ isStyleActive });
+				}
+
 				getUserData: async () => {
 					try {
 						const token = sessionStorage.getItem('token');
@@ -310,6 +329,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw error;
 					}
 				},
+
 
 			}
 		}

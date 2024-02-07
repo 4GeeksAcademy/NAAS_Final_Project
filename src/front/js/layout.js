@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
@@ -27,6 +27,7 @@ import Ranking from "./component/Ranking";
 import PasswordUpdate from "./pages/PasswordUpdate";
 import PhotoUploader from "./pages/PhotoUploader";
 import { ActiveEvents } from "./pages/ActiveEvents";
+import PhotoDetail from "./pages/PhotoDetail";
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -34,6 +35,8 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL === "") return <BackendURL />;
+
+
 
     return (
         <div>
@@ -50,6 +53,7 @@ const Layout = () => {
                         <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
+                        <Route element={<PhotoDetail />} path="/photo-detail/:photoUrl" />
                         <Route element={<Ranking title="Top fotografias" description="Explore las fotografías de la comunidad mejor clasificados en la galería" />} path="/ranking-photo" />
                         <Route element={<Ranking title="Top creadores" description="Explore a los artistas de la comunidad mejor clasificados en la galería" />} path="/ranking-user" />
                         <Route element={<TermsAndConditions />} path="/terms" />

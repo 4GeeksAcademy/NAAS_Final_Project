@@ -81,25 +81,23 @@ const PasswordUpdate = () => {
       } else {
         console.error('Error updating the password');
         console.error('Server error message:', await response.text());
-        toast.error('Error updating the password');
+        toast.error('Error al actualizar la contraseña');
       }
     } catch (error) {
       console.error('Error making the request', error);
-      toast.error('Error making the request');
+      toast.error('Error al realizar la solicitud');
     }
   };
 
   return (
-    <div className='container-fluid d-flex justify-content-center color-back color-text'>
-      <div className='container-fluid col-6' style={{ display: 'contents' }}>
-        {/* Add any additional content you want here */}
-      </div>
-      <div className='login-container p-5 col-6'>
-        <form onSubmit={handlePasswordUpdate}>
-          <h2>Update Password</h2>
-          <div className='mb-3 px-3'>
-            <label>
-              New Password:
+    <div className='container-fluid d-flex justify-content-center color-text mobile-column vista mb-5 p-5 welcome-view'>
+      <div className='login-container container mobile-column d-flex justify-content-center '>
+        <form className="text-start color-back p-5" onSubmit={handlePasswordUpdate}>
+          <h2>Actualizar Contraseña</h2>
+          <div className='text-center'>
+          <div className='my-3'>
+            <label className='d-flex justify-content-between'>
+              Nueva Contraseña:
               <input className='mx-5'
                 type='password'
                 value={password}
@@ -107,9 +105,9 @@ const PasswordUpdate = () => {
               />
             </label>
           </div>
-          <div className='mb-3 px-3'>
+          <div className='mb-3'>
             <label>
-              Confirm Password:
+            Confirmar Contraseña:
               <input className='mx-5'
                 type='password'
                 value={confirmPassword}
@@ -117,8 +115,9 @@ const PasswordUpdate = () => {
               />
             </label>
           </div>
-          <button type='submit' className='btn confirm-btn' style={{ background: '#FE5201' }}>
-            Update Password
+          </div>
+          <button type='submit' className='btn confirm-btn mb-5' style={{ background: '#FE5201' }}>
+          Actualizar
           </button>
         </form>
       </div>
