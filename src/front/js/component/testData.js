@@ -7,12 +7,6 @@ export const testData = [
   { name: "Ana", index: 4, ranking: 4, fotos: 15, avatarUrl: "https://randomuser.me/api/portraits/women/4.jpg" },
   { name: "David", index: 5, ranking: 5, fotos: 10, avatarUrl: "https://randomuser.me/api/portraits/lego/5.jpg" },
   { name: "Laura", index: 6, ranking: 6, fotos: 18, avatarUrl: "https://randomuser.me/api/portraits/women/6.jpg" },
-  { name: "Fernando", index: 7, ranking: 7, fotos: 14, avatarUrl: "https://randomuser.me/api/portraits/lego/7.jpg" },
-  { name: "Isabel", index: 8, ranking: 8, fotos: 16, avatarUrl: "https://randomuser.me/api/portraits/women/8.jpg" },
-  { name: "Pablo", index: 9, ranking: 9, fotos: 22, avatarUrl: "https://randomuser.me/api/portraits/lego/2.jpg" },
-  { name: "Sofia", index: 10, ranking: 10, fotos: 20, avatarUrl: "https://randomuser.me/api/portraits/women/10.jpg" },
-  { name: "Javier", index: 11, ranking: 11, fotos: 25, avatarUrl: "https://randomuser.me/api/portraits/lego/4.jpg" },
-  { name: "Elena", index: 12, ranking: 12, fotos: 30, avatarUrl: "https://randomuser.me/api/portraits/women/12.jpg" },
 ];
 
 export const testData1 = [
@@ -32,8 +26,6 @@ export const testData2 =
   { name: "Retrato", index: 4, icon: "fa-camera-retro",  backUrl: "https://picsum.photos/id/244/300/400/?blur=3" },
   { name: "Paisajes", index: 5, icon: "fa-video",  backUrl: "https://picsum.photos/id/243/300/400/?blur=3" },
   { name: "Blanco y Negro", index: 6, icon: "fa-wand-magic-sparkles", backUrl: "https://picsum.photos/id/237/200/300/?blur=3" },
-  { name: "Deportes", index: 7, icon: "fa-basketball",  backUrl: "https://picsum.photos/id/555/300/400/?blur=3" },
-  { name: "Otros", index: 8, icon:"fa-image",  backUrl: "https://picsum.photos/id/456/300/400/?blur=3" },
 ];
 
 export const testData3 =

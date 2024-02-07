@@ -37,9 +37,9 @@ export const Footer = () => (
 					<h4>Únete A Nuestro Boletín Semanal</h4>
 					<p> Obtenga promociones y actualizaciones exclusivas directamente en su bandeja de entrada. </p>
 					<div className="input-group d-flex align-items-baseline">
-						<input type="text" className="form-control" placeholder="Enter your email here" aria-label="Enter your email here">
+						<input type="text" className="form-control" placeholder="Introduzca su correo electrónico aquí" aria-label="Enter your email here">
 						</input>
-						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscribe</button>
+						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscríbete</button>
 					</div>
 				</div>
 			</div>

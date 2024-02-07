@@ -41,7 +41,7 @@ export const VistaProfile = () => {
   };
 
   return (
-    <div className="container-fluid color-back">
+    <div className="container-fluid color-back mobile-column vista">
       <div>
         <img className="banner" src={testData3[2].fotoUrl} alt="Banner" />
       </div>

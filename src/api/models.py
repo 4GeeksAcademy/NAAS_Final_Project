@@ -175,6 +175,7 @@ class Photos(db.Model):
     name = db.Column(db.String(50))
     description = db.Column(db.String(250))
     img_url = db.Column(db.String(250))
+    like = db.Column(db.Integer)
 
     ## Relationship photo_categories
     category_id = db.Column(db.Integer, db.ForeignKey('photo_categories.id'))

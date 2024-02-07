@@ -33,17 +33,13 @@ export const NavbarLogin = () => {
               <i className="pe-2 fa-solid fa-store"></i>Galería
             </Link>
           </li>
-          <li className="nav-item dropdown">
-            <a className="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Rankings
-            </a>
-            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><Link to="ranking-photo" className="dropdown-item" >Ranking de fotografias</Link></li>
-              <li><Link to="ranking-user" className="dropdown-item">Ranking de usuarios</Link></li>
-            </ul>
+          <li className="nav-item">
+            <Link to="/ranking-photo" className="nav-link active color-text-nav">
+              <i className="pe-2 fa-solid fa-store"></i>Ranking
+            </Link>
           </li>
           <li className="nav-item">
-            <Link to="/" className="nav-link color-text-nav">
+            <Link to="/events" className="nav-link color-text-nav">
               <i className="pe-2 fa-brands fa-space-awesome"></i>Eventos
             </Link>
           </li>
@@ -58,7 +54,7 @@ export const NavbarLogin = () => {
         <div className="offcanvas-header">
           <Link to="/vistaProfile">
             <button className="offcanvas-title color-text-nav color-back" id="offcanvasDarkNavbarLabel">
-              <h5><i className="pe-2 avatar-login fa-solid fa-user-gear"></i>My Profile</h5>
+              <h5><i className="pe-2 avatar-login fa-solid fa-user-gear"></i>Mi perfil</h5>
             </button>
           </Link>
           <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -67,7 +63,7 @@ export const NavbarLogin = () => {
           <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 mx-5">
             <li className="nav-item">
               <button onClick={() => actions.toggleStatus()} className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
-                <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Set Status
+                <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Cambiar Estado
               </button>
             </li>
             <li className="nav-item">
@@ -82,7 +78,7 @@ export const NavbarLogin = () => {
             </li>
             <li className="nav-item">
               <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Eventos")} className="nav-link color-text-nav">
-                <i className="pe-2 fa-brands fa-space-awesome"></i>Eventos
+                <i className="pe-2 fa-brands fa-space-awesome"></i>Mis Eventos
               </Link>
             </li>
             <li className="nav-item">
@@ -128,16 +124,16 @@ export const NavbarLogin = () => {
               </Link>
             </form>
             <form className="mt-2 mb-5 d-flex color-text drop-nav" role="search">
-              <h6>Dar de baja mi cuenta</h6>
-              <button className="btn btn-outline-danger" type="submit"><i className="avatar-login fa-solid fa-user-large-slash"></i></button>
-            </form>
-            <form className="mt-2 d-flex color-text drop-nav" role="search">
               <h5>Cerrar Sesión</h5>
               <Link to="/">
                 <button className="btn btn-outline-warning" type="button" onClick={handleLogout}>
                   <i className="avatar-login fa-solid fa-person-walking-arrow-right"></i>
                 </button>
               </Link>
+            <form className="mt-2 d-flex color-text drop-nav" role="search">
+              <h6>Dar de baja mi cuenta</h6>
+              <button className="btn btn-outline-danger" type="submit"><i className="avatar-login fa-solid fa-user-large-slash"></i></button>
+            </form>
             </form>
           </div>
         </div>

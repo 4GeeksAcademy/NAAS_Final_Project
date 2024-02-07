@@ -12,7 +12,7 @@ export const Landing = () => {
     const { store, actions } = useContext(Context);
 
     return (
-        <div>
+        <div className="container mobile-column vista">
             <div className="mobile-column d-flex px-4 py-5 color-text color-back container-fluid">
                 <div className="text-center">
                     <h1>Descubre Una Comunidad De Artistas</h1>
@@ -21,7 +21,7 @@ export const Landing = () => {
                     <button
                         type="button"
                         className="px-5 btn brd color-call color-text m-3">
-                        <i className="pe-2 fa-solid fa-rocket"></i>Get Started
+                        <i className="pe-2 fa-solid fa-rocket"></i>Comienza Aquí
                     </button>
                     </Link>
                 </div>
@@ -163,16 +163,7 @@ export const Landing = () => {
                     <ArtistCard key={index} {...data} />
                 ))}
             </div>
-            <div className="d-flex px-5 py-5 color-back container-fluid justify-content-between">
-                <div>
-                    <h2 className="color-text2 px-5">Categorías</h2>
-                </div>
-            </div>
-            <div className="color-back d-flex justify-content-evenly flex-wrap pt-3">
-                {testData2.map((data, index) => (
-                    <CategoryCard key={index} {...data} />
-                ))}
-            </div>
+           
             <div className=" mobile-column container-fluid color-back justify-content-around align-items-center">
                 <div className="d-flex rounded-3 color-text color-back2 container align-items-center">
                     <div className="ghost">
@@ -182,9 +173,9 @@ export const Landing = () => {
                         <h2>Únase A Nuestro Boletín Semanal</h2>
                         <h4 className="p-3">Obtenga Promociones Y Actualizaciones Exclusivas Directamente En Su Bandeja De Entrada.</h4>
                         <div className="input-group d-flex align-items-baseline">
-						<input type="text" className="form-control" placeholder="Enter your email here" aria-label="Enter your email here">
+						<input type="text" className="form-control" placeholder="Introduzca su correo electrónico aquí" aria-label="Enter your email here">
 						</input>
-						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscribe</button>
+						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscríbete</button>
 					</div>
                     </div>
                 </div>
@@ -194,11 +185,12 @@ export const Landing = () => {
                     <img src={testData3[14].fotoUrl} className="w-100" alt="Photo" />
 
                     <div className="position-absolute d-flex-column justify-content-center text-center m-5 top-0 end-0">
-                        <h1>Magic Mashrooms</h1>
-                        
+                        <h1>Magic Mushrooms</h1>
+                        <Link to="/events">
                         <button type="button" className="px-5 btn rounded color-call color-text">
                             <i className="pe-2 fa-regular fa-eye"></i>Ver Evento
                         </button>
+                        </Link>
                         {/* <Timer/> */}
                     </div>
                 </div>

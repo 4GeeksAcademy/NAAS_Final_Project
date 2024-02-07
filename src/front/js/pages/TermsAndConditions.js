@@ -13,7 +13,7 @@ const TermsAndConditions = () => {
     };
 
     return (
-        <div className='terms-conditions container-fluid mt-4'>
+        <div className='terms-conditions container-fluid mobile-column vista'>
             <h1 className='main-title text-center mb-4 mt-5'>Bases y Condiciones del Concurso de Fotografía Amateur de Snapify</h1>
             &nbsp;
             <h3 className='secondary-title mb-4 mt-4'>¡Bienvenidos al Concurso Amateur de Fotografía de Snapify! Nos complace enormemente presentar esta oportunidad para que nuestra comunidad exhiba su talento y creatividad a través de la lente de una cámara. ¡Esperamos ansiosos ver las maravillosas imágenes que capturarán!

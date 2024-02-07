@@ -110,14 +110,13 @@ function SignUpForm() {
 
 
   return (
-    <div className='mobile-column container-fluid d-flex color-back'>
+    <div className='mobile-column container-fluid d-flex color-back vista'>
       <div className='mobile-column container-fluid' style={{ display: "contents" }}>
         <Welcome />
       </div>
       <div className="login-container p-4 mobile-column">
         <form onSubmit={handleSubmit}>
-          <h2 className='title-color mb-5'>Create a new account</h2>
-
+          <h2 className='title-color mb-5'>Crea una cuenta nueva</h2>
           <div className='name-container'>
             <div className="mb-3">
               <div className="input-icon">
@@ -126,7 +125,7 @@ function SignUpForm() {
                   type="text"
                   className="form-control"
                   id="firstname"
-                  placeholder="First Name"
+                  placeholder="Nombre"
                   value={formData.firstname}
                   onChange={handleChange}
                 />
@@ -140,7 +139,7 @@ function SignUpForm() {
                   type="text"
                   className="form-control"
                   id="lastname"
-                  placeholder="Last Name"
+                  placeholder="Apellido"
                   value={formData.lastname}
                   onChange={handleChange}
                 />
@@ -155,7 +154,7 @@ function SignUpForm() {
                 type="text"
                 className="form-control"
                 id="username"
-                placeholder="Username"
+                placeholder="Nombre de usuario"
                 value={formData.username}
                 onChange={handleChange}
               />
@@ -170,7 +169,7 @@ function SignUpForm() {
                   type="number"
                   className="form-control"
                   id="phone"
-                  placeholder="Phone number"
+                  placeholder="Teléfono"
                   value={formData.phone}
                   onChange={handleChange}
                 />
@@ -179,7 +178,7 @@ function SignUpForm() {
 
             <div className="dropdown" onScroll={handleScroll}>
               <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {formData.country || 'Country'}
+                {formData.country || 'País'}
               </a>
               <ul className="dropdown-menu" style={{ maxHeight: '200px', overflowY: 'auto' }} onScroll={handleScroll}>
                 {visibleCountries.map((country) => (
@@ -205,7 +204,7 @@ function SignUpForm() {
                 type="email"
                 className="form-control"
                 id="email"
-                placeholder="Email address"
+                placeholder="Dirección de correo electrónico"
                 value={formData.email}
                 onChange={handleChange}
               />
@@ -219,7 +218,7 @@ function SignUpForm() {
                 type="password"
                 className="form-control"
                 id="password"
-                placeholder="Password"
+                placeholder="Contraseña"
                 value={formData.password}
                 onChange={handleChange}
               />
@@ -229,13 +228,13 @@ function SignUpForm() {
           <div className='btn-container'>
             <button type="submit" className="btn confirm-btn" style={{ background: "#FE5201" }}>
               <i className="fa-solid fa-rocket" style={{ marginRight: '8px' }} />
-              Sign Up
+              Inscribirse
             </button>
           </div>
 
           <p className='p-2 color-text'>
-            Already have an account?
-            <Link to={"/login"}> Log in </Link>
+          ¿Ya tienes una cuenta?
+            <Link to={"/login"}> Iniciar sesión </Link>
           </p>
         </form>
       </div>

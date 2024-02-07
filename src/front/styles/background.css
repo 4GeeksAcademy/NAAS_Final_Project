@@ -145,6 +145,14 @@ body, html {
     margin-top: 150px;
 }
 
+.welcome-view {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    background: linear-gradient(to bottom, rgb(255, 232, 117) 1%,rgb(255, 164, 67) 42%,rgba(255,124,0,1) 84%);
+}
+
+
 
 /* Media query para móviles (hasta 767px) */
 @media screen and (max-width: 767px) {
@@ -170,6 +178,10 @@ body, html {
     .no-mar{
         margin: 10px !important;
     }
+    .vista {
+        width: 90%;
+        margin-top: 0vh;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1650px) {
@@ -185,8 +197,9 @@ body, html {
         text-align: center;
         padding: 10px;
     }
-
-    welcome-view {
-        width: 50%;
+    .vista {
+        width: 80%;
+        margin-top: 10vh;
     }
+    
 }

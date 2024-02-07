@@ -5,6 +5,15 @@
     width: 100%;
 }
 
+.bloq{
+    opacity: .09;
+}
+
+.desbloq{
+    opacity: 100;
+    border: solid 10px greenyellow;
+}
+
 .tier-container {
     margin-bottom: 30px;
     margin-top: 30px;
@@ -18,7 +27,7 @@ h4 {
 
 .achievement-title {
     text-align: center;
-    margin-right: 10px;
+    margin: 10px;
     position: relative;
 }
 

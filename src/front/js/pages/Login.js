@@ -36,7 +36,7 @@ const Login = ({ onLogin }) => {
       const responseJson = await response.json();
 
       if (response.ok) {
-        toast.success('Login successfully');
+        toast.success('Inicio de sesión exitoso');
         const { token } = responseJson;
 
         // Decodifica el token para obtener el rol
@@ -49,9 +49,9 @@ const Login = ({ onLogin }) => {
         // Llama a la función proporcionada para actualizar el navbar
         onLogin(userRole);
 
-        navigate("/galeria")
+        navigate("/vistaProfile")
 
-        console.log('Login successful!', responseJson);
+        console.log('Inicio de sesión exitoso!', responseJson);
       } else {
         toast.error(`${responseJson.msg}`);
         console.error('Error en el login:', responseJson.msg);
@@ -63,9 +63,10 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className='contaniner-fluid d-flex color-back mobile-column'>
-      <div className='container-fluid d-flex-column col-6' style={{ display: "contents" }}>
-        <div className='container-fluid m-5 color-grad3 rounded-3'>
+    <div className='container d-flex justify-content-center mobile-column vista'>
+    <div className='contaniner-fluid d-flex justify-content-center color-back mobile-column'>
+      <div className='container-fluid d-flex-column mobile-column'>
+        <div className='container-fluid color-grad3 rounded-3'>
           <div className="container d-flex-column text-center">
             <div className=" color-text">
               <h1 style={{ fontSize: "35px" }}>Bienvenido!</h1>
@@ -85,9 +86,9 @@ const Login = ({ onLogin }) => {
           </div>
         </div>
       </div>
-      <div className="login-container no-pad p-5 col-6 mobile-column">
+      <div className="login-container no-pad p-5 mobile-column">
         <form onSubmit={handleSubmit} className="login-form mobile-column">
-          <h2 className='title'>Login</h2>
+          <h2 className='title'>Iniciar sesión</h2>
           <div className="mb-3">
             <div className="input-icon">
               <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />
@@ -95,10 +96,10 @@ const Login = ({ onLogin }) => {
                 type="email"
                 className="form-control"
                 id="email"
-                placeholder="Email address"
+                placeholder="Dirección de correo electrónico"
                 value={formData.email}
                 onChange={handleChange}
-              />
+                />
             </div>
           </div>
 
@@ -109,10 +110,10 @@ const Login = ({ onLogin }) => {
                 type="password"
                 className="form-control"
                 id="password"
-                placeholder="Password"
+                placeholder="Contraseña"
                 value={formData.password}
                 onChange={handleChange}
-              />
+                />
             </div>
           </div>
 
@@ -129,6 +130,7 @@ const Login = ({ onLogin }) => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

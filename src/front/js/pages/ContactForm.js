@@ -3,10 +3,11 @@ import "../../styles/contactForm.css"
 
 function ContactForm() {
   return (
-    <div className='mobile-column contaniner-fluid d-flex text-center color-back'>
-    <div className='mobile-column container-fluid align-items-center d-flex m-5 color-back rounded-3'>
+    <div className='container d-flex justify-content-center'>
+    <div className='mobile-column contaniner-fluid d-flex text-center color-back vista'>
+    <div className='mobile-column container-fluid align-items-center d-flex m-1 color-back rounded-3'>
       <div className="container-fluid">
-      <div className='no-pad p-4 color-grad3 my-2'>
+      <div className='no-pad p-1 color-grad3 my-1'>
         <form className="container py-3 color-grad4">
           <h2 className='title'>Contacto</h2>
           <div className="mb-3">
@@ -16,7 +17,7 @@ function ContactForm() {
                 type="email"
                 className="form-control"
                 id="username"
-                placeholder="Username"
+                placeholder="Nombre de usuario"
               />
             </div>
           </div>
@@ -27,7 +28,7 @@ function ContactForm() {
                 type="password"
                 className="form-control"
                 id="email"
-                placeholder="Email address"
+                placeholder="Dirección de correo electrónico"
               />
             </div>
           </div>
@@ -57,6 +58,7 @@ function ContactForm() {
       </div>
         </div>
       </div>
+    </div>
     </div>
     </div>
   )

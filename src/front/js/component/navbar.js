@@ -50,17 +50,13 @@ export const Navbar = () => {
                             <i className="pe-2 fa-solid fa-store"></i>Galería
                         </Link>
                     </li>
-                    <li className="nav-item dropdown">
-                        <a className="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rankings
-                        </a>
-                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><Link to="ranking-photo" className="dropdown-item" >Ranking de fotografias</Link></li>
-                            <li><Link to="ranking-user" className="dropdown-item">Ranking de usuarios</Link></li>
-                        </ul>
+                    <li className="nav-item">
+                        <Link to="/ranking-photo" className="nav-link active color-text-nav">
+                            <i className="pe-2 fa-solid fa-store"></i>Ranking
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link color-text-nav">
+                        <Link to="/events" className="nav-link color-text-nav">
                             <i className="pe-2 fa-brands fa-space-awesome"></i>Eventos
                         </Link>
                     </li>
@@ -72,7 +68,7 @@ export const Navbar = () => {
                             data-bs-target="#staticBackdrop"
                             onClick={navigateToLogin}
                         >
-                            <i className=" pe-2 fa-regular fa-user"></i>Login
+                            <i className=" pe-2 fa-regular fa-user"></i>Iniciar sesión
                         </button>
                     </li>
                 </ul>
