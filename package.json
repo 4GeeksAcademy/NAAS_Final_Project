@@ -84,6 +84,7 @@
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.21.3",
 		"react-scrollbars-custom": "^4.1.1",
-		"react-toastify": "^10.0.4"
+		"react-toastify": "^10.0.4",
+		"sweetalert2": "^11.10.5"
 	}
 }

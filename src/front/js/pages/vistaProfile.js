@@ -48,7 +48,16 @@ export const VistaProfile = () => {
       <div className="mobile-column d-flex align-items-center justify-content-between">
       <div className="mobile-column d-flex align-items-center">
         <img className="avatar no-mar" src={testData3[1].fotoUrl} alt="Avatar" />
+        <div className="">
         <h2 className="color-text">Animakid</h2>
+        <Link to="/photo-uploader">
+                    <button
+                        type="button"
+                        className="btn brd color-call color-text">
+                        <i className="pe-2 fa-solid fa-rocket"></i>Subir foto
+                    </button>
+                    </Link>
+        </div>
         <button onClick={() => actions.toggleStatus()}className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
           <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Status
         </button>

@@ -34,8 +34,8 @@ export const Galeria = () => {
   };
 
   return (
-    <div className="container-fluid color-back mobile-column vista">
-      <div className="container-fluid color-back d-flex-column p-5 color-text">
+    <div className="e-claro container-fluid color-back mobile-column vista">
+      <div className="e-claro container-fluid color-back d-flex-column p-5 color-text">
         <h1 className="text-center pt-2 mt-5">Navegar En La Galeria</h1>
         <h3 className="text-center pt-2">Explore más de 50.000 Fotografías en nuestra galeria libre</h3>
         <form className="mobile-column container-fluid pt-2 pb-5 d-flex w-75 text-center justtify-align-center">
@@ -43,8 +43,8 @@ export const Galeria = () => {
           <button className="btn btn-outline-success ms-3" type="submit">Buscar</button>
         </form>
       </div>
-      <div className="mobile-column container color-back2 p-2">
-        <div className="row justify-content-center">
+      <div className="e-claro mobile-column container color-back2 p-2">
+        <div className="e-claro row justify-content-center">
           {currentPhotos.map((data, index) => (
             <div key={index} className={`col-md-${12 / cardsPerRow} mb-4`}>
               <PhotoCard {...data} style={{ maxWidth: "100%" }} />

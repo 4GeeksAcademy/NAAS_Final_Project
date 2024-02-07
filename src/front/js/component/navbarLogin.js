@@ -4,15 +4,28 @@ import "../../styles/background.css";
 import rigoImageUrl from "../../img/logo1.jpeg";
 import { Context } from "../store/appContext";
 
+
 export const NavbarLogin = () => {
   const { store, actions } = useContext(Context);
-
+  const Swal = require('sweetalert2')
   const handleLogout = () => {
     actions.logout();
     // Redirige al usuario al home después de cerrar sesión
     // Puedes ajustar la ruta según tus necesidades
     window.location.href = "/";
   };
+
+  function handleClick(event) {
+    // Prevenir la navegación predeterminada
+    event.preventDefault();
+  
+    // Mostrar la alerta de SweetAlert
+    Swal.fire({
+      title: '¡Próximamente disponible!',
+      icon: 'info',
+      confirmButtonText: 'Entendido'
+    });
+  }
 
   return (
     <nav className="navbar navbar-dark bg-dark px-5">
@@ -66,13 +79,13 @@ export const NavbarLogin = () => {
                 <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Cambiar Estado
               </button>
             </li>
-            <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("PersonalDataForm")} className="nav-link">
+            <li className="nav-item ">
+              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("PersonalDataForm")} className="nav-link color-text-nav">
                 <i className="pe-2 fa-solid fa-user-pen color-text"></i>Mis Datos
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Photos")} className="nav-link">
+              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Photos")} className="nav-link color-text-nav">
                 <i className="pe-2 color-text fa-solid fa-photo-film"></i>Mis Colecciones
               </Link>
             </li>
@@ -82,22 +95,23 @@ export const NavbarLogin = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Logros")} className="nav-link">
+              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Logros")} className="nav-link color-text-nav">
                 <i className="pe-2 color-text fa-solid fa-medal"></i>Mis Logros
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Favoritos")} className="nav-link">
+              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Favoritos")} className="nav-link color-text-nav">
                 <i className="pe-2 color-text fa-regular fa-star"></i>Mis Favoritos
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Status")} className="nav-link">
-                <i className="pe-2 color-text fa-solid fa-heart-circle-plus"></i>Mis Seguidores
-              </Link>
-            </li>
+      {/* Utiliza una función para manejar el evento onClick */}
+      <Link to="/vistaProfile" onClick={handleClick} className="nav-link color-text-nav">
+        <i className="pe-2 color-text fa-solid fa-heart-circle-plus"></i>Mis Seguidores
+      </Link>
+    </li>
             <li className="nav-item">
-              <Link to="/vistaProfile" onClick={() => actions.setVistaElement("Status")} className="nav-link">
+            <Link to="/vistaProfile" onClick={handleClick} className="nav-link color-text-nav">
                 <i className="pe-2 color-text fa-solid fa-user-plus"></i>A Quién Sigo
               </Link>
             </li>
@@ -130,10 +144,10 @@ export const NavbarLogin = () => {
                   <i className="avatar-login fa-solid fa-person-walking-arrow-right"></i>
                 </button>
               </Link>
+            </form>
             <form className="mt-2 d-flex color-text drop-nav" role="search">
               <h6>Dar de baja mi cuenta</h6>
               <button className="btn btn-outline-danger" type="submit"><i className="avatar-login fa-solid fa-user-large-slash"></i></button>
-            </form>
             </form>
           </div>
         </div>

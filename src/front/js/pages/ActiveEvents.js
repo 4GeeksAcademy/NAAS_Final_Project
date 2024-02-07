@@ -27,22 +27,22 @@ export const ActiveEvents = () => {
     };
 
     return (
-        <div className="container">
-            <div className="main-container" style={{ marginTop: "80px" }}>
+        <div className="e-claro container">
+            <div className="e-claro main-container" style={{ marginTop: "80px" }}>
                 {store.events.map(event => (
-                    <div key={event.id} className="event-container" style={{ background: "#2B2B2B", marginTop: "80px" }}>
+                    <div key={event.id} className="e-claro event-container" style={{ background: "#2B2B2B", marginTop: "80px" }}>
                         <div className="description">
                             <h2 style={{ fontSize: "40px", color: "#FE5201" }}>{event.name}</h2>
-                            <div className="info">
-                                <div className="mini-container">
+                            <div className="e-claro info">
+                                <div className="e-claro mini-container">
                                     <p className="mt-2">{event.photo_category}</p>
                                 </div>
-                                <div className="mini-container">
+                                <div className="e-claro mini-container">
                                     <p className="mt-2">Fecha: {event.start_date}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="d-flex flex-column" style={{ marginTop: "30px" }}>
+                        <div className="e-claro d-flex flex-column" style={{ marginTop: "30px" }}>
                             <Timer event_id={event.id} />
                             <button
                                 className="btn color-call button-event"

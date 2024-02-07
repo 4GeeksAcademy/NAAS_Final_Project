@@ -3,10 +3,10 @@ import { testData3 } from "./testData";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
-export const PhotoCard = (props) => {
+export const PhotoDetails = (props) => {
   const { store, actions } = useContext(Context);
-  const [favoriteCount, setFavoriteCount] = useState("");
-  const [likeCount, setLikeCount] = useState(props.likes);
+  const [favoriteCount, setFavoriteCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
   const handleFavoriteClick = () => {
@@ -96,4 +96,10 @@ PhotoCard.propTypes = {
   likes: PropTypes.number.isRequired,
   favorites: PropTypes.number.isRequired,
   photoUrl: PropTypes.string.isRequired, // Asegúrate de incluir photoUrl en las PropTypes
+};
+
+
+PhotoCard.defaultProps = {
+  likes: 0,
+  favorites: 0,
 };

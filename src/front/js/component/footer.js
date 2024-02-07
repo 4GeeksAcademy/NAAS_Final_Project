@@ -4,7 +4,7 @@ import rigoImageUrl from "../../img/logo1.jpeg";
 import { Link } from 'react-router-dom';
 
 export const Footer = () => (
-	<footer className="footer mobile-column mt-auto py-3 text-center color-back2 text-white text">
+	<footer className="footer mobile-column mt-auto py-3 text-center color-back text-white text">
 		<div className="mobile-column container text-center">
 			<div className="row mobile-column">
 				<div className="mobile-column text-center col-3">

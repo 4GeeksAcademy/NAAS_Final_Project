@@ -9,8 +9,8 @@ function RankingItem() {
 
     const rankings = isUserRanking ? store.userRankings : store.photoRankings;
   return (
-    <div>
-         <div className="mobile-column user-info">
+    <div className='e-claro'>
+         <div className="e-claro mobile-column user-info">
                <p>Nombre del usuario</p>
                 <div className="user-stats">
                     <p>Likes</p>
@@ -19,15 +19,15 @@ function RankingItem() {
                 </div>
             </div>
             {rankings.map((userData, index) => (
-                <div className='mobile-column ranking-container' key={index}>
-                    <div className="ranking-info">
-                        <div className="ranking-circle">
+                <div className='e-claro mobile-column ranking-container' key={index}>
+                    <div className="e-claro ranking-info">
+                        <div className="e-claro ranking-circle">
                             <p>{userData.rank}</p>
                         </div>
                         <img src={userData.imageUrl} alt='user' className='rounded-circle' />
                         <h5>{userData.username}</h5>
                     </div>
-                    <div className="ranking-numbers">
+                    <div className="e-claro ranking-numbers">
                         {userData.numbers.map((number, numberIndex) => (
                             <p key={numberIndex}>{number}</p>
                         ))}
