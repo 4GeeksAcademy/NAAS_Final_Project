@@ -224,115 +224,115 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ leavingEvent: false });
 				}
 			},
-			getUserJoinedEvent: async()=>{
+			getUserJoinedEvent: async () => {
 				try {
 					const token = sessionStorage.getItem('token');
-				
+
 					if (!token) {
-					  console.error("Token no encontrado en sessionStorage");
-					  return;
+						console.error("Token no encontrado en sessionStorage");
+						return;
 					}
-				
+
 					const response = await fetch(`${process.env.BACKEND_URL}/api/events/user-joined`, {
-					  method: "GET",
-					  headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-					  },
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
 					});
-				
+
 					if (response.ok) {
-					  const data = await response.json();
-					  return data; // Devuelve la lista de eventos a los que el usuario está unido
+						const data = await response.json();
+						return data; // Devuelve la lista de eventos a los que el usuario está unido
 					} else {
-					  console.error("Error al obtener eventos del usuario:", response.status);
-					  return [];
+						console.error("Error al obtener eventos del usuario:", response.status);
+						return [];
 					}
-				  } catch (error) {
+				} catch (error) {
 					console.error("Error al obtener eventos del usuario:", error);
 					return [];
-				  }
-				},
+				}
+			},
 
-				toggleGlobalStyle: (className, targetSelector) => {
-					const isStyleActive = !getStore().isStyleActive;
-					const elements = document.querySelectorAll(targetSelector);
-				
-					if (isStyleActive) {
-						elements.forEach(element => {
-							element.classList.add(className);
-						});
-					} else {
-						elements.forEach(element => {
-							element.classList.remove(className);
-						});
-					}
-				
-					localStorage.setItem("isStyleActive", isStyleActive.toString());
-					setStore({ isStyleActive });
+			toggleGlobalStyle: (className, targetSelector) => {
+				const isStyleActive = !getStore().isStyleActive;
+				const elements = document.querySelectorAll(targetSelector);
+
+				if (isStyleActive) {
+					elements.forEach(element => {
+						element.classList.add(className);
+					});
+				} else {
+					elements.forEach(element => {
+						element.classList.remove(className);
+					});
 				}
 
-				getUserData: async () => {
-					try {
-						const token = sessionStorage.getItem('token');
-				
-						if (!token) {
-							console.error("Token no encontrado en sessionStorage");
-							return;
-						}
-				
-						const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
-							method: "GET",
-							headers: {
-								"Content-Type": "application/json",
-								"Authorization": `Bearer ${token}`
-							}
-						});
-				
-						if (!response.ok) {
-							throw new Error(`Status: ${response.status}`);
-						}
-				
-						const data = await response.json();
-						setStore({ userData: data });
-						console.log(data)
-					} catch (error) {
-						console.error("Error:", error);
+				localStorage.setItem("isStyleActive", isStyleActive.toString());
+				setStore({ isStyleActive });
+			},
+
+			getUserData: async () => {
+				try {
+					const token = sessionStorage.getItem('token');
+
+					if (!token) {
+						console.error("Token no encontrado en sessionStorage");
+						return;
 					}
-				},
-				updateUserData: async (UserData) => {
-					try {
-						const token = sessionStorage.getItem('token');
-						if (!token) {
-							console.error("Token no encontrado en sessionStorage");
-							return;
+
+					const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": `Bearer ${token}`
 						}
-	
-						const response = await fetch(`${process.env.BACKEND_URL}/api/update-user-data`, {
-							method: "PUT",
-							headers: {
-								"Content-Type": "application/json",
-								Authorization: `Bearer ${token}`,
-							},
-							body: JSON.stringify(UserData),
-						});
-	
-						if (!response.ok) {
-							throw new Error(`Status: ${response.status}`);
-						}
-	
-						const data = await response.json();
-						setStore({ userData: data });
-						console.log("Datos del usuarios actualizados con exito:", data);
-					} catch (error) {
-						console.error("error al actualizar los datos:", error);
-						throw error;
+					});
+
+					if (!response.ok) {
+						throw new Error(`Status: ${response.status}`);
 					}
-				},
+
+					const data = await response.json();
+					setStore({ userData: data });
+					console.log(data)
+				} catch (error) {
+					console.error("Error:", error);
+				}
+			},
+			updateUserData: async (UserData) => {
+				try {
+					const token = sessionStorage.getItem('token');
+					if (!token) {
+						console.error("Token no encontrado en sessionStorage");
+						return;
+					}
+
+					const response = await fetch(`${process.env.BACKEND_URL}/api/update-user-data`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
+						body: JSON.stringify(UserData),
+					});
+
+					if (!response.ok) {
+						throw new Error(`Status: ${response.status}`);
+					}
+
+					const data = await response.json();
+					setStore({ userData: data });
+					console.log("Datos del usuarios actualizados con exito:", data);
+				} catch (error) {
+					console.error("error al actualizar los datos:", error);
+					throw error;
+				}
+			},
 
 
-			}
 		}
 	}
+}
 
 export default getState;
