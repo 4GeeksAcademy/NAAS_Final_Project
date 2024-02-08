@@ -11,8 +11,10 @@ const ImageUpload = () => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
+  const token = sessionStorage.getItem('token');
+  
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
+    
     if (!token) {
       console.error('User not authenticated');
       toast.error('User not authenticated');
@@ -118,7 +120,7 @@ const ImageUpload = () => {
       const uploadResponse = await fetch(`${process.env.BACKEND_URL}/api/upload-photos`, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${sessionStorage.getItem('token')}`
         },
         body: uploadFormData,
       });
