@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
 const ImageUpload = () => {
@@ -11,56 +11,64 @@ const ImageUpload = () => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
-  const token = sessionStorage.getItem('token');
-
-  if (!token) {
-    console.error('User not authenticated');
-    toast.error('User not authenticated');
-    navigate('/');
-  }
-
   useEffect(() => {
-
     const token = sessionStorage.getItem('token');
-
-    if (token) {
+    if (!token) {
+      console.error('User not authenticated');
+      toast.error('User not authenticated');
+      navigate('/');
+    } else {
       const decodedToken = jwtDecode(token);
       setUserId(decodedToken.sub);
     }
 
-    const fetchEventsAndCategories = async () => {
-      try {
-        const eventsResponse = await fetch(`${process.env.BACKEND_URL}/api/events`);
-        if (!eventsResponse.ok) {
-          console.error(`Events API request failed with status: ${eventsResponse.status}`);
-          return;
-        }
-        const eventsData = await eventsResponse.json();
-        console.log("Events Data:", eventsData);
-        setEvents(eventsData || []);
-        console.log("Events:", eventsData.events);
-
-        const categoriesResponse = await fetch(`${process.env.BACKEND_URL}/api/categories`);
-        if (!categoriesResponse.ok) {
-          throw new Error(`Categories API request failed with status: ${categoriesResponse.status}`);
-        }
-        const categoriesData = await categoriesResponse.json();
-        setCategories(categoriesData);
-
-        console.log("Fetching events and categories");
-      } catch (error) {
-        console.error("Error fetching events and categories:", error.message);
-      }
-    };
-
     fetchEventsAndCategories();
   }, []);
+
+  const fetchEventsAndCategories = async () => {
+    try {
+      const eventsResponse = await fetch(`${process.env.BACKEND_URL}/api/events`);
+      if (!eventsResponse.ok) {
+        console.error(`Events API request failed with status: ${eventsResponse.status}`);
+        return;
+      }
+      const eventsData = await eventsResponse.json();
+      console.log("Events Data:", eventsData);
+      setEvents(eventsData || []);
+      console.log("Events:", eventsData.events);
+
+      const categoriesResponse = await fetch(`${process.env.BACKEND_URL}/api/categories`);
+      if (!categoriesResponse.ok) {
+        throw new Error(`Categories API request failed with status: ${categoriesResponse.status}`);
+      }
+      const categoriesData = await categoriesResponse.json();
+      setCategories(categoriesData);
+
+      console.log("Fetching events and categories");
+
+    } catch (error) {
+      console.error("Error fetching events:", error.message);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const categoriesResponse = await fetch(`${process.env.BACKEND_URL}/api/categories`);
+      if (!categoriesResponse.ok) {
+        console.error(`Categories API request failed with status: ${categoriesResponse.status}`);
+        return;
+      }
+      const categoriesData = await categoriesResponse.json();
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error("Error fetching categories:", error.message);
+    }
+  };
 
   const handleFileChange = (event) => {
     const selectedFiles = event.target.files;
     setFiles(selectedFiles);
 
-    // Previsualización de imágenes
     const previews = [];
     for (let i = 0; i < selectedFiles.length; i++) {
       previews.push(URL.createObjectURL(selectedFiles[i]));
@@ -69,14 +77,12 @@ const ImageUpload = () => {
   };
 
   const handleUpload = async () => {
-    // Check if files are selected
     if (!files || files.length === 0) {
       console.error("No files selected");
       toast.error('No hay archivos seleccionados');
       return;
     }
 
-    // Validar extensiones permitidas (png, jpg, jpeg)
     const allowedExtensions = ['png', 'jpg', 'jpeg'];
     for (let i = 0; i < files.length; i++) {
       const fileExtension = files[i].name.split('.').pop().toLowerCase();
@@ -87,22 +93,18 @@ const ImageUpload = () => {
       }
     }
 
-    // Create a FormData object for uploading photos
     const uploadFormData = new FormData();
 
-    // Append the selected files with the name 'photos'
     for (let i = 0; i < files.length; i++) {
       uploadFormData.append("photos", files[i]);
     }
 
-    // Append other form fields
     uploadFormData.append("name", document.getElementById("name").value);
     uploadFormData.append("description", document.getElementById("description").value);
     uploadFormData.append("category_id", document.getElementById("category_id").value);
     uploadFormData.append("user_id", userId);
     uploadFormData.append("event_id", document.getElementById("event_id").value);
 
-    // Validar campos obligatorios
     const name = document.getElementById("name").value;
     const description = document.getElementById("description").value;
     const category_id = document.getElementById("category_id").value;
@@ -113,8 +115,6 @@ const ImageUpload = () => {
     }
 
     try {
-      // Fetch the backend API endpoint for uploading photos
-      console.log(uploadFormData);
       const uploadResponse = await fetch(`${process.env.BACKEND_URL}/api/upload-photos`, {
         method: "POST",
         body: uploadFormData,
@@ -126,6 +126,7 @@ const ImageUpload = () => {
       }
 
       const uploadData = await uploadResponse.json();
+
       console.log("Image upload success!", uploadData);
 
       // Extract the img_urls from the response
@@ -165,21 +166,17 @@ const ImageUpload = () => {
       const createData = await createResponse.json();
       console.log("Photos creation success!", createData);
 
-      // Muestra un mensaje de éxito
       toast.success('¡Fotos subidas exitosamente!');
 
-      // Limpia los campos
       document.getElementById("name").value = "";
       document.getElementById("description").value = "";
       document.getElementById("category_id").value = "";
       document.getElementById("event_id").value = "";
 
-
       setFiles(null);
       setPreviewImages([]);
     } catch (error) {
       console.error("Error:", error);
-      // Handle network or unexpected errors
     }
   };
 

@@ -5,6 +5,7 @@ import { PhotoCard } from "../component/PhotoCard";
 import { Logros } from "../component/logros";
 import { Eventos } from "../component/Eventos";
 import { Favoritos } from "../component/Favoritos";
+import { PhotosUser } from "../component/photosUser";
 import { testData1, testData3 } from "../component/testData";
 import PersonalDataForm from "../component/PersonalDataForm";
 
@@ -45,7 +46,7 @@ export const VistaProfile = () => {
   const renderComponent = () => {
     switch (store.vistaProfile) {
       case "Photos": // Cambiado de "Logros" a "logros"
-        return (testData1.map((data, index) => <PhotoCard key={index} {...data} />));
+        return <PhotosUser photosUser={store.photosUser} />;;
       case "Logros": // Cambiado de "Logros" a "logros"
         return <Logros />;
       case "Eventos": // Cambiado de "Eventos" a "eventos"
