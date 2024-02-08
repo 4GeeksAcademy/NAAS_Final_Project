@@ -270,7 +270,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 					localStorage.setItem("isStyleActive", isStyleActive.toString());
 					setStore({ isStyleActive });
-				}
+				},
 
 				getUserData: async () => {
 					try {
