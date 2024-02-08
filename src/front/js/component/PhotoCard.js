@@ -8,11 +8,15 @@ export const PhotoCard = (props) => {
   const { store, actions } = useContext(Context);
   const [favoriteCount, setFavoriteCount] = useState("");
   const [isLiked, setIsLiked] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(store.isUserLoggedIn); // Obtener el estado de autenticación del almacén
 
   useEffect(() => {
     setFavoriteCount(store.cardFavorites[props.index] || 0);
     setIsLiked(store.likes && store.likes.some((like) => like.index === props.index));
-  }, [store.cardFavorites, store.likes, props.index]);
+    
+    // Actualizar el estado de isLoggedIn cuando cambie en el almacén
+    setIsLoggedIn(store.isUserLoggedIn);
+  }, [store.cardFavorites, store.likes, props.index, store.isUserLoggedIn]);
 
   const handleFavoriteClick = () => {
     actions.addFavoritePhoto({
@@ -26,17 +30,17 @@ export const PhotoCard = (props) => {
   };
 
   const handleLikeClick = () => {
-    if (!isLiked) { // Asegurarse de que no se haya dado like antes
+    if (!isLiked) {
       actions.addLikePhoto({
         photo: props.photo,
         name: props.name,
         index: props.index,
-        likes: props.likes + 1, // Incrementa el número de likes en 1
+        likes: props.likes + 1,
         favorites: props.favorites,
         photoUrl: props.photoUrl,
       });
 
-      setIsLiked(true); // Cambia el estado para que el botón de like desaparezca
+      setIsLiked(true);
     }
   };
 
@@ -59,32 +63,33 @@ export const PhotoCard = (props) => {
             />
             <h5 className="card-title p-3 color-text ">{props.name}</h5>
           </div>
-          <div className="buttons d-flex justify-content-between mt-1">
-            {/* Botón de Like */}
-            {!isLiked && ( // Mostrar botón de Like solo si no está marcado como liked
+          
+          {/* Renderizar los botones solo si el usuario está logueado */}
+          {isLoggedIn && (
+            <div className="buttons d-flex justify-content-between mt-1">
+              {!isLiked && (
+                <button
+                  onClick={handleLikeClick}
+                  type="button"
+                  className="btn p-1 border-1 btn-outline-success"
+                >
+                  <i className="far fa-thumbs-up"></i> Votar
+                </button>
+              )}
               <button
-                onClick={handleLikeClick}
+                onClick={handleFavoriteClick}
                 type="button"
-                className="btn p-1 border-1 btn-outline-success"
+                className={`btn p-1 border-1 ${store.favorites.some((fav) => fav.index === props.index)
+                  ? "btn-danger"
+                  : "btn-outline-success"}`}
               >
-                <i className="far fa-thumbs-up"></i> Votar
+                <i className="far fa-heart"></i> Favorito
               </button>
-            )}
-            {/* Botón de Favorito */}
-            <button
-              onClick={handleFavoriteClick}
-              type="button"
-              className={`btn p-1 border-1 ${store.favorites.some((fav) => fav.index === props.index)
-                ? "btn-danger"
-                : "btn-outline-success"}`}
-            >
-              <i className="far fa-heart"></i> Favorito
-            </button>
-          </div>
+            </div>
+          )}
 
           <div className="d-flex justify-content-between mt-1 color-text">
-            {/* Contador de Likes */}
-            <p>Likes: {isLiked ? props.likes + 1 : props.likes}</p>
+            <p>Votos: {isLiked ? props.likes + 1 : props.likes}</p>
           </div>
         </div>
       </div>
@@ -97,5 +102,6 @@ PhotoCard.propTypes = {
   name: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
   favorites: PropTypes.number.isRequired,
-  photoUrl: PropTypes.string.isRequired, // Asegúrate de incluir photoUrl en las PropTypes
+  photoUrl: PropTypes.string.isRequired,
 };
+

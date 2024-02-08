@@ -68,7 +68,7 @@ export const Navbar = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/ranking-photo" className="nav-link active color-text-nav">
+                        <Link to="/top" className="nav-link active color-text-nav">
                             <i className="pe-2 fa-solid fa-store"></i>Ranking
                         </Link>
                     </li>
@@ -95,10 +95,6 @@ export const Navbar = () => {
             {store.isUserLoggedIn && <NavbarLogin onNavbarChange={() => actions.isUserLoggedIn(false)} />}
             {store.isAdminLoggedIn && <NavbarLoginAdmin onNavbarChange={() => actions.isAdminLoggedIn(false)} />}
 
-            <div>
-            {/* Botón para volver a la página anterior */}
-            <GoBackButton />
-            </div>
         </nav >
     );
 };

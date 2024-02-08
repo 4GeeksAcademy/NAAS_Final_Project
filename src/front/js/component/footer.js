@@ -29,7 +29,7 @@ export const Footer = () => (
 					<h4>Explorar</h4>
 					<nav className="nav flex-column text-center">
 					<Link to="/galeria" className="p-0 fs-5 text-white nav-link">Galeria</Link>
-						<Link to="/ranking-photo" className="p-0 fs-5 text-white nav-link">Ranking</Link>
+						<Link to="/top" className="p-0 fs-5 text-white nav-link">Ranking</Link>
 						<Link to="/signUp" className="p-0 fs-5 text-white nav-link">Registrarse</Link>
 					</nav>
 				</div>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Context } from "./store/appContext";
@@ -48,11 +48,11 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/home" />
                         <Route element={<Landing />} path="/" />
-                        <Route element={<Galeria />} path="/galeria" />
+                        <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<Login onLogin={actions.loginUser} />} path="/login"/>
+                        <Route element={<Galeria />} path="/galeria" />
                         <Route element={<ForgotPassword />} path="/forgot-password" />
                         <Route element={<PasswordUpdate />} path="/password-update" />
-                        <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
                         <Route element={<PhotoDetail />} path="/photo-detail/:index" />
