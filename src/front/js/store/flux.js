@@ -25,7 +25,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			joiningEvent: false,
 			leavingEvent: false,
 			userJoinedEvent: false,
-			userData: []
+			userData: [],
+			userPhotosData: [],
 
 		},
 		actions: {
@@ -224,95 +225,132 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ leavingEvent: false });
 				}
 			},
-			getUserJoinedEvent: async()=>{
+			getUserJoinedEvent: async () => {
 				try {
 					const token = sessionStorage.getItem('token');
-				
+
 					if (!token) {
-					  console.error("Token no encontrado en sessionStorage");
-					  return;
+						console.error("Token no encontrado en sessionStorage");
+						return;
 					}
-				
+
 					const response = await fetch(`${process.env.BACKEND_URL}/api/events/user-joined`, {
-					  method: "GET",
-					  headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-					  },
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
 					});
-				
+
 					if (response.ok) {
-					  const data = await response.json();
-					  return data; // Devuelve la lista de eventos a los que el usuario está unido
+						const data = await response.json();
+						return data; // Devuelve la lista de eventos a los que el usuario está unido
 					} else {
-					  console.error("Error al obtener eventos del usuario:", response.status);
-					  return [];
+						console.error("Error al obtener eventos del usuario:", response.status);
+						return [];
 					}
-				  } catch (error) {
+				} catch (error) {
 					console.error("Error al obtener eventos del usuario:", error);
 					return [];
-				  }
-				},
-				getUserData: async () => {
-					try {
-						const token = sessionStorage.getItem('token');
-				
-						if (!token) {
-							console.error("Token no encontrado en sessionStorage");
-							return;
-						}
-				
-						const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
-							method: "GET",
-							headers: {
-								"Content-Type": "application/json",
-								"Authorization": `Bearer ${token}`
-							}
-						});
-				
-						if (!response.ok) {
-							throw new Error(`Status: ${response.status}`);
-						}
-				
-						const data = await response.json();
-						setStore({ userData: data });
-						console.log(data)
-					} catch (error) {
-						console.error("Error:", error);
-					}
-				},
-				updateUserData: async (UserData) => {
-					try {
-						const token = sessionStorage.getItem('token');
-						if (!token) {
-							console.error("Token no encontrado en sessionStorage");
-							return;
-						}
-	
-						const response = await fetch(`${process.env.BACKEND_URL}/api/update-user-data`, {
-							method: "PUT",
-							headers: {
-								"Content-Type": "application/json",
-								Authorization: `Bearer ${token}`,
-							},
-							body: JSON.stringify(UserData),
-						});
-	
-						if (!response.ok) {
-							throw new Error(`Status: ${response.status}`);
-						}
-	
-						const data = await response.json();
-						setStore({ userData: data });
-						console.log("Datos del usuarios actualizados con exito:", data);
-					} catch (error) {
-						console.error("error al actualizar los datos:", error);
-						throw error;
-					}
-				},
+				}
+			},
+			getUserData: async () => {
+				try {
+					const token = sessionStorage.getItem('token');
 
-			}
+					if (!token) {
+						console.error("Token no encontrado en sessionStorage");
+						return;
+					}
+
+					const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": `Bearer ${token}`
+						}
+					});
+
+					if (!response.ok) {
+						throw new Error(`Status: ${response.status}`);
+					}
+
+					const data = await response.json();
+					setStore({ userData: data });
+				} catch (error) {
+					console.error("Error:", error);
+				}
+			},
+			updateUserData: async (UserData) => {
+				try {
+					const token = sessionStorage.getItem('token');
+					if (!token) {
+						console.error("Token no encontrado en sessionStorage");
+						return;
+					}
+
+					const response = await fetch(`${process.env.BACKEND_URL}/api/update-user-data`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
+						body: JSON.stringify(UserData),
+					});
+
+					if (!response.ok) {
+						throw new Error(`Status: ${response.status}`);
+					}
+
+					const data = await response.json();
+					setStore({ userData: data });
+					console.log("Datos del usuarios actualizados con exito:", data);
+				} catch (error) {
+					console.error("error al actualizar los datos:", error);
+					throw error;
+				}
+			},
+			
+			getUserPhotosData: async (user_id) => {
+				try {
+				  const token = sessionStorage.getItem('token');
+			  
+				  if (!token) {
+					console.error("Token not found");
+					return;
+				  }
+	
+				  if (!user_id) {
+					console.error("User ID not found");
+					return;
+				  }
+			  
+				  const response = await fetch(`${process.env.BACKEND_URL}/api/get-user-photos/${user_id}`, {
+					method: "GET",
+					headers: {
+					  "Content-Type": "application/json",
+					  "Authorization": `Bearer ${token}`
+					}
+				  });
+			  
+				  if (!response.ok) {
+					throw new Error(`Status: ${response.status}`);
+				  }
+			  
+				  const data = await response.json();
+			  
+				  // Verificar si se recibieron fotos
+				  if (data && data.photos && data.photos.length > 0) {
+					setStore({ userPhotosData: data.photos });
+				  } else {
+					console.log("No se encontraron fotos para el usuario");
+				  }
+				} catch (error) {
+				  console.error("Error fetching user photos:", error);
+				}
+			  },			  
 		}
 	}
+}
 
 export default getState;

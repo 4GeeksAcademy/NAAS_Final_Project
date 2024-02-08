@@ -116,6 +116,9 @@ const ImageUpload = () => {
       console.log(uploadFormData);
       const uploadResponse = await fetch(`${process.env.BACKEND_URL}/api/upload-photos`, {
         method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
         body: uploadFormData,
       });
     
@@ -145,6 +148,7 @@ const ImageUpload = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
           name: document.getElementById("name").value,

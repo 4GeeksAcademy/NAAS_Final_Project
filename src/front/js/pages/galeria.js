@@ -47,7 +47,7 @@ export const Galeria = () => {
         <div className="row justify-content-center">
           {currentPhotos.map((data, index) => (
             <div key={index} className={`col-md-${12 / cardsPerRow} mb-4`}>
-              <PhotoCard {...data} style={{ maxWidth: "100%" }} />
+              {/* <PhotoCard {...data} style={{ maxWidth: "100%" }} /> */}
             </div>
           ))}
         </div>
