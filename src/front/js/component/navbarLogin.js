@@ -35,7 +35,8 @@ export const NavbarLogin = () => {
   }
 
   const confirmDeactivateAccount = () => {
-    fetch('https://musical-giggle-6qrggjvx7742xr44-3001.app.github.dev/api/deactivate_account', {
+  
+    fetch(`${process.env.BACKEND_URL}/api/deactivate_account`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
