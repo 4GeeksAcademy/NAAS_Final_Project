@@ -53,7 +53,7 @@ const EventsDetails = () => {
     return (
 
         <div className="e-claro main-container" style={{ marginTop: "80px" }}>
-            <div className="e-claro" id="eventContainer"
+            <div className="e-claro" id="eventContainer">
                 <div className="description">
                     <h2 style={{ fontSize: "40px", color: "#FE5201" }}>{currentEvent.name}</h2>
                     <div className="e-claro info">

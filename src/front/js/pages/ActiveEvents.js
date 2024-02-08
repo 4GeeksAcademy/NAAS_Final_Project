@@ -52,7 +52,7 @@ export const ActiveEvents = () => {
                     <div key={event.id} className="e-claro event-container" style={{ background: "#2B2B2B", marginTop: "80px" }}>
                         <div className="description">
                             <h2 style={{ fontSize: "40px", color: "#FE5201" }}>{event.name}</h2>
-                            <div className="e-claro info info">
+                            <div className="e-claro info">
                                 <div className="e-claro mini-container">
                                     <p className="mt-2">Categoria: {event.photo_category}</p>
                                 </div>
