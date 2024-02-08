@@ -1,0 +1,46 @@
+.about-us-container {
+    background-color: #3B3B3B;
+    color: #FFF;
+}
+
+.about-us-image {
+    border: 5px solid #ffff;
+}
+
+.about-us-card {
+    background-color: #2B2B2B;
+    transition: transform 0.5s ease;
+}
+
+.about-us-card p {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.about-us-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.about-us-btn {
+    background-color: #64C247;
+}
+
+.about-us-btn:hover {
+    transform: translateY(-3px);
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-us-title {
+    color: #FE5201;
+}

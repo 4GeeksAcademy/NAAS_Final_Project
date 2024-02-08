@@ -35,7 +35,7 @@ export const NavbarLogin = () => {
   }
 
   const confirmDeactivateAccount = () => {
-  
+
     fetch(`${process.env.BACKEND_URL}/api/deactivate_account`, {
       method: "POST",
       headers: {
