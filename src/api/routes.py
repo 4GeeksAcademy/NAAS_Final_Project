@@ -573,3 +573,18 @@ def update_user_data():
     
     except Exception as e: 
         return jsonify({'error': str(e)}),500
+
+@api.route('/deactivate_account', methods=['POST'])
+@jwt_required()
+def deactivate_account():
+    current_user_id = get_jwt_identity()
+
+    user = Users.query.get(current_user_id)
+
+    if user is None:
+        return jsonify({'msg': 'User not found'}), 404
+
+    user.is_active = False
+    db.session.commit()
+
+    return jsonify({'msg': 'Account deactivated successfully!'}), 200
