@@ -128,7 +128,12 @@ export const NavbarLoginAdmin = () => {
                                 Eventos
                             </a>
                             <ul className="dropdown-menu dropdown-menu-dark">
-                                <li><a className="dropdown-item" href="#"><i className="pe-2 color-text fa-regular fa-calendar-plus"></i>Crear Eventos</a></li>
+                                <li>
+                                    <Link to="/create-event" className="dropdown-item">
+                                        <i className="pe-2 color-text fa-regular fa-calendar-plus"></i>
+                                        Crear Eventos
+                                    </Link>
+                                </li>
                                 <li><a className="dropdown-item" href="#"><i className="pe-2 color-text fa-solid fa-pen-to-square"></i>Modificar Eventos</a></li>
                             </ul>
                         </li>

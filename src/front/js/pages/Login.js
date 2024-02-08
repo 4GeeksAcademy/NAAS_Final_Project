@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(process.env.BACKEND_URL + '/api/login', {
+      const response = await fetch(process.env.BACKEND_URL + '/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,12 +46,20 @@ const Login = ({ onLogin }) => {
         // Almacena el token en el sessionStorage
         sessionStorage.setItem('token', token);
 
+        // Calcular la expiración del token en minutos
+        const expirationTime = decodedToken.exp;
+        const currentTime = Math.floor(Date.now() / 1000); // tiempo actual en segundos
+        const expirationMinutes = Math.ceil((expirationTime - currentTime) / 60); // calcular minutos hasta la expiración
+
         // Llama a la función proporcionada para actualizar el navbar
         onLogin(userRole);
-
+        
+        console.log('Login successful!', responseJson);
+        console.log('Token expiration in minutes:', expirationMinutes);
+        
         navigate("/vistaProfile")
-
         console.log('Inicio de sesión exitoso!', responseJson);
+        
       } else {
         toast.error(`${responseJson.msg}`);
         console.error('Error en el login:', responseJson.msg);
