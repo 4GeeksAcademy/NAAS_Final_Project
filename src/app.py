@@ -3,18 +3,26 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 import smtplib
+import datetime
+
 from flask import Flask, request, jsonify, url_for, send_from_directory, make_response
 from flask_migrate import Migrate
 from flask_swagger import swagger
+
 from api.utils import APIException, generate_sitemap
 from api.models import *
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+
 from flask_cors import CORS
+
 from cloudinary.uploader import upload
 from cloudinary import config as cloudinary_config
-from flask_jwt_extended import JWTManager
+
+from datetime import timedelta
+
+from flask_jwt_extended import JWTManager, create_access_token
 from flask_bcrypt import Bcrypt
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -33,6 +41,8 @@ app.url_map.strict_slashes = False
 
 # Initialize the JWTManager with your app
 jwt = JWTManager(app)
+# Create a Bcrypt object
+bcrypt = Bcrypt()
 
 #CORS
 CORS(app)
@@ -79,40 +89,68 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0  # avoid cache memory
     return response
 
+ACCESS_TOKEN_EXPIRATION = timedelta(hours=1);
+
+@app.route('/login', methods=['POST'])
+def login():
+    body = request.get_json(silent=True)
+
+    if body is None:
+        return jsonify({'msg': 'You must send data in your body'}), 400
+    
+    if 'email' not in body or 'password' not in body:
+        return jsonify({'msg': 'Missing email or password fields'}), 400
+    
+    if '@' not in body['email']:
+        return jsonify({'msg': 'Invalid email format'}), 400
+
+    user = Users.query.filter_by(email=body['email']).first()
+
+    if user is None:
+        return jsonify({'msg': 'Invalid email or password'}), 400
+    
+    check_password = bcrypt.check_password_hash(user.password, body['password'])
+    if not check_password:
+        return jsonify({'msg': 'Invalid email or password'}), 400
+    
+    # Generar el token con la expiración configurada
+    access_token = create_access_token(identity=user.id, additional_claims={'role': user.role}, expires_delta=ACCESS_TOKEN_EXPIRATION)
+    
+    return jsonify({'msg': 'Login successful!', 'token': access_token}), 200
 
 
-@app.route('/events', methods=['GET'])
-def get_all_events():
-    try:
-        events = Events.query.all()
-        if not events: 
-            return jsonify({'msg': 'No hay eventos disponibles'})
+# @app.route('/events', methods=['GET'])
+# def get_all_events():
+#     try:
+#         events = Events.query.all()
+#         if not events: 
+#             return jsonify({'msg': 'No hay eventos disponibles'})
         
-        serialized_events = [event.serialize() for event in events]
-        response = jsonify(serialized_events)
-        response.headers['Content-Type'] = 'application/json'
+#         serialized_events = [event.serialize() for event in events]
+#         response = jsonify(serialized_events)
+#         response.headers['Content-Type'] = 'application/json'
 
-        return response, 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+#         return response, 200
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 
 
-@app.route('/events/<int:event_id>', methods=['GET'])
-def get_event(event_id):
-    try:
-        event = Events.query.get(event_id)
-        if not event:
-            return jsonify({'msg': 'Evento no encontrado'}), 404
+# @app.route('/events/<int:event_id>', methods=['GET'])
+# def get_event(event_id):
+#     try:
+#         event = Events.query.get(event_id)
+#         if not event:
+#             return jsonify({'msg': 'Evento no encontrado'}), 404
 
-        serialized_event = event.serialize()
+#         serialized_event = event.serialize()
 
-        response = make_response(jsonify(serialized_event))
-        response.headers['Content-Type'] = 'application/json'
+#         response = make_response(jsonify(serialized_event))
+#         response.headers['Content-Type'] = 'application/json'
 
-        return response, 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+#         return response, 200
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 
 if __name__ == '__main__':
