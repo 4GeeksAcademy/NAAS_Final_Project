@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import { toast } from 'react-toastify';
-import { Link } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 const CreateEvent = () => {
     const [formData, setFormData] = useState({
@@ -11,9 +11,29 @@ const CreateEvent = () => {
         start_date: '',
         end_date: ''
     });
+
     const [categories, setCategories] = useState([]);
+    const [userId, setUserId] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
+
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            console.error('Token not found in sessionStorage');
+            console.error('User not authenticated');
+            toast.error('User not authenticated');
+            navigate('/');
+        } else {
+            const decodedToken = jwtDecode(token);
+            setUserId(decodedToken.sub);
+            if (decodedToken.role !== 'admin') {
+                console.error('User does not have admin privileges');
+                toast.error('No tienes permisos');
+                navigate('/');
+            }
+        }
+
         const fetchCategories = async () => {
             try {
                 const response = await fetch(`${process.env.BACKEND_URL}/api/categories`);
