@@ -71,7 +71,7 @@ const ImageUpload = () => {
     // Check if files are selected
     if (!files || files.length === 0) {
       console.error("No files selected");
-      toast.error('No files selected');
+      toast.error('No hay archivos seleccionados');
       return;
     }
 
@@ -81,7 +81,7 @@ const ImageUpload = () => {
       const fileExtension = files[i].name.split('.').pop().toLowerCase();
       if (!allowedExtensions.includes(fileExtension)) {
         console.error(`Invalid file format: ${fileExtension}`);
-        toast.error(`Invalid file format: ${fileExtension}`);
+        toast.error(`Formato de archivo inválido: ${fileExtension}`);
         return;
       }
     }
@@ -107,7 +107,7 @@ const ImageUpload = () => {
     const category_id = document.getElementById("category_id").value;
 
     if (!name || !description || !category_id) {
-      toast.error('Required fields are missing');
+      toast.error('Faltan campos obligatorios');
       return;
     }
 
@@ -164,6 +164,16 @@ const ImageUpload = () => {
       const createData = await createResponse.json();
       console.log("Photos creation success!", createData);
 
+      // Muestra un mensaje de éxito
+      toast.success('¡Fotos subidas exitosamente!');
+
+      // Limpia los campos
+      document.getElementById("name").value = "";
+      document.getElementById("description").value = "";
+      document.getElementById("category_id").value = "";
+      document.getElementById("event_id").value = "";
+      
+
       setFiles(null);
       setPreviewImages([]);
     } catch (error) {
@@ -173,11 +183,11 @@ const ImageUpload = () => {
   };
 
   return (
-    <div className="container">
-      <div className="jumbotron" style={{ marginTop: "100px" }}>
-        <h2 className="mb-4">Upload and Create Photos</h2>
+    <div className="container d-flex justify-content-center mobile-column vista text-color text-center welcome-view">
+      <div className="jumbotron color-text login-form mobile-column">
+        <h2 className="mb-4 color-text">Subir y crear fotos</h2>
         <div className="form-group">
-          <label htmlFor="photoInput">Select Photos:</label>
+          <label htmlFor="photoInput">Seleccionar fotos:</label>
           <input type="file" className="form-control-file" id="photoInput" onChange={handleFileChange} multiple />
         </div>
         <div className="preview-section">
@@ -186,17 +196,17 @@ const ImageUpload = () => {
           ))}
         </div>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input type="text" className="form-control" id="name" placeholder="Enter name" />
+          <label htmlFor="name">Nombre:</label>
+          <input type="text" className="form-control" id="name" placeholder="Ingrese el nombre de la foto" />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <input type="text" className="form-control" id="description" placeholder="Enter description" />
+          <label htmlFor="description">Descripción:</label>
+          <input type="text" className="form-control" id="description" placeholder="Introduce la descripción" />
         </div>
         <div className="form-group">
-          <label htmlFor="categorySelect">Category:</label>
+          <label htmlFor="categorySelect">Categoría:</label>
           <select className="form-control" id="category_id">
-            <option value="">Select a category</option>
+            <option value="">Seleccione una categoría</option>
             {Array.isArray(categories) && categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -205,9 +215,9 @@ const ImageUpload = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="eventSelect">Event:</label>
+          <label htmlFor="eventSelect">Evento:</label>
           <select className="form-control" id="event_id">
-            <option value="">Select an event</option>
+            <option value="">Seleccione un evento</option>
             {Array.isArray(events) && events.map((event) => (
               <option key={event.id} value={event.id}>
                 {event.name}
@@ -215,8 +225,8 @@ const ImageUpload = () => {
             ))}
           </select>
         </div>
-        <button className="btn btn-primary" onClick={handleUpload}>
-          Upload and Create Photos
+        <button className="btn brd color-call color-text" onClick={handleUpload}>
+        Subir fotos
         </button>
       </div>
     </div>

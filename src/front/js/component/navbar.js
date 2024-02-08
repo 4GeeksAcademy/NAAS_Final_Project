@@ -31,6 +31,16 @@ export const Navbar = () => {
         navigate("/login")
     }
 
+    const handleToggleStyle = () => {
+        actions.toggleGlobalStyle('claro', '.e-claro');
+    };
+    const handleToggleStyle1 = () => {
+        actions.toggleGlobalStyle('claro1', '.e-claro');
+    };
+    const handleToggleStyle2 = () => {
+        actions.toggleGlobalStyle('claro2', '.e-claro');
+    };
+
     return (
         <nav className="navbar color-back color-text px-5">
             <div className="container-fluid">
@@ -44,23 +54,25 @@ export const Navbar = () => {
                         <Link to="/" className="color-text-nav text-decoration-none ">SNAPIFY</Link>
                     </h4>
                 </div>
+                {/* Resto del contenido del Layout */}
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" class="btn btn-outline-dark" onClick={handleToggleStyle}>Claro</button>
+                    <button type="button" class="btn btn-outline-dark" onClick={handleToggleStyle1}>Daltónico</button>
+                    <button type="button" class="btn btn-outline-dark" onClick={handleToggleStyle2}>Flash</button>
+                </div>
                 <ul className="nav justify-content-center">
                     <li className="nav-item">
                         <Link to="/galeria" className="nav-link active color-text-nav">
                             <i className="pe-2 fa-solid fa-store"></i>Galería
                         </Link>
                     </li>
-                    <li className="nav-item dropdown">
-                        <a className="color-text-nav nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rankings
-                        </a>
-                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><Link to="ranking-photo" className="dropdown-item" >Ranking de fotografias</Link></li>
-                            <li><Link to="ranking-user" className="dropdown-item">Ranking de usuarios</Link></li>
-                        </ul>
+                    <li className="nav-item">
+                        <Link to="/ranking-photo" className="nav-link active color-text-nav">
+                            <i className="pe-2 fa-solid fa-store"></i>Ranking
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link color-text-nav">
+                        <Link to="/events" className="nav-link color-text-nav">
                             <i className="pe-2 fa-brands fa-space-awesome"></i>Eventos
                         </Link>
                     </li>
@@ -72,7 +84,7 @@ export const Navbar = () => {
                             data-bs-target="#staticBackdrop"
                             onClick={navigateToLogin}
                         >
-                            <i className=" pe-2 fa-regular fa-user"></i>Login
+                            <i className=" pe-2 fa-regular fa-user"></i>Iniciar sesión
                         </button>
                     </li>
                 </ul>

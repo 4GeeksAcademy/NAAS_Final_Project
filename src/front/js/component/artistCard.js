@@ -7,14 +7,14 @@ export const ArtistCard = (props) => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="mx-2 bg-gra">
-			<div className="card color-back" style={{ width: "240px"}}>
-				<div className="card-body color-back2 p-3 m-2" style={{borderRadius: "50px" }}>
-					<div className="d-flex-column text-center align-items-center">
+		<div className="e-claro mx-2 bg-gra">
+			<div className="e-claro card color-back" style={{ width: "240px"}}>
+				<div className="e-claro card-body color-back2 p-3 m-2" style={{borderRadius: "50px" }}>
+					<div className="e-claro d-flex-column text-center align-items-center">
 						<img style={{ width: "90%" }} className=" rounded-circle" src={props.avatarUrl} alt="Avatar" />
-						<h4 className="card-title color-text ">{props.name}</h4>
+						<h4 className="e-claro card-title color-text ">{props.name}</h4>
 					</div>
-                    <div className="d-flex-column text-center justify-content-between color-text">
+                    <div className="e-claro d-flex-column text-center justify-content-between color-text">
 					{/* Ranking */}
 					<p>Ranking: {props.ranking}</p>
 					{/* Contador de fotos */}

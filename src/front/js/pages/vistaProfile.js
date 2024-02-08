@@ -10,6 +10,14 @@ import PersonalDataForm from "../component/PersonalDataForm";
 
 export const VistaProfile = () => {
   const { store, actions } = useContext(Context);
+  const [UserData, setUserData] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    phone: "",
+    country: "",
+    email: ""
+  });
 
   // useEffect para establecer la vista por defecto al montar el componente
   useEffect(() => {
@@ -18,6 +26,20 @@ export const VistaProfile = () => {
       actions.setVistaElement("Photos");
     }
   }, [store.vistaProfile]); // Ejecutar el efecto cuando store.vistaProfile cambie
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await actions.getUserData();
+        setUserData(store.userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, [store.dataUser]);
+
 
 
   const renderComponent = () => {
@@ -40,15 +62,26 @@ export const VistaProfile = () => {
     }
   };
 
+
   return (
-    <div className="container-fluid color-back">
+    <div className="container-fluid color-back mobile-column vista">
       <div>
         <img className="banner" src={testData3[2].fotoUrl} alt="Banner" />
       </div>
       <div className="mobile-column d-flex align-items-center justify-content-between">
       <div className="mobile-column d-flex align-items-center">
         <img className="avatar no-mar" src={testData3[1].fotoUrl} alt="Avatar" />
-        <h2 className="color-text">Animakid</h2>
+        <div className="">
+       <h2 className="color-text">{UserData.firstname }</h2>
+        <Link to="/photo-uploader">
+                    <button
+                        type="button"
+                        className="btn brd color-call color-text">
+                        <i className="pe-2 fa-solid fa-rocket"></i>Subir foto
+                    </button>
+                    </Link>
+        </div>
+      
         <button onClick={() => actions.toggleStatus()}className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
           <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Status
         </button>

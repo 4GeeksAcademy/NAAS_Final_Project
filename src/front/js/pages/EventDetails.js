@@ -51,23 +51,25 @@ const EventsDetails = () => {
     }
 
     return (
-        <div className="main-container" style={{ marginTop: "80px" }}>
-            <div id="eventContainer" style={{ background: "#2B2B2B", marginTop: "80px" }}>
+
+        <div className="e-claro main-container" style={{ marginTop: "80px" }}>
+            <div className="e-claro" id="eventContainer"
                 <div className="description">
                     <h2 style={{ fontSize: "40px", color: "#FE5201" }}>{currentEvent.name}</h2>
-                    <div className="info">
-                        <div className="mini-container">
+                    <div className="e-claro info">
+                        <div className="e-claro mini-container">
                             <p className="mt-2">{currentEvent.photo_category}</p>
                         </div>
+
                         <div className="mini-container">
                             <p className="mt-2">{currentEvent.description}</p>
                         </div>
-                        <div className="mini-container">
+                        <div className="e-claro mini-container">
                             <p className="mt-2"> {currentEvent.end_date}</p>
                         </div>
                     </div>
                 </div>
-                <div className="d-flex flex-column" style={{ marginTop: "30px" }}>
+                <div className="e-claro d-flex flex-column" style={{ marginTop: "30px" }}>
                     <Timer endDate={currentEvent.end_date} />
                     {isUserJoined ? (
                         <button

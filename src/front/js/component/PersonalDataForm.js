@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import "../../styles/loginContainer.css";
+// PersonalDataForm.js
+import React, { useState, useEffect, useContext} from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { testData3 } from "../component/testData";
 
 function PersonalDataForm() {
   const [editMode, setEditMode] = useState(false);
-  const [formData, setFormData] = useState({
+  const [UserData, setUserData] = useState({
     firstname: "",
     lastname: "",
     username: "",
@@ -14,37 +16,20 @@ function PersonalDataForm() {
     email: ""
   });
 
+  const {store, actions} = useContext(Context)
+
   useEffect(() => {
-    const getUserData = async () => {
+    const fetchData = async () => {
       try {
-        const token = sessionStorage.getItem('token');
-        if (!token) {
-          console.error("Token no encontrado en sessionStorage");
-          return;
-        }
-
-        const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error(`Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data received from backend:", data); // Verificar datos recibidos
-        setFormData(data);
+        await actions.getUserData();
+        setUserData(store.userData);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
-    getUserData();
-  }, []);
+    fetchData();
+  }, [store.dataUser]);
 
   const handleEdit = () => {
     setEditMode(true);
@@ -52,28 +37,11 @@ function PersonalDataForm() {
 
   const handleSave = async () => {
     try {
-      const token = sessionStorage.getItem('token');
-      if (!token) {
-        console.error("Token no encontrado en sessionStorage");
-        return;
-      }
-
-      const response = await fetch(`${process.env.BACKEND_URL}/api/update-user-data`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Status: ${response.status}`);
-      }
-
-      const updatedData = await response.json();
-      console.log("Datos del usuario actualizados con éxito:", updatedData);
+      // Llama a la acción updateUserData con los datos del usuario
+      await actions.updateUserData(UserData);
       setEditMode(false);
+      toast.success('Saved data');
+
     } catch (error) {
       console.error("Error updating user data:", error);
     }
@@ -81,8 +49,8 @@ function PersonalDataForm() {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData(prevFormData => ({
-      ...prevFormData,
+    setUserData(prevUserData => ({
+      ...prevUserData,
       [id]: value
     }));
   };
@@ -106,7 +74,7 @@ function PersonalDataForm() {
             className="form-control"
             placeholder="First Name"
             id="firstname"
-            value={formData.firstname}
+            value={UserData.firstname}
             onChange={handleChange}
             readOnly={!editMode}
           />
@@ -121,7 +89,7 @@ function PersonalDataForm() {
             className="form-control"
             placeholder="Last name"
             id="lastname"
-            value={formData.lastname}
+            value={UserData.lastname}
             onChange={handleChange}
             readOnly={!editMode}
           />
@@ -136,7 +104,7 @@ function PersonalDataForm() {
             className="form-control"
             placeholder="username"
             id="username"
-            value={formData.username}
+            value={UserData.username}
             onChange={handleChange}
             readOnly={!editMode}
           />
@@ -151,7 +119,7 @@ function PersonalDataForm() {
             className="form-control"
             placeholder="Phone"
             id="phone"
-            value={formData.phone}
+            value={UserData.phone}
             onChange={handleChange}
             readOnly={!editMode}
           />
@@ -160,13 +128,13 @@ function PersonalDataForm() {
       <div className="mb-3">
         <label htmlFor="country" className="label-color">País:</label>
         <div className="input-icon">
-        <i className="fa-solid fa-phone" style={{ color: "#7f7f7f" }} />
+        <i className="fa-solid fa-globe" style={{ color: "#7f7f7f" }} />
           <input
             type="text"
             className="form-control"
             placeholder="Country"
             id="country"
-            value={formData.country}
+            value={UserData.country}
             onChange={handleChange}
             readOnly={!editMode}
           />
@@ -182,7 +150,7 @@ function PersonalDataForm() {
 
       {editMode ? (
         <button type="button" className="btn confirm-btn" onClick={handleSave}>
-          Guardar cambios
+          Guardar
         </button>
       ) : (
         <div className="d-flex justify-content-center">
@@ -199,4 +167,3 @@ function PersonalDataForm() {
 }
 
 export default PersonalDataForm;
-

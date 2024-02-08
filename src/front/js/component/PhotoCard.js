@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { testData3 } from "./testData";
 import PropTypes from "prop-types";
-import { Context } from "../store/appContext";
+import { Context } from "../store/appContext"
+import { Link } from "react-router-dom";
 
 export const PhotoCard = (props) => {
   const { store, actions } = useContext(Context);
-  const [favoriteCount, setFavoriteCount] = useState(0);
-  const [likeCount, setLikeCount] = useState(0);
+  const [favoriteCount, setFavoriteCount] = useState("");
+  const [likeCount, setLikeCount] = useState(props.likes);
   const [isLiked, setIsLiked] = useState(false);
 
   const handleFavoriteClick = () => {
@@ -39,12 +40,14 @@ export const PhotoCard = (props) => {
 
 
   return (
-    <div className="d-flex justify-content-center mx-2 bg-gra">
-      <div className="card mb-2" style={{ width: "17rem" }}>
-        <img src={props.photoUrl} className="card-img-top" alt="Photo" />
+    <div className="d-flex justify-content-center bg-gra">
+      <div className="card" style={{ width: "17rem" }}>
+      <Link to={`/photo-detail/${encodeURIComponent(props.photoUrl)}`} className="photo-link">
+    <img src={props.photoUrl} className="card-img-top" alt="Photo" />
+</Link>
 
         <div className="card-body color-back px-3">
-          <h4 className="color-text">{props.photo}</h4>
+          <h4 className="m-0 color-text">{props.photo}</h4>
 
           <div className="d-flex align-items-center">
             <img
@@ -55,12 +58,12 @@ export const PhotoCard = (props) => {
             />
             <h5 className="card-title p-3 color-text ">{props.name}</h5>
           </div>
-          <div className="buttons d-flex justify-content-between mt-3">
+          <div className="buttons d-flex justify-content-between mt-1">
             {/* Botón de Like */}
             <button
               onClick={handleLikeClick}
               type="button"
-              className={`btn p-1 border-2 ${isLiked ? "btn-danger" : "btn-outline-success"}`}
+              className={`btn p-1 border-1 ${isLiked ? "btn-danger" : "btn-outline-success"}`}
             >
               <i className={`far fa-thumbs-up ${isLiked ? "text-danger" : ""}`}></i> Like
             </button>
@@ -68,7 +71,7 @@ export const PhotoCard = (props) => {
             <button
               onClick={handleFavoriteClick}
               type="button"
-              className={`btn p-1 border-2 ${store.favorites.some((fav) => fav.index === props.index)
+              className={`btn p-1 border-1 ${store.favorites.some((fav) => fav.index === props.index)
                 ? "btn-danger"
                 : "btn-outline-success"}`}
             >
@@ -76,7 +79,7 @@ export const PhotoCard = (props) => {
             </button>
           </div>
 
-          <div className="d-flex justify-content-between mt-3 color-text">
+          <div className="d-flex justify-content-between mt-1 color-text">
             {/* Contador de Likes */}
             <p>Likes: {likeCount}</p>
 
@@ -96,10 +99,4 @@ PhotoCard.propTypes = {
   likes: PropTypes.number.isRequired,
   favorites: PropTypes.number.isRequired,
   photoUrl: PropTypes.string.isRequired, // Asegúrate de incluir photoUrl en las PropTypes
-};
-
-
-PhotoCard.defaultProps = {
-  likes: 0,
-  favorites: 0,
 };
