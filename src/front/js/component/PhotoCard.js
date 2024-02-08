@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { testData3 } from "./testData";
 import PropTypes from "prop-types";
-import { Context } from "../store/appContext";
+import { Context } from "../store/appContext"
+import { Link } from "react-router-dom";
 
 export const PhotoCard = (props) => {
   const { store, actions } = useContext(Context);
+
  
+
   useEffect(() => {
     const fetchUserDataAndPhotos = async () => {
       try {
@@ -33,12 +36,14 @@ export const PhotoCard = (props) => {
   }, [store.userData.id]);
 
   return (
+
     <div className="d-flex justify-content-center mx-2 bg-gra" style={{gap:"20px", flexWrap: "wrap"}}>
      {store.userPhotosData.map((photo, index) => (
       <div key={index} className="card mb-2" style={{ width: "17rem" }}>
         <img src={photo.img_url} className="card-img-top" alt={`Photo ${index}`} />
         <div className="card-body color-back px-3">
         <h4 className="color-text">{photo.name} </h4>
+
           <div className="d-flex align-items-center">
             <img
               style={{ width: "20%" }}
@@ -48,12 +53,14 @@ export const PhotoCard = (props) => {
             />
             <h5 className="card-title p-3 color-text ">{store.userData.username}</h5>
           </div>
-          <div className="buttons d-flex justify-content-between mt-3">
+          <div className="buttons d-flex justify-content-between mt-1">
             {/* Botón de Like */}
             <button
               // onClick={handleLikeClick}
               type="button"
+
               className={`btn p-1 border-2`}
+
             >
               <i className={`far fa-thumbs-up `}></i> Like
             </button>
@@ -61,13 +68,17 @@ export const PhotoCard = (props) => {
             <button
               // onClick={handleFavoriteClick}
               type="button"
+
               className={`btn p-1 border-2`}
+
             >
               <i className="far fa-heart"></i> Favorito
             </button>
           </div>
+
   
           <div className="d-flex justify-content-between mt-3 color-text">
+
             {/* Contador de Likes */}
             <p>Likes: </p>
   
@@ -82,6 +93,7 @@ export const PhotoCard = (props) => {
   );
 };
 
+
 // PhotoCard.propTypes = {
 //   photo: PropTypes.string.isRequired,
 //   name: PropTypes.string.isRequired,
@@ -95,3 +107,4 @@ export const PhotoCard = (props) => {
 //   likes: 0,
 //   favorites: 0,
 // };
+

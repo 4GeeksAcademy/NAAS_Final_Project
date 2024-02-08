@@ -4,7 +4,7 @@ import rigoImageUrl from "../../img/logo1.jpeg";
 import { Link } from 'react-router-dom';
 
 export const Footer = () => (
-	<footer className="footer mobile-column mt-auto py-3 text-center color-back2 text-white text">
+	<footer className="footer mobile-column mt-auto py-3 text-center color-back text-white text">
 		<div className="mobile-column container text-center">
 			<div className="row mobile-column">
 				<div className="mobile-column text-center col-3">
@@ -37,9 +37,9 @@ export const Footer = () => (
 					<h4>Únete A Nuestro Boletín Semanal</h4>
 					<p> Obtenga promociones y actualizaciones exclusivas directamente en su bandeja de entrada. </p>
 					<div className="input-group d-flex align-items-baseline">
-						<input type="text" className="form-control" placeholder="Enter your email here" aria-label="Enter your email here">
+						<input type="text" className="form-control" placeholder="Introduzca su correo electrónico aquí" aria-label="Enter your email here">
 						</input>
-						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscribe</button>
+						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscríbete</button>
 					</div>
 				</div>
 			</div>

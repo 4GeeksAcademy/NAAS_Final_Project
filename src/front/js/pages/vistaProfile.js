@@ -5,7 +5,12 @@ import { PhotoCard } from "../component/PhotoCard";
 import { Logros } from "../component/logros";
 import { Eventos } from "../component/Eventos";
 import { Favoritos } from "../component/Favoritos";
+
 import { testData3 } from "../component/testData";
+
+import { PhotosUser } from "../component/photosUser";
+import { testData1, testData3 } from "../component/testData";
+
 import PersonalDataForm from "../component/PersonalDataForm";
 
 export const VistaProfile = () => {
@@ -45,7 +50,11 @@ export const VistaProfile = () => {
   const renderComponent = () => {
     switch (store.vistaProfile) {
       case "Photos": // Cambiado de "Logros" a "logros"
+
         return <PhotoCard />;
+
+        
+
       case "Logros": // Cambiado de "Logros" a "logros"
         return <Logros />;
       case "Eventos": // Cambiado de "Eventos" a "eventos"
@@ -64,14 +73,24 @@ export const VistaProfile = () => {
 
 
   return (
-    <div className="container-fluid color-back">
+    <div className="container-fluid color-back mobile-column vista">
       <div>
         <img className="banner" src={testData3[2].fotoUrl} alt="Banner" />
       </div>
       <div className="mobile-column d-flex align-items-center justify-content-between">
       <div className="mobile-column d-flex align-items-center">
         <img className="avatar no-mar" src={testData3[1].fotoUrl} alt="Avatar" />
-        <h2 className="color-text">{UserData.firstname }</h2>
+        <div className="">
+       <h2 className="color-text">{UserData.firstname }</h2>
+        <Link to="/photo-uploader">
+                    <button
+                        type="button"
+                        className="btn brd color-call color-text">
+                        <i className="pe-2 fa-solid fa-rocket"></i>Subir foto
+                    </button>
+                    </Link>
+        </div>
+      
         <button onClick={() => actions.toggleStatus()}className={`nav-link ${store.statusActive ? 'text-danger' : 'text-success'}`} aria-current="page">
           <i className={`pe-2 fa-solid fa-user-clock ${store.statusActive ? 'text-danger' : 'text-success'}`}></i>Status
         </button>

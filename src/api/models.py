@@ -148,6 +148,7 @@ class Events(db.Model):
             "id": self.id,
             "name": self.name,
             "photo_category": self.category_relationship.name,
+            "description": self.description,
             "start_date": self.start_date,
             "end_date": self.end_date,
         }
@@ -166,7 +167,7 @@ class User_events(db.Model):
     event_relationship = db.relationship(Events)
 
     def __repr__(self):
-        return '{} {}'.format(self.user_id, self.event_id)
+        return 'User ID: {} registrado en Event ID: {}'.format(self.user_id, self.event_id)
 
 
 class Photos(db.Model):
@@ -175,6 +176,7 @@ class Photos(db.Model):
     name = db.Column(db.String(50))
     description = db.Column(db.String(250))
     img_url = db.Column(db.String(250))
+    like = db.Column(db.Integer, default=0)
 
     ## Relationship photo_categories
     category_id = db.Column(db.Integer, db.ForeignKey('photo_categories.id'))

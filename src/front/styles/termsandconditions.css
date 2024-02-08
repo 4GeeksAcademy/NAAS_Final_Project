@@ -66,7 +66,7 @@
     margin-top: 8px;
     font-size: 16px;
     line-height: 1.5;
-    color: #333;
+    color: #3b3b3b;
     transition: 0.3s ease;
     opacity: 0;
     animation: fadeInListItem 0.5s ease forwards;

@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, make_response
 from sqlalchemy.exc import IntegrityError
 from api.models import *
 from api.utils import generate_sitemap, APIException
@@ -32,14 +32,14 @@ CORS(api)
 bcrypt = Bcrypt()
 
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+# @api.route('/hello', methods=['POST', 'GET'])
+# def handle_hello():
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
+#     response_body = {
+#         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+#     }
 
-    return jsonify(response_body), 200
+#     return jsonify(response_body), 200
 
 
 @api.route('/register', methods=['POST'])
@@ -102,30 +102,6 @@ def register():
         return jsonify({'msg': 'An error occurred: IntegrityError'}), 400
     except Exception as e:
         return jsonify({'msg': f'An error occurred: {str(e)}'}), 500
-
-@api.route('/login', methods=['POST'])
-def login():
-    body = request.get_json(silent=True)
-
-    if body is None:
-        return jsonify({'msg': 'You must send data in your body'}), 400
-    
-    if 'email' not in body or 'password' not in body:
-        return jsonify({'msg': 'Missing email or password fields'}), 400
-    
-    if '@' not in body['email']:
-        return jsonify({'msg': 'Invalid email format'}), 400
-
-    user = Users.query.filter_by(email=body['email']).first()
-
-    if user is None:
-        return jsonify({'msg': 'Invalid email or password'}), 400
-    
-    check_password = bcrypt.check_password_hash(user.password, body['password'])
-    if check_password == False:
-        return jsonify({'msg': 'Invalid email or password'}), 400
-    access_token = create_access_token(identity=user.id, additional_claims={'role': user.role})
-    return jsonify({'msg': 'Login successful!', 'token': access_token}), 200
 
 ## SUBIR FOTO A API CLOUDINARY
 @api.route('/upload-photos', methods=['POST'])
@@ -325,21 +301,38 @@ def get_photos_by_post(post_id):
         return jsonify({'msg': str(e)}), 500
 
 @api.route('/events', methods=['GET'])
-def get_events():
+def get_all_events():
     try:
         events = Events.query.all()
-
-        if not events:
-            return jsonify({'msg': 'No se encontraron eventos'}), 404
-
-        serialized_events = [{'id': event.id, 'name': event.name} for event in events]
-        response = jsonify({'msg': 'ok', 'events': serialized_events})
+        if not events: 
+            return jsonify({'msg': 'No hay eventos disponibles'})
+        
+        serialized_events = [event.serialize() for event in events]
+        response = jsonify(serialized_events)
         response.headers['Content-Type'] = 'application/json'
+
+        return response, 200
+    except Exception as e:
+        return jsonify({'error': 'Error al serializar los eventos'}), 500
+
+@api.route('/events/<int:event_id>', methods=['GET'])
+def get_event(event_id):
+    try:
+        event = Events.query.get(event_id)
+        if not event:
+            return jsonify({'msg': 'Evento no encontrado'}), 404
+
+        serialized_event = event.serialize()
+
+        response = make_response(jsonify(serialized_event))
+        response.headers['Content-Type'] = 'application/json'
+
         return response, 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 
+# Generate token to reset password
 def generate_change_password_token(email):
     expire = datetime.timedelta(hours=1)
     token = create_access_token(identity=email, expires_delta=expire)
@@ -435,10 +428,16 @@ def join_event(event_id):
         current_user_id = get_jwt_identity()
 
         existing_registration = User_events.query.filter_by(user_id=current_user_id,event_id=event_id).first()
+
+        print(existing_registration)
+
         if existing_registration:
+            
             return jsonify({'msg': 'User is already registered for this event'}), 400
         
         event = Events.query.get(event_id)
+        
+        
         if not event:
             return jsonify({'msg': 'Event not found'}), 404
         

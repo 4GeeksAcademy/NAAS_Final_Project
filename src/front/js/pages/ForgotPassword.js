@@ -14,13 +14,13 @@ function ForgetPassword() {
 
     // Check if the email field is not empty
     if (!email.trim()) {
-      toast.info('Fields are empty');
+      toast.info('Los campos están vacíos');
       return;
     }
 
     try {
       setLoading(true);
-      toast.info('Sending request...');
+      toast.info('Enviando pedido...');
 
       // Make a request to reset the password
       const response = await fetch(process.env.BACKEND_URL + "/api/reset-password", {
@@ -33,15 +33,15 @@ function ForgetPassword() {
 
       if (response.ok) {
         // Request successful, redirect to the login page
-        toast.success('Request received. If the email is registered, you will receive a link to reset your password.');
+        toast.success('Solicitud recibida. Si el correo electrónico está registrado, recibirá un enlace para restablecer su contraseña.');
         navigate('/login');
       } else {
         console.error('Error resetting password');
-        toast.error('Error resetting the password');
+        toast.error('Error al restablecer la contraseña');
       }
     } catch (error) {
       console.error('Error resetting password', error);
-      toast.error('Error resetting the password');
+      toast.error('Error al restablecer la contraseña');
     } finally {
       setLoading(false);
     }
@@ -56,13 +56,13 @@ function ForgetPassword() {
   };
 
   return (
-    <div className='container-fluid d-flex color-back mobile-column'>
+    <div className='container-fluid d-flex color-back mobile-column vista'>
       <div className='mobile-column container-fluid'>
         <Welcome />
       </div>
-      <div className="login-container p-5">
+      <div className="login-container p-2">
         <form onSubmit={handleResetPassword}>
-          <h1 className='color-text'>Reset My Password</h1>
+          <h1 className='color-text'>Restablecer mi contraseña</h1>
           <div className="mb-3">
             <div className="input-icon">
               <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />
@@ -72,7 +72,7 @@ function ForgetPassword() {
                 id="EmailAddress"
                 aria-describedby="emailHelp"
                 title="&#xf0e0 Email address"
-                placeholder="Email address"
+                placeholder="Dirección de correo electrónico"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyPress={handleKeyPress}
@@ -80,7 +80,7 @@ function ForgetPassword() {
             </div>
           </div>
           <button type="submit" className="btn confirm-btn" style={{ background: "#FE5201" }} disabled={loading}>
-            {loading ? 'Loading...' : 'Submit'}
+            {loading ? 'Cargando...' : 'Confirmar'}
           </button>
         </form>
       </div>
