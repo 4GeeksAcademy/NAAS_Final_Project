@@ -17,7 +17,6 @@ const CreateEvent = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-
         const token = sessionStorage.getItem('token');
         if (!token) {
             console.error('Token not found in sessionStorage');
@@ -77,18 +76,7 @@ const CreateEvent = () => {
 
             if (response.ok) {
                 toast.success('Evento creado exitosamente');
-                // Esperar un momento antes de limpiar los campos y redirigir
-                setTimeout(() => {
-                    setFormData({
-                        name: '',
-                        description: '',
-                        category_id: '',
-                        start_date: '',
-                        end_date: ''
-                    });
-                    // Redirigir a la página de eventos después de limpiar los campos
-                    window.location.href = "/events";
-                }, 1000); // Esperar 1 segundo antes de limpiar y redirigir (puedes ajustar este valor según tus necesidades)
+                navigate('/events');
             } else {
                 throw new Error(data.message || 'Error al crear evento');
             }
@@ -97,7 +85,6 @@ const CreateEvent = () => {
             toast.error('Error al crear evento. Por favor, intenta de nuevo.');
         }
     };
-
 
     return (
         <div className="container">

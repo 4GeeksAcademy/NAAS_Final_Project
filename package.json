@@ -11,17 +11,25 @@
 		"build": "webpack --config webpack.prod.js"
 	},
 	"author": {
-		"name": "Alejandro Sanchez",
-		"url": "http://alesanchezr.com/"
+		"name": "Snapify",
+		"url": "https://snapify4geeks.com"
 	},
 	"contributors": [
 		{
-			"name": "Alejandro Sanchez",
-			"url": "http://alesanchezr.com/"
+			"name": "Nicolas Eugui",
+			"url": "https://github.com/NicoEugui"
 		},
 		{
-			"name": "Ignacio Cordoba",
-			"url": "http://github.com/nachovz"
+			"name": "Andre Abreo",
+			"url": "https://github.com/AndreAbreo"
+		},
+		{
+			"name": "Santiago Quijano",
+			"url": "https://github.com/Santi-Quijano"
+		},
+		{
+			"name": "Agustina Gonzalez",
+			"url": "https://github.com/AgustinaGonzalezAG"
 		}
 	],
 	"license": "ISC",
