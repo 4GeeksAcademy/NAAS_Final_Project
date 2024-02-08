@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { PhotoCard } from "../component/PhotoCard";
-import { testData1, testData4, testData5, testData6 } from "../component/testData";
+import { testData1 } from "../component/testData";
 
 export const Galeria = () => {
   const { store, actions } = useContext(Context);
 
   // Combina los datos de testData1, testData4 y testData5 en un solo array
-  const allPhotos = [...testData1, ...testData4, ...testData5, testData6];
+  const allPhotos = [...testData1];
 
   // Define el número de tarjetas por fila y tarjetas por página
   const cardsPerRow = 3;

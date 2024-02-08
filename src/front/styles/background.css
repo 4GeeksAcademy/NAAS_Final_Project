@@ -20,6 +20,38 @@
     height: 75vh;
     object-fit: cover;
 }
+
+.img-rank {
+    width: 100px;
+    height: 75px;
+    object-fit: cover;
+}
+
+.img-rank1 {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+.div-rank {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-center;
+    color: white;
+    border-radius: 5%;
+    background-color: #2B2B2B;
+    margin: 10px;
+    align-content: center;
+}
+.go-back-btn {
+    position: fixed;
+    left: 20px;
+    top: 150px;
+    z-index: 9999;
+
+}
+
 .color-back{
     background: #2B2B2B;
 }

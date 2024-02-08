@@ -5,6 +5,7 @@ import { NavbarLoginAdmin } from "./navbarLoginAdmin";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { ScrollToTopButton, GoBackButton } from '../component/Buttons';
 
 export const Navbar = () => {
     const { store, actions } = useContext(Context);
@@ -94,7 +95,10 @@ export const Navbar = () => {
             {store.isUserLoggedIn && <NavbarLogin onNavbarChange={() => actions.isUserLoggedIn(false)} />}
             {store.isAdminLoggedIn && <NavbarLoginAdmin onNavbarChange={() => actions.isAdminLoggedIn(false)} />}
 
-
+            <div>
+            {/* Botón para volver a la página anterior */}
+            <GoBackButton />
+            </div>
         </nav >
     );
 };
