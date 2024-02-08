@@ -13,10 +13,10 @@ const ImageUpload = () => {
 
   const token = sessionStorage.getItem('token');
 
-  if(!token) {
-      console.error('User not authenticated');
-      toast.error('User not authenticated');
-      navigate('/');
+  if (!token) {
+    console.error('User not authenticated');
+    toast.error('User not authenticated');
+    navigate('/');
   }
 
   useEffect(() => {
@@ -37,7 +37,8 @@ const ImageUpload = () => {
         }
         const eventsData = await eventsResponse.json();
         console.log("Events Data:", eventsData);
-        setEvents(eventsData.events || []);
+        setEvents(eventsData || []);
+        console.log("Events:", eventsData.events);
 
         const categoriesResponse = await fetch(`${process.env.BACKEND_URL}/api/categories`);
         if (!categoriesResponse.ok) {
@@ -118,28 +119,28 @@ const ImageUpload = () => {
         method: "POST",
         body: uploadFormData,
       });
-    
+
       if (!uploadResponse.ok) {
         console.error("Image upload failed", uploadResponse.status);
         return;
       }
-    
+
       const uploadData = await uploadResponse.json();
       console.log("Image upload success!", uploadData);
-    
+
       // Extract the img_urls from the response
       const imgUrls = uploadData.img_urls;
-    
+
       // Create a FormData object for creating photos
       const createFormData = new FormData();
-    
+
       // Append other form fields (if needed)
       createFormData.append("name", document.getElementById("name").value);
       createFormData.append("description", document.getElementById("description").value);
       createFormData.append("category_id", document.getElementById("category_id").value);
       createFormData.append("user_id", userId);;
       createFormData.append("event_id", document.getElementById("event_id").value);
-    
+
       // Create photos using the img_urls
       const createResponse = await fetch(`${process.env.BACKEND_URL}/api/create-photos`, {
         method: "POST",
@@ -155,12 +156,12 @@ const ImageUpload = () => {
           img_urls: imgUrls,
         }),
       });
-    
+
       if (!createResponse.ok) {
         console.error("Creating photos failed", createResponse.status);
         return;
       }
-    
+
       const createData = await createResponse.json();
       console.log("Photos creation success!", createData);
 
@@ -172,7 +173,7 @@ const ImageUpload = () => {
       document.getElementById("description").value = "";
       document.getElementById("category_id").value = "";
       document.getElementById("event_id").value = "";
-      
+
 
       setFiles(null);
       setPreviewImages([]);
@@ -226,7 +227,7 @@ const ImageUpload = () => {
           </select>
         </div>
         <button className="btn brd color-call color-text" onClick={handleUpload}>
-        Subir fotos
+          Subir fotos
         </button>
       </div>
     </div>
