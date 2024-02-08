@@ -103,34 +103,6 @@ def register():
     except Exception as e:
         return jsonify({'msg': f'An error occurred: {str(e)}'}), 500
 
-@api.route('/login', methods=['POST'])
-def login():
-    body = request.get_json(silent=True)
-
-    if body is None:
-        return jsonify({'msg': 'You must send data in your body'}), 400
-    
-    if 'email' not in body or 'password' not in body:
-        return jsonify({'msg': 'Missing email or password fields'}), 400
-    
-    if '@' not in body['email']:
-        return jsonify({'msg': 'Invalid email format'}), 400
-
-    user = Users.query.filter_by(email=body['email']).first()
-
-    if user is None:
-        return jsonify({'msg': 'Invalid email or password'}), 400
-    
-    check_password = bcrypt.check_password_hash(user.password, body['password'])
-    if check_password == False:
-        return jsonify({'msg': 'Invalid email or password'}), 400
-
-    if not user.is_active:
-        return jsonify({'msg': 'Invalid email or password'}), 400
-
-    access_token = create_access_token(identity=user.id, additional_claims={'role': user.role})
-    return jsonify({'msg': 'Login successful!', 'token': access_token}), 200
-
 ## SUBIR FOTO A API CLOUDINARY
 @api.route('/upload-photos', methods=['POST'])
 def upload_photos():
