@@ -6,8 +6,6 @@ import { Logros } from "../component/logros";
 import { Eventos } from "../component/Eventos";
 import { Favoritos } from "../component/Favoritos";
 
-import { testData3 } from "../component/testData";
-
 import { PhotosUser } from "../component/photosUser";
 import { testData1, testData3 } from "../component/testData";
 
