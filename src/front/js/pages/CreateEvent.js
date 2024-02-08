@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import { Link } from "react-router-dom";
 
 const CreateEvent = () => {
     const [formData, setFormData] = useState({
@@ -56,7 +57,18 @@ const CreateEvent = () => {
 
             if (response.ok) {
                 toast.success('Evento creado exitosamente');
-                // Aquí puedes redirigir a la página de detalles del evento recién creado
+                // Esperar un momento antes de limpiar los campos y redirigir
+                setTimeout(() => {
+                    setFormData({
+                        name: '',
+                        description: '',
+                        category_id: '',
+                        start_date: '',
+                        end_date: ''
+                    });
+                    // Redirigir a la página de eventos después de limpiar los campos
+                    window.location.href = "/events";
+                }, 1000); // Esperar 1 segundo antes de limpiar y redirigir (puedes ajustar este valor según tus necesidades)
             } else {
                 throw new Error(data.message || 'Error al crear evento');
             }
@@ -65,6 +77,7 @@ const CreateEvent = () => {
             toast.error('Error al crear evento. Por favor, intenta de nuevo.');
         }
     };
+
 
     return (
         <div className="container">
@@ -97,6 +110,7 @@ const CreateEvent = () => {
                     <label>Fecha de fin:</label>
                     <input type="datetime-local" className="form-control" name="end_date" value={formData.end_date} onChange={handleChange} required />
                 </div>
+
                 <button type="submit" className="btn btn-primary">Crear Evento</button>
             </form>
         </div>
