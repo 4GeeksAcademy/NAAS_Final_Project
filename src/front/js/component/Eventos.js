@@ -14,9 +14,9 @@ export const Eventos = () => {
             const events = await actions.getUserJoinedEvent();
             setUserJoinedEvents(events);
         };
-
+    
         fetchData();
-    }, [actions.getUserJoinedEvent()]);
+    }, [actions.getUserJoinedEvent]);
 
     return (
         <div className="events mobile-column">
