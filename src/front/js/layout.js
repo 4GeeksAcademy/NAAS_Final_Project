@@ -27,6 +27,7 @@ import Ranking from "./component/Ranking";
 import PasswordUpdate from "./pages/PasswordUpdate";
 import PhotoUploader from "./pages/PhotoUploader";
 import { ActiveEvents } from "./pages/ActiveEvents";
+import CreateEvent from "./pages/CreateEvent";
 import PhotoDetail from "./pages/PhotoDetail";
 
 const Layout = () => {
@@ -61,6 +62,7 @@ const Layout = () => {
                         <Route element={<ActiveEvents/>} path="/events" />
                         <Route element={<EventsDetails />} path="/events/:event_id" />
                         <Route element={<PhotoUploader />} path="/photo-uploader" />
+                        <Route element={<CreateEvent />} path="/create-event" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
