@@ -28,9 +28,10 @@ export const Footer = () => (
 				<div className="mobile-column text-center col-4">
 					<h4>Explorar</h4>
 					<nav className="nav flex-column text-center">
-					<Link to="/galeria" className="p-0 fs-5 text-white nav-link">Galeria</Link>
+						<Link to="/galeria" className="p-0 fs-5 text-white nav-link">Galeria</Link>
 						<Link to="/ranking-photo" className="p-0 fs-5 text-white nav-link">Ranking</Link>
 						<Link to="/signUp" className="p-0 fs-5 text-white nav-link">Registrarse</Link>
+						<Link to="/about-us" className="p-0 fs-5 text-white nav-link">Sobre Nosotros</Link>
 					</nav>
 				</div>
 				<div className="mobile-column p-2 text-start col-5">

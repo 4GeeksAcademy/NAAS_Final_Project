@@ -104,6 +104,14 @@ linear-gradient(128.15deg, #59FF7E 49.75%, #377DF7 136.56%);
     text-decoration: underline
   }
 
+.nav-link {
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: scale(1.1);
+}
+
  /* Estilo inicial para los enlaces en vistaProfile */
 .select{
     background-color: #2B2B2B;
