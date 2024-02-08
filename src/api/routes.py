@@ -504,6 +504,7 @@ def update_user_data():
     except Exception as e: 
         return jsonify({'error': str(e)}),500
 
+
 @api.route('/deactivate_account', methods=['POST'])
 @jwt_required()
 def deactivate_account():
