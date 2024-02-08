@@ -105,6 +105,7 @@ def register():
 
 ## SUBIR FOTO A API CLOUDINARY
 @api.route('/upload-photos', methods=['POST'])
+@jwt_required()
 def upload_photos():
     try:
         if 'photos' not in request.files:
@@ -139,6 +140,7 @@ def upload_photos():
 
 ## CREAR PHOTO EN BD CON URLS DE CLOUDINARY
 @api.route('/create-photos', methods=['POST'])
+@jwt_required()
 @cross_origin() 
 def create_photos():
     try:
@@ -194,18 +196,91 @@ def create_photos():
         print("Error:", str(e))
         return jsonify({'msg': str(e)}), 500
 
+##traer datos de mi foto por id 
+@api.route('/get-photo/<int:photo_id>', methods=['GET'])
+@jwt_required()
+@cross_origin() 
+def get_photoData(photo_id): 
+    try:
+        photo = Photos.query.filter_by(id=photo_id).first()
+        
+        if photo is None:
+            return jsonify({'msg': 'Photo not found'}), 404
+        
+        photo_data = {
+            'id': photo.id,
+            'name': photo.name,
+            'img_url': photo.img_url,
+            'description': photo.description,
+            'category_id': photo.category_id,
+            'user_id': photo.user_id,
+            'event_id': photo.event_id
+        }
 
-## BUSCAR FOTOS POR USUARIO
+        return jsonify({'msg': 'ok', 'photo': photo_data}), 200
+
+    except Exception as e:
+        print("Error:", str(e))
+        return jsonify({'msg': str(e)}), 500
+
+#traer fotos por usuario - con url y datos 
 @api.route('/get-user-photos/<int:user_id>', methods=['GET'])
+@jwt_required()
 def get_user_photos(user_id):
     try:
+        current_user_id = get_jwt_identity()
+
+        # Verificar si el usuario actual coincide con el usuario solicitado
+        if current_user_id != user_id:
+            return jsonify({'msg': 'Unauthorized'}), 401
+        
         user_photos = Photos.query.filter_by(user_id=user_id).all()
 
         if not user_photos:
             return jsonify({'msg': 'No photos found for the user'}), 404
 
-        img_urls = [photo.img_url for photo in user_photos]
-        return jsonify({'msg': 'ok', 'img_urls': img_urls}), 200
+        # Serializar cada objeto de foto
+        serialized_photos = []
+        for photo in user_photos:
+            serialized_photos.append({
+                'id': photo.id,
+                'name': photo.name,
+                'img_url': photo.img_url,
+                'description': photo.description,
+                'category_id': photo.category_id,
+                'user_id': photo.user_id,
+                'event_id': photo.event_id
+                          })
+
+        return jsonify({'msg': 'ok', 'photos': serialized_photos}), 200
+
+    except Exception as e:
+        return jsonify({'msg': str(e)}), 500
+    
+#traer todas las fotos de la bbdd (para galeria)
+@api.route('/get-all-photos', methods=['GET'])
+@jwt_required()
+def get_all_photos():
+    try:
+       
+        all_photos = Photos.query.all()
+
+        if not all_photos:
+            return jsonify({'msg': 'No photos found'}), 404
+
+        serialized_photos = []
+        for photo in all_photos:
+            serialized_photos.append({
+                'id': photo.id,
+                'name': photo.name,
+                'img_url': photo.img_url,
+                'description': photo.description,
+                'category_id': photo.category_id,
+                'user_id': photo.user_id,
+                'event_id': photo.event_id
+            })
+
+        return jsonify({'msg': 'ok', 'photos': serialized_photos}), 200
 
     except Exception as e:
         return jsonify({'msg': str(e)}), 500
