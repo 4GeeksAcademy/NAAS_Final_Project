@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import jwt_decode, { jwtDecode } from "jwt-decode";
 import checkTokenAndRedirect from "../utils/checkToken";
 
 const ImageUpload = () => {
@@ -22,8 +23,17 @@ const ImageUpload = () => {
       }
     };
 
-    checkToken();
+    const getUserIdFromToken = () => {
+      const token = sessionStorage.getItem('token');
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.sub;
+        setUserId(userId);
+      }
+    };
 
+    checkToken();
+    getUserIdFromToken();
     fetchEventsAndCategories();
   }, []);
 
@@ -53,19 +63,6 @@ const ImageUpload = () => {
     }
   };
 
-  const fetchCategories = async () => {
-    try {
-      const categoriesResponse = await fetch(`${process.env.BACKEND_URL}/api/categories`);
-      if (!categoriesResponse.ok) {
-        console.error(`Categories API request failed with status: ${categoriesResponse.status}`);
-        return;
-      }
-      const categoriesData = await categoriesResponse.json();
-      setCategories(categoriesData);
-    } catch (error) {
-      console.error("Error fetching categories:", error.message);
-    }
-  };
 
   const handleFileChange = (event) => {
     const selectedFiles = event.target.files;
@@ -101,12 +98,6 @@ const ImageUpload = () => {
       uploadFormData.append("photos", files[i]);
     }
 
-    uploadFormData.append("name", document.getElementById("name").value);
-    uploadFormData.append("description", document.getElementById("description").value);
-    uploadFormData.append("category_id", document.getElementById("category_id").value);
-    uploadFormData.append("user_id", userId);
-    uploadFormData.append("event_id", document.getElementById("event_id").value);
-
     const name = document.getElementById("name").value;
     const description = document.getElementById("description").value;
     const category_id = document.getElementById("category_id").value;
@@ -115,6 +106,12 @@ const ImageUpload = () => {
       toast.error('Faltan campos obligatorios');
       return;
     }
+
+    uploadFormData.append("name", name);
+    uploadFormData.append("description", description);
+    uploadFormData.append("category_id", category_id);
+    uploadFormData.append("user_id", userId);
+    uploadFormData.append("event_id", document.getElementById("event_id").value);
 
     try {
       const uploadResponse = await fetch(`${process.env.BACKEND_URL}/api/upload-photos`, {
@@ -137,27 +134,38 @@ const ImageUpload = () => {
       // Extract the img_urls from the response
       const imgUrls = uploadData.img_urls;
 
+      // Log the data being sent to create-photos endpoint
+      console.log("Data sent to create-photos endpoint:", {
+        name,
+        description,
+        category_id,
+        event_id: document.getElementById("event_id").value,
+        user_id: userId,
+        img_urls: imgUrls,
+      });
+
       // Create a FormData object for creating photos
-      const createFormData = new FormData();
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("category_id", category_id);
+      formData.append("event_id", document.getElementById("event_id").value);
+      formData.append("user_id", userId);
+      imgUrls.forEach((url, index) => {
+        formData.append(`img_urls[${index}]`, url);
+      });
 
-      // Append other form fields (if needed)
-      createFormData.append("name", document.getElementById("name").value);
-      createFormData.append("description", document.getElementById("description").value);
-      createFormData.append("category_id", document.getElementById("category_id").value);
-      createFormData.append("user_id", userId);;
-      createFormData.append("event_id", document.getElementById("event_id").value);
-
-      // Create photos using the img_urls
+      // Send the request to create the photos
       const createResponse = await fetch(`${process.env.BACKEND_URL}/api/create-photos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${sessionStorage.getItem('token')}`
         },
         body: JSON.stringify({
-          name: document.getElementById("name").value,
-          description: document.getElementById("description").value,
-          category_id: document.getElementById("category_id").value,
+          name: name,
+          description: description,
+          category_id: category_id,
           event_id: document.getElementById("event_id").value,
           user_id: userId,
           img_urls: imgUrls,
@@ -172,17 +180,20 @@ const ImageUpload = () => {
       const createData = await createResponse.json();
       console.log("Photos creation success!", createData);
 
+      // Limpiar campos y estado después de la carga exitosa de imágenes
       toast.success('¡Fotos subidas exitosamente!');
-
       document.getElementById("name").value = "";
       document.getElementById("description").value = "";
       document.getElementById("category_id").value = "";
       document.getElementById("event_id").value = "";
-
       setFiles(null);
       setPreviewImages([]);
+
     } catch (error) {
       console.error("Error:", error);
+      if (error.response) {
+        console.error("Detalles de la respuesta del servidor:", error.response.data);
+      }
     }
   };
 
@@ -192,7 +203,7 @@ const ImageUpload = () => {
         <h2 className="mb-4 color-text">Subir y crear fotos</h2>
         <div className="form-group">
           <label htmlFor="photoInput">Seleccionar fotos:</label>
-          <input type="file" className="form-control-file" id="photoInput" onChange={handleFileChange} multiple />
+          <input type="file" className="form-control-file" id="photoInput" onChange={handleFileChange} multiple={false} />
         </div>
         <div className="preview-section">
           {previewImages.map((preview, index) => (
