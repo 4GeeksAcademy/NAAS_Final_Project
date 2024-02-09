@@ -256,7 +256,38 @@ def get_user_photos(user_id):
 
     except Exception as e:
         return jsonify({'msg': str(e)}), 500
+#traer fotos por id del evento
+@api.route('/get-event-photos/<int:event_id>', methods=['GET'])
+@jwt_required()
+def get_event_photos(event_id): 
+    try:
+        event_photos = Photos.query.filter_by(event_id=event_id).all()
+
+        if not event_photos:
+            return jsonify({'msg': 'No se encontraron fotos'}),404
+        
+        serialized_photos = []
+        for photo in event_photos:
+            serialized_photos.append({
+                'id': photo.id,
+                'name': photo.name,
+                'img_url': photo.img_url,
+                'description': photo.description,
+                'category_id': photo.category_id,
+                'user_id': photo.user_id,
+                'event_id': photo.event_id
+            })
+
+        return jsonify({'msg': 'ok', 'photos': serialized_photos}),200
     
+    except Exception as e:
+        return jsonify({'msg': str(e)}),500
+
+
+
+
+
+
 #traer todas las fotos de la bbdd (para galeria)
 @api.route('/get-all-photos', methods=['GET'])
 def get_all_photos():

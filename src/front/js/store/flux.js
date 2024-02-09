@@ -1,4 +1,5 @@
 import React from "react";
+import { json } from "react-router-dom";
 
 const getState = ({ getStore, getActions, setStore }) => {
     const isUserAlreadyRegistered = (event_id, userEvents) => {
@@ -34,6 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             userDataById: [],
             userPhotosData: [],
             allPhotosData: [],
+            eventPhotos: [],
         },
         actions: {
             exampleFunction: () => {
@@ -380,6 +382,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                 }
 
+            },
+            getEventPhotos: async(event_id) => {
+                try{
+                    const token = sessionStorage.getItem('token')
+
+                    if(!token){
+                        console.error("token not found");
+                        return
+                    }
+
+                    if(!event_id){
+                        console.log("event_id not found")
+                        return
+                    }
+
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/get-event-photos/${event_id}`,{
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            console.log("Event photos not found");
+                            // Si no se encuentran fotos para el evento, establecer eventPhotos como un array vacío
+                            setStore({ eventPhotos: [] });
+                            return;
+                        }
+                        throw new Error(`Status": ${response.status}`);
+                    }
+            
+                    const data = await response.json()
+                    if(data && data.photos && data.photos.length > 0){
+                        setStore({eventPhotos: data.photos})
+                       
+                    } else {
+                        console.log("photos and data not found")
+                    }
+                } catch (error){
+                   console.error("Error fetching event photos:", error)
+                }
+            },
+            setEventPhotos: (photos) => {
+                setStore({ eventPhotos: photos });
             },
         }
     }
