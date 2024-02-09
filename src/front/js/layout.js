@@ -30,6 +30,7 @@ import { ActiveEvents } from "./pages/ActiveEvents";
 import CreateEvent from "./pages/CreateEvent";
 import PhotoDetail from "./pages/PhotoDetail";
 import { TopLikedPhotos } from "./pages/TopLikedPhotos";
+import { AboutUs } from "./pages/AboutUs";
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -65,6 +66,7 @@ const Layout = () => {
                         <Route element={<PhotoUploader />} path="/photo-uploader" />
                         <Route element={<CreateEvent />} path="/create-event" />
                         <Route element={<TopLikedPhotos />} path="/top" />
+                        <Route element={<AboutUs />} path="/aboutUs" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

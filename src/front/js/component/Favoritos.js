@@ -59,3 +59,4 @@ export const Favoritos = ({ favorites }) => {
     </div>
   );
 };
+ 

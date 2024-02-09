@@ -10,6 +10,7 @@ import { CategoryCard } from "../component/categoryCard";
 
 export const Landing = () => {
     const { store, actions } = useContext(Context);
+    
 
     return (
         <div className="e-claro container mobile-column vista">
@@ -185,7 +186,7 @@ export const Landing = () => {
                     <img src={testData3[14].fotoUrl} className="w-100" alt="Photo" />
 
                     <div className="e-claro position-absolute d-flex-column justify-content-center text-center m-5 top-0 end-0">
-                        <h1>Magic Mushrooms</h1>
+                        <h1>Estilo Libre</h1>
                         <Link to="/events">
                         <button type="button" className="px-5 btn rounded color-call color-text">
                             <i className="pe-2 fa-regular fa-eye"></i>Ver Evento
