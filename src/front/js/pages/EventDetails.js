@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import { Timer } from "../component/Timer";
 import { toast } from 'react-toastify';
+import { PhotoCardEvents } from "../component/PhotoCardEvents";
 import checkTokenAndRedirect from "../utils/checkToken"
 
 const EventsDetails = () => {
@@ -107,6 +108,9 @@ const EventsDetails = () => {
                         <button className="btn button-event" style={{ background: "#FE5201" }}>Bases y condiciones</button>
                     </Link>
                 </div>
+            </div>
+            <div className="photos-container">
+                <PhotoCardEvents event_id={event_id}/>
             </div>
         </div>
     );

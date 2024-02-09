@@ -3,9 +3,12 @@ import { testData3 } from "./testData";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext"
 import { Link } from "react-router-dom";
+import { Modal, Button } from 'react-bootstrap'
 
 export const PhotoCard = (props) => {
   const { store, actions } = useContext(Context);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); 
+  const [photoToDeleteId, setPhotoToDeleteId] = useState(null); 
 
 
   useEffect(() => {
@@ -34,6 +37,31 @@ export const PhotoCard = (props) => {
     }
   }, [store.userData.id]);
 
+   
+   const handleShowDeleteModal = (photoId) => {
+    setPhotoToDeleteId(photoId);
+    setShowDeleteModal(true);
+  };
+
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setPhotoToDeleteId(null);
+  };
+
+ 
+  const handleDeletePhoto = async () => {
+    try {
+      await actions.deletePhotoById(photoToDeleteId);
+      const updatedUserPhotosData = store.userPhotosData.filter(photo => photo.id !== photoToDeleteId);
+      actions.setUserPhotosData(updatedUserPhotosData);
+     
+      handleCloseDeleteModal();
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+     
+    }
+  };
   return (
 
     <div className="d-flex justify-content-center mx-2 bg-gra" style={{gap:"20px", flexWrap: "wrap"}}>
@@ -85,6 +113,9 @@ export const PhotoCard = (props) => {
             {/* Contador de Favoritos */}
             <p>Favorites: </p>
           </div>
+            <button onClick={() => handleShowDeleteModal(photo.id)} className="btn btn-danger">
+                    <i className="fa-solid fa-trash-alt"></i>
+                  </button>
         </div>
       </div>
     ))) : (
@@ -92,6 +123,22 @@ export const PhotoCard = (props) => {
                 <p style={{color: "white"}}>Aún no tienes fotos subidas</p>
             </div>
     )}
+     <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Eliminar foto</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Estás seguro de que deseas eliminar esta foto?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={handleDeletePhoto}>
+            Eliminar
+          </Button>
+        </Modal.Footer>
+      </Modal>
   </div>
   
   );

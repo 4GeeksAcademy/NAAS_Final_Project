@@ -195,6 +195,36 @@ def create_photos():
     except Exception as e:
         print("Error:", str(e))
         return jsonify({'msg': str(e)}), 500
+#borrar foto de cloudinary y de la bbdd
+@api.route('/delete-photo/<int:photo_id>', methods=['DELETE'])
+@jwt_required()
+def delete_photo(photo_id):
+    try:
+        # Obtén la foto de la base de datos
+        photo = Photos.query.get(photo_id)
+        if photo is None:
+            return jsonify({'msg': 'Photo not found'}), 404
+
+        # Obtén la URL de la imagen desde la base de datos
+        # img_url = photo.img_url
+
+        # # Elimina la imagen de Cloudinary
+        # cloudinary_response = cloudinary.uploader.destroy(img_url)
+        # if cloudinary_response.get('result') != 'ok':
+        #     return jsonify({'msg': 'Failed to delete photo from Cloudinary'}), 500
+
+        # Elimina la foto de la base de datos
+        db.session.delete(photo)
+        db.session.commit()
+
+        return jsonify({'msg': 'Photo deleted successfully'}), 200
+
+    except Exception as e:
+        print("Error:", str(e))
+        return jsonify({'msg': str(e)}), 500
+
+
+
 
 ##traer datos de mi foto por id 
 @api.route('/get-photo/<int:photo_id>', methods=['GET'])
@@ -256,7 +286,38 @@ def get_user_photos(user_id):
 
     except Exception as e:
         return jsonify({'msg': str(e)}), 500
+#traer fotos por id del evento
+@api.route('/get-event-photos/<int:event_id>', methods=['GET'])
+@jwt_required()
+def get_event_photos(event_id): 
+    try:
+        event_photos = Photos.query.filter_by(event_id=event_id).all()
+
+        if not event_photos:
+            return jsonify({'msg': 'No se encontraron fotos'}),404
+        
+        serialized_photos = []
+        for photo in event_photos:
+            serialized_photos.append({
+                'id': photo.id,
+                'name': photo.name,
+                'img_url': photo.img_url,
+                'description': photo.description,
+                'category_id': photo.category_id,
+                'user_id': photo.user_id,
+                'event_id': photo.event_id
+            })
+
+        return jsonify({'msg': 'ok', 'photos': serialized_photos}),200
     
+    except Exception as e:
+        return jsonify({'msg': str(e)}),500
+
+
+
+
+
+
 #traer todas las fotos de la bbdd (para galeria)
 @api.route('/get-all-photos', methods=['GET'])
 def get_all_photos():
@@ -619,6 +680,34 @@ def update_user_data():
     except Exception as e: 
         return jsonify({'error': str(e)}),500
 
+#actualizar datos de la foto(like)
+@api.route('/update-photo-likes/<int:photo_id>', methods=['PUT'])
+@jwt_required()
+def update_photo_like(photo_id):
+    try: 
+        
+        new_likes_data = request.json
+        photo = Photos.query.get(photo_id)
+
+        if not photo:
+            return jsonify({'msg': 'Foto no encontrada'}),404
+        #actualiza los likes de la foto
+        photo.like = new_likes_data.get('likes', photo.like)
+
+        db.session.commit()
+        updated_photo_data = {
+            'id': photo.id,
+            'name': photo.name,
+            'img_url': photo.img_url,
+            'description': photo.description,
+            'likes': photo.like,
+        }
+
+        return jsonify(updated_photo_data), 200
+    
+    except Exception as e: 
+        return jsonify({'error': str(e)}),500
+
 @api.route('/deactivate_account', methods=['POST'])
 @jwt_required()
 def deactivate_account():
@@ -633,3 +722,4 @@ def deactivate_account():
     db.session.commit()
 
     return jsonify({'msg': 'Account deactivated successfully!'}), 200
+
