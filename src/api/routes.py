@@ -651,3 +651,31 @@ def update_user_data():
     
     except Exception as e: 
         return jsonify({'error': str(e)}),500
+
+#actualizar datos de la foto(like)
+@api.route('/update-photo-likes/<int:photo_id>', methods=['PUT'])
+@jwt_required()
+def update_photo_like(photo_id):
+    try: 
+        
+        new_likes_data = request.json
+        photo = Photos.query.get(photo_id)
+
+        if not photo:
+            return jsonify({'msg': 'Foto no encontrada'}),404
+        #actualiza los likes de la foto
+        photo.like = new_likes_data.get('likes', photo.like)
+
+        db.session.commit()
+        updated_photo_data = {
+            'id': photo.id,
+            'name': photo.name,
+            'img_url': photo.img_url,
+            'description': photo.description,
+            'likes': photo.like,
+        }
+
+        return jsonify(updated_photo_data), 200
+    
+    except Exception as e: 
+        return jsonify({'error': str(e)}),500
