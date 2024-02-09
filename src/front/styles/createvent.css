@@ -1,0 +1,29 @@
+.custom-form label{
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+
+}
+
+.custom-input {
+    border: 2px solid #dddd;
+}
+
+.custom-input:focus {
+    border-color: #C74901;
+    box-shadow: none;
+}
+
+.custom-btn {
+    background-color: #64C247;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    padding: 15px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.custom-btn:hover {
+    background-color: #C74901;
+    transform: scale(1.1);
+}
+

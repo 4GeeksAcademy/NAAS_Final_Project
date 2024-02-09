@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap"
 import "../../styles/background.css";
 import rigoImageUrl from "../../img/logo1.jpeg";
 import { Context } from "../store/appContext";
@@ -7,6 +8,7 @@ import { Context } from "../store/appContext";
 
 export const NavbarLogin = () => {
   const { store, actions } = useContext(Context);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const Swal = require('sweetalert2')
   const handleLogout = () => {
     actions.logout();
@@ -18,7 +20,7 @@ export const NavbarLogin = () => {
   function handleClick(event) {
     // Prevenir la navegación predeterminada
     event.preventDefault();
-  
+
     // Mostrar la alerta de SweetAlert
     Swal.fire({
       title: '¡Próximamente disponible!',
@@ -26,6 +28,33 @@ export const NavbarLogin = () => {
       confirmButtonText: 'Entendido'
     });
   }
+
+  const handleDeactivateAccount = (event) => {
+    event.preventDefault();
+    setShowConfirmation(true);
+  }
+
+  const confirmDeactivateAccount = () => {
+
+    fetch(`${process.env.BACKEND_URL}/api/deactivate_account`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          actions.logout();
+
+          window.location.href = "/login";
+        } else {
+          console.error('Error deactivating account. Please, contact our support');
+        }
+      })
+      .catch(error => console.error("Error deactivating account:", error));
+    setShowConfirmation(false);
+  };
 
   return (
     <nav className="navbar navbar-dark bg-dark px-5">
@@ -105,13 +134,13 @@ export const NavbarLogin = () => {
               </Link>
             </li>
             <li className="nav-item">
-      {/* Utiliza una función para manejar el evento onClick */}
-      <Link to="/vistaProfile" onClick={handleClick} className="nav-link color-text-nav">
-        <i className="pe-2 color-text fa-solid fa-heart-circle-plus"></i>Mis Seguidores
-      </Link>
-    </li>
+              {/* Utiliza una función para manejar el evento onClick */}
+              <Link to="/vistaProfile" onClick={handleClick} className="nav-link color-text-nav">
+                <i className="pe-2 color-text fa-solid fa-heart-circle-plus"></i>Mis Seguidores
+              </Link>
+            </li>
             <li className="nav-item">
-            <Link to="/vistaProfile" onClick={handleClick} className="nav-link color-text-nav">
+              <Link to="/vistaProfile" onClick={handleClick} className="nav-link color-text-nav">
                 <i className="pe-2 color-text fa-solid fa-user-plus"></i>A Quién Sigo
               </Link>
             </li>
@@ -147,8 +176,24 @@ export const NavbarLogin = () => {
             </form>
             <form className="mt-2 d-flex color-text drop-nav" role="search">
               <h6>Dar de baja mi cuenta</h6>
-              <button className="btn btn-outline-danger" type="submit"><i className="avatar-login fa-solid fa-user-large-slash"></i></button>
+              <button className="btn btn-outline-danger" type="button" onClick={(event) => handleDeactivateAccount(event)}><i className="avatar-login fa-solid fa-user-large-slash"></i></button>
             </form>
+            <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Confirmación</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p>¿Estás seguro de que deseas desactivar tu cuenta? ¡Una vez hecho no podrás recuperarla!</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="danger" onClick={confirmDeactivateAccount}>
+                  Confirmar
+                </Button>
+                <Button variant="secondary" onClick={() => setShowConfirmation(false)}>
+                  Cancelar
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
         </div>
       </div>

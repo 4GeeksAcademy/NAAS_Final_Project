@@ -479,6 +479,34 @@ def crate_event():
     except Exception as e:
         return {"message": "Error creating event", "error": str(e)}, 500
 
+@api.route('/event/update', methods=['PUT'])
+@jwt_required()
+def update_event():
+    try:
+        current_user_id = get_jwt_identity()
+        event_id = request.json.get('event_id')
+        new_data = request.json.get('new_data', {})
+        
+        event = Events.query.get(event_id)
+        
+        if not event:
+            return jsonify({'msg': 'Evento no encontrado'}), 404
+        
+        # Actualizar los campos del evento con los nuevos datos
+        event.name = new_data.get('name', event.name)
+        event.description = new_data.get('description', event.description)
+        event.category_id = new_data.get('category_id', event.category_id)
+        event.start_date = new_data.get('start_date', event.start_date)
+        event.end_date = new_data.get('end_date', event.end_date)
+
+        db.session.commit()
+
+        updated_event_data = event.serialize()  # Serializar el evento actualizado
+        return jsonify(updated_event_data), 200
+    
+    except Exception as e: 
+        return jsonify({'error': str(e)}), 500
+
 
 # Agregar evento al usuario
 @api.route('/events/<int:event_id>/join', methods=['POST'])
@@ -679,3 +707,19 @@ def update_photo_like(photo_id):
     
     except Exception as e: 
         return jsonify({'error': str(e)}),500
+
+@api.route('/deactivate_account', methods=['POST'])
+@jwt_required()
+def deactivate_account():
+    current_user_id = get_jwt_identity()
+
+    user = Users.query.get(current_user_id)
+
+    if user is None:
+        return jsonify({'msg': 'User not found'}), 404
+
+    user.is_active = False
+    db.session.commit()
+
+    return jsonify({'msg': 'Account deactivated successfully!'}), 200
+

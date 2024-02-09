@@ -1,14 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Timer } from "../component/Timer";
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import checkTokenAndRedirect from "../utils/checkToken"
 import 'react-toastify/dist/ReactToastify.css';
 
 export const ActiveEvents = () => {
     const { store, actions } = useContext(Context);
     const [isUserJoined, setIsUserJoined] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkToken = () => {
+            const token = sessionStorage.getItem('token'); // Obtener el token aquí
+            const isValidToken = checkTokenAndRedirect(token);
+            if (!isValidToken) {
+                toast.error('¡Debe volver a iniciar sesión!');
+                navigate('/login');
+            }
+        };
+    
+        checkToken();
+    }, []);
 
     useEffect(() => {
         actions.getAllEvents();

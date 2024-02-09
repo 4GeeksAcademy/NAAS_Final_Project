@@ -112,6 +112,9 @@ def login():
     check_password = bcrypt.check_password_hash(user.password, body['password'])
     if not check_password:
         return jsonify({'msg': 'Invalid email or password'}), 400
+
+    if not user.is_active:
+        return jsonify({'msg': 'Invalid email or password'}), 400
     
     # Generar el token con la expiración configurada
     access_token = create_access_token(identity=user.id, additional_claims={'role': user.role}, expires_delta=ACCESS_TOKEN_EXPIRATION)

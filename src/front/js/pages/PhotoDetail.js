@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useContext, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import {useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import checkTokenAndRedirect from "../utils/checkToken"
 
 const PhotoDetail = () => {
     const { photoUrl, name, description } = useParams();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkToken = () => {
+            const token = sessionStorage.getItem('token'); // Obtener el token aquí
+            const isValidToken = checkTokenAndRedirect(token);
+            if (!isValidToken) {
+                toast.error('¡Debe volver a iniciar sesión!');
+                navigate('/login');
+            }
+        };
+
+        checkToken();
+    }, []);
 
     return (
         <div className="container">
