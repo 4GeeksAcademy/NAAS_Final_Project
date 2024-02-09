@@ -1,19 +1,35 @@
 import React, { useContext, useState, useEffect } from "react"
 import { Context } from "../store/appContext"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import checkTokenAndRedirect from "../utils/checkToken"
 import "../../styles/events.css"
 
 export const Eventos = () => {
     const { store, actions } = useContext(Context);
     const [userJoinedEvents, setUserJoinedEvents] = useState([])
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkToken = () => {
+            const token = sessionStorage.getItem('token'); // Obtener el token aquí
+            const isValidToken = checkTokenAndRedirect(token);
+            if (!isValidToken) {
+                toast.error('¡Debe volver a iniciar sesión!');
+                navigate('/login');
+            }
+        };
+    
+        checkToken();
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
             const events = await actions.getUserJoinedEvent();
             setUserJoinedEvents(events);
         };
-    
+
         fetchData();
     }, [actions.getUserJoinedEvent]);
 
@@ -66,18 +82,18 @@ export const Eventos = () => {
                                 </button>
                             </div>
                         </div>
-                    <div>
-                    </div>
+                        <div>
+                        </div>
                     </div>
                 ))
             ) : (
                 <div className="d-flex  flex-column justify-content-center mt-2 mb-2">
                     <p style={{ color: "white", margin: "0 auto" }}>No estás registrado en ningún evento.</p>
-                    <Link to={"/events"} style={{margin: "0 auto"}}>
-                    <button className="btn color-call" style={{ color: "white", marginTop: "10px" }}>
-                        <i className="fa-solid fa-plus" style={{ color: "#ffffff" }} />
-                        Ver eventos
-                    </button>
+                    <Link to={"/events"} style={{ margin: "0 auto" }}>
+                        <button className="btn color-call" style={{ color: "white", marginTop: "10px" }}>
+                            <i className="fa-solid fa-plus" style={{ color: "#ffffff" }} />
+                            Ver eventos
+                        </button>
                     </Link>
                 </div>
             )}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
-import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import checkTokenAndRedirect from "../utils/checkToken";
 
 const ImageUpload = () => {
   const [userId, setUserId] = useState(null);
@@ -11,18 +11,18 @@ const ImageUpload = () => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
-  const token = sessionStorage.getItem('token');
-  
   useEffect(() => {
-    
-    if (!token) {
-      console.error('User not authenticated');
-      toast.error('User not authenticated');
-      navigate('/');
-    } else {
-      const decodedToken = jwtDecode(token);
-      setUserId(decodedToken.sub);
-    }
+
+    const checkToken = () => {
+      const token = sessionStorage.getItem('token'); // Obtener el token aquí
+      const isValidToken = checkTokenAndRedirect(token);
+      if (!isValidToken) {
+        toast.error('¡Debe volver a iniciar sesión!');
+        navigate('/login');
+      }
+    };
+
+    checkToken();
 
     fetchEventsAndCategories();
   }, []);
