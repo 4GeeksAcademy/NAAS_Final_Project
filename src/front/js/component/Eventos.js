@@ -20,14 +20,26 @@ export const Eventos = () => {
                 navigate('/login');
             }
         };
-    
+
         checkToken();
     }, []);
 
     useEffect(() => {
         const fetchData = async () => {
-            const events = await actions.getUserJoinedEvent();
-            setUserJoinedEvents(events);
+            try {
+                const events = await actions.getUserJoinedEvent();
+                setUserJoinedEvents(events);
+            } catch (error) {
+                console.error('Error fetching user events:', error);
+                if (error.response && error.response.status === 404) {
+                    console.log('No se encontraron eventos para el usuario.');
+                    // Puedes mostrar un mensaje al usuario o realizar otra acción según sea necesario
+                } else {
+                    // Manejar otros errores de manera adecuada
+                    // Por ejemplo, mostrar una notificación de error al usuario
+                    toast.error('Ocurrió un error al cargar los eventos del usuario. Por favor, inténtalo de nuevo más tarde.');
+                }
+            }
         };
 
         fetchData();
