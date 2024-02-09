@@ -79,47 +79,23 @@ const UpdateEvent = ({ eventId }) => {
     }, []);
 
     const handleEditEvent = (eventId) => {
-        const eventToEdit = events.find(event => event.id === eventId);
-        setFormData({
-            name: eventToEdit.name,
-            description: eventToEdit.description,
-            category_id: eventToEdit.category_id,
-            start_date: eventToEdit.start_date,
-            end_date: eventToEdit.end_date
-        });
-        setShowEditForm(true);
+        // const eventToEdit = events.find(event => event.id === eventId);
+        // setFormData({
+        //     name: eventToEdit.name,
+        //     description: eventToEdit.description,
+        //     category_id: eventToEdit.category_id,
+        //     start_date: eventToEdit.start_date,
+        //     end_date: eventToEdit.end_date
+        // });
+        // setShowEditForm(true);
+        toast.info('Proximamente');
     };
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    //     // Verificar si eventId está definido
-    //     if (!eventId) {
-    //         console.error('El ID del evento no está definido');
-    //         return;
-    //     }
-
-    //     try {
-    //         const response = await fetch(`${process.env.BACKEND_URL}/api/events/${eventId}`, {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(formData)
-    //         });
-
-    //         if (!response.ok) {
-    //             throw new Error('Error al actualizar el evento');
-    //         }
-
-    //         toast.success('Evento actualizado exitosamente');
-    //         setShowEditForm(false);
-    //         // Puedes agregar aquí cualquier otra lógica necesaria después de actualizar el evento, como recargar la lista de eventos, etc.
-    //     } catch (error) {
-    //         console.error('Error al actualizar el evento:', error.message);
-    //         toast.error('Error al actualizar el evento. Por favor, intenta de nuevo.');
-    //     }
-    // };
+        toast.info('Proximamente');
+    };
 
     return (
         <div className="container">
@@ -142,7 +118,7 @@ const UpdateEvent = ({ eventId }) => {
                             <td>{event.id}</td>
                             <td>{event.name}</td>
                             <td>{event.description}</td>
-                            <td>{event.category_id}</td>
+                            <td>{event.photo_category ? event.photo_category : 'Sin categoría'}</td>
                             <td>{event.start_date}</td>
                             <td>{event.end_date}</td>
                             <td>
