@@ -1,0 +1,131 @@
+.ranking{
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+  background-color: #2B2B2B;
+  color: white;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+.content-container {
+  height: 400px; 
+  overflow-y: auto; /* Agrega un scroll si el contenido es más grande que el contenedor */
+}
+
+.tabs-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; 
+  }
+  
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #ffffff; 
+  }
+  
+  button.active {
+    border-bottom: 2px solid #007bff;
+  }
+
+  .ranking-container {
+    margin-top: 20px;
+    background-color: #3B3B3B;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    color: rgb(255, 255, 255);
+    height: 60px;
+    border-radius: 30px;
+    padding: 0 20px;
+}
+
+.ranking-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.ranking-numbers {
+    display: flex;
+    gap: 50px;
+    margin-right: 50px;
+}
+
+.ranking-circle {
+    width: 30px; 
+    height: 30px; 
+    background-color: #64C247; 
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; 
+}
+
+
+.ranking-circle p {
+    margin: 0;
+}
+/* encabezado */
+.user-info {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: transparent; 
+  color: #858584; 
+  border: 1px solid #858584; 
+  border-radius: 30px;
+  align-items: baseline;
+ 
+}
+
+
+.user-stats {
+  /* margin-right: 50px; */
+  display: flex;
+  gap: 20px;
+}
+
+body {
+  background:#3b3b3b;
+}
+
+/* Media query para móviles (hasta 767px) */
+@media screen and (max-width: 767px) {
+
+  /* Ajustes específicos para la sección especial en móviles */
+  .mobile-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centra horizontalmente */
+      justify-content: center; /* Centra verticalmente */
+      text-align: center;
+      width: 100%;
+      padding: 10px;
+  }
+
+  .ghost{
+      display: none;
+  }
+
+  .no-pad{
+      padding: 10px !important;
+  }
+  .no-mar{
+      margin: 10px !important;
+  }
+
+  .ranking-container{
+    gap: 0px;
+    height: auto;
+  }
+  .ranking {
+    margin: 0px;
+  }
+}

@@ -1,0 +1,144 @@
+.terms-conditions {
+    box-sizing: border-box;
+    background-color: #3b3b3b;
+    width: 100%;
+    padding: 20px;
+}
+
+
+/* Titles */
+.main-title, .secondary-title, .third-title {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: color 0.3s ease;
+    animation: fadeInTitle 0.5s ease forwards;
+    position: relative;
+}
+
+@keyframes fadeInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-title::after, .secondary-title::after, .third-title::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color:#64C247;
+    transition: width 0.3s ease;
+}
+
+.main-title:hover::after, .secondary-title:hover::after, .third-title:hover::after {
+    width: 80%;
+}
+
+/* Accordion Box */
+.accordion-item {
+    background: #E8F0FE;
+    border: 1px solid #dee2e6;
+    margin-bottom: 10px;
+}
+
+/* Accordion Storage of Text */
+
+.accordion-body ul{
+    list-style: disc;
+    text-align: left;
+    padding: 10px 20px;
+}
+
+
+/* Accordion Text Itself */
+
+.accordion-body ul li {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #3b3b3b;
+    transition: 0.3s ease;
+    opacity: 0;
+    animation: fadeInListItem 0.5s ease forwards;
+}
+
+@keyframes fadeInListItem {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.accordion-body ul li:last-child {
+    margin-bottom: 10px;
+}
+
+/* Box Itself */
+.accordion-button {
+    padding: 20px;
+    font-size: 17px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+}
+
+
+.accordion-button:hover {
+    background-color: #64C247;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-title:hover, .secondary-title:hover, .third-title:hover {
+    color: #64C247;
+    transform: scale(1.1);
+}
+
+.accordion-collapse {
+    transition: height 0.3s ease;
+}
+
+.accordion-button.collapsed + .accordion-collapse {
+    height: 0;
+}
+
+.accordion-item:hover {
+    background-color: #e1e1e1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(100, 194, 71, 0.5);
+}
+
+.accordion-button::after{
+    transition: transform 0.2s ease-in-out; /*Add Transition to Transform*/
+    transform: rotate(0deg); /*Start with the arrow pointed downwards*/
+}
+
+.accordion-button.collapsed::after{
+    transform: rotate(180deg); /*Rotate the arrow upwards when collapsed*/
+}
+
+.accordion-button:not(.collapsed)::after{
+    transform: rotate(0deg); /*Rotate the arrow upwards when expanded */
+}
+
+
