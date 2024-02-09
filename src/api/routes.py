@@ -195,6 +195,36 @@ def create_photos():
     except Exception as e:
         print("Error:", str(e))
         return jsonify({'msg': str(e)}), 500
+#borrar foto de cloudinary y de la bbdd
+@api.route('/delete-photo/<int:photo_id>', methods=['DELETE'])
+@jwt_required()
+def delete_photo(photo_id):
+    try:
+        # Obtén la foto de la base de datos
+        photo = Photos.query.get(photo_id)
+        if photo is None:
+            return jsonify({'msg': 'Photo not found'}), 404
+
+        # Obtén la URL de la imagen desde la base de datos
+        # img_url = photo.img_url
+
+        # # Elimina la imagen de Cloudinary
+        # cloudinary_response = cloudinary.uploader.destroy(img_url)
+        # if cloudinary_response.get('result') != 'ok':
+        #     return jsonify({'msg': 'Failed to delete photo from Cloudinary'}), 500
+
+        # Elimina la foto de la base de datos
+        db.session.delete(photo)
+        db.session.commit()
+
+        return jsonify({'msg': 'Photo deleted successfully'}), 200
+
+    except Exception as e:
+        print("Error:", str(e))
+        return jsonify({'msg': str(e)}), 500
+
+
+
 
 ##traer datos de mi foto por id 
 @api.route('/get-photo/<int:photo_id>', methods=['GET'])

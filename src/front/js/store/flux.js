@@ -275,11 +275,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Content-Type": "application/json",
                         }
                     });
-            
+
                     if (!response.ok) {
                         throw new Error(`Error: ${response.status}`);
                     }
-            
+
                     const data = await response.json();
                     setStore({ userDataById: data });
                 } catch (error) {
@@ -349,7 +349,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     // Verificar si se recibieron fotos
                     if (data && data.photos && data.photos.length > 0) {
                         setStore({ userPhotosData: data.photos });
-                        
+
                     } else {
                         console.log("No se encontraron fotos para el usuario");
                     }
@@ -359,13 +359,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getAllPhotosWithData: async () => {
                 try {
-                    
+
 
                     const response = await fetch(`${process.env.BACKEND_URL}/api/get-all-photos`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
-                    
+
                         }
                     });
 
@@ -374,30 +374,30 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
 
                     const data = await response.json();
-        
+
                     setStore({ allPhotosData: data.photos })
-                
+
                 } catch (error) {
                     console.error('Error fetching photos:', error);
 
                 }
 
             },
-            getEventPhotos: async(event_id) => {
-                try{
+            getEventPhotos: async (event_id) => {
+                try {
                     const token = sessionStorage.getItem('token')
 
-                    if(!token){
+                    if (!token) {
                         console.error("token not found");
                         return
                     }
 
-                    if(!event_id){
+                    if (!event_id) {
                         console.log("event_id not found")
                         return
                     }
 
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/get-event-photos/${event_id}`,{
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/get-event-photos/${event_id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -414,22 +414,52 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                         throw new Error(`Status": ${response.status}`);
                     }
-            
+
                     const data = await response.json()
-                    if(data && data.photos && data.photos.length > 0){
-                        setStore({eventPhotos: data.photos})
-                       
+                    if (data && data.photos && data.photos.length > 0) {
+                        setStore({ eventPhotos: data.photos })
+
                     } else {
                         console.log("photos and data not found")
                     }
-                } catch (error){
-                   console.error("Error fetching event photos:", error)
+                } catch (error) {
+                    console.error("Error fetching event photos:", error)
                 }
             },
             setEventPhotos: (photos) => {
                 setStore({ eventPhotos: photos });
             },
+            deletePhotoById: async (photoId) => {
+                try {
+                    const token = sessionStorage.getItem('token');
+                    if (!token) {
+                        console.error("Token not found");
+                        return;
+                    }
+
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/delete-photo/${photoId}`,{
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    })
+                    if (!response.ok) {
+                        throw new Error(`Status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log(data.msg)
+                    return data
+                } catch (error) {
+                    console.error("Error deleting photo:", error);
+                    throw error
+                }
+            },
+            setUserPhotosData: (photosData) => {
+                setStore({ userPhotosData: photosData });
+              },
         }
     }
 }
-export default getState;
+    export default getState;
