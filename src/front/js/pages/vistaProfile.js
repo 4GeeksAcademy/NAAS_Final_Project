@@ -5,6 +5,7 @@ import { PhotoCard } from "../component/PhotoCard";
 import { Logros } from "../component/logros";
 import { Eventos } from "../component/Eventos";
 import { Favoritos } from "../component/Favoritos";
+import { PhotoCard1 } from "../component/PhotoCard1";
 
 import { PhotosUser } from "../component/photosUser";
 import { testData1, testData3 } from "../component/testData";

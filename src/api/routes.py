@@ -257,12 +257,10 @@ def get_user_photos(user_id):
     except Exception as e:
         return jsonify({'msg': str(e)}), 500
     
-#traer todas las fotos de la bbdd (para galeria)
+## Define el nuevo endpoint en tu Blueprint existente
 @api.route('/get-all-photos', methods=['GET'])
-@jwt_required()
 def get_all_photos():
     try:
-       
         all_photos = Photos.query.all()
 
         if not all_photos:
@@ -573,3 +571,77 @@ def update_user_data():
     
     except Exception as e: 
         return jsonify({'error': str(e)}),500
+
+
+
+
+
+
+# Obtener todas las fotos
+@api.route('/photos', methods=['GET'])
+def get_alls_photos():
+    photos = Photo.query.all()
+    serialized_photos = [photo.serialize() for photo in photos]
+    return jsonify(serialized_photos)
+
+# Obtener una foto específica por su ID
+@api.route('/photo/<int:photo_id>', methods=['GET'])
+def get_photo(photo_id):
+    photo = Photo.query.get(photo_id)
+    if not photo:
+        return jsonify({"message": "Photo not found"}), 404
+    return jsonify(photo.serialize())
+
+# Crear una nueva foto
+@api.route('/photos', methods=['POST'])
+@jwt_required()
+def create_photo():
+    data = request.get_json()
+    try:
+        photo = Photo(
+            name=data['name'],
+            img_url=data['img_url'],
+            description=data['description'],
+            category_id=data['category_id'],
+            user_id=data['user_id'],
+            event_id=data['event_id']
+        )
+        db.session.add(photo)
+        db.session.commit()
+        return jsonify(photo.serialize()), 201
+    except KeyError:
+        return jsonify({"message": "Invalid data provided"}), 400
+
+# Actualizar una foto existente por su ID
+@api.route('/photo/<int:photo_id>', methods=['PUT'])
+@jwt_required()
+def update_photo(photo_id):
+    photo = Photo.query.get(photo_id)
+    if not photo:
+        return jsonify({"message": "Photo not found"}), 404
+
+    data = request.get_json()
+    try:
+        photo.name = data['name']
+        photo.img_url = data['img_url']
+        photo.description = data['description']
+        photo.category_id = data['category_id']
+        photo.user_id = data['user_id']
+        photo.event_id = data['event_id']
+
+        db.session.commit()
+        return jsonify(photo.serialize()), 200
+    except KeyError:
+        return jsonify({"message": "Invalid data provided"}), 400
+
+# Eliminar una foto por su ID
+@api.route('/photo/<int:photo_id>', methods=['DELETE'])
+@jwt_required()
+def delete_photo(photo_id):
+    photo = Photo.query.get(photo_id)
+    if not photo:
+        return jsonify({"message": "Photo not found"}), 404
+
+    db.session.delete(photo)
+    db.session.commit()
+    return jsonify({"message": "Photo deleted successfully"}), 200

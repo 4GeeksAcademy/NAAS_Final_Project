@@ -1,4 +1,6 @@
 import React from "react";
+import { testData1 } from "../component/testData";
+const API_URL = process.env.BACKEND_URL;
 
 const getState = ({ getStore, getActions, setStore }) => {
     const isUserAlreadyRegistered = (event_id, userEvents) => {
@@ -32,11 +34,54 @@ const getState = ({ getStore, getActions, setStore }) => {
             userJoinedEvent: false,
             userData: [],
             userPhotosData: [],
+            top: [],
+            photos: [],
         },
         actions: {
             exampleFunction: () => {
                 getActions().changeColor1(0, "green");
             },
+            
+            
+            // Añade la función para obtener todas las fotos de todos los usuarios desde el backend
+getAllPhotos: async () => {
+    try {
+        const response = await fetch(`${process.env.BACKEND_URL}/api/photos`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Verificar si se recibieron fotos
+        if (data && data.photos && data.photos.length > 0) {
+            // Actualizar el estado de las fotos en la tienda
+            setStore({ userPhotosData: data.photos });
+        } else {
+            console.log("No se encontraron fotos en la base de datos");
+        }
+    } catch (error) {
+        console.error("Error fetching photos from database:", error);
+    }
+},
+
+            
+            loadTestData1: () => {
+                // Simplemente establece los datos de testData1 en el almacén bajo la propiedad 'top'
+                setStore({ top: testData1 });
+            },
+            // Dentro de tu archivo de contexto o flux
+setTestData : (updatedTestData) => {
+    // Actualiza el estado de testData con el nuevo valor
+    setStore({ testData: updatedTestData });
+  },
+
             addFavoritePhoto: (photo) => {
                 const store = getStore();
                 const updatedFavorites = store.favorites.some((fav) => fav.index === photo.index)
@@ -236,33 +281,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return [];
                 }
             },
-            getUserData: async () => {
-                try {
-                    const token = sessionStorage.getItem('token');
-
-                    if (!token) {
-                        console.error("Token no encontrado en sessionStorage");
-                        return;
-                    }
-
-                    const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Status: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    setStore({ userData: data });
-                } catch (error) {
-                    console.error("Error:", error);
-                }
-            },
+            
             updateUserData: async (UserData) => {
                 try {
                     const token = sessionStorage.getItem('token');
@@ -293,20 +312,48 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
+            getUserData: async () => {
+                try {
+                    const token = sessionStorage.getItem('token');
+            
+                    if (!token) {
+                        console.error("Token no encontrado en sessionStorage");
+                        return;
+                    }
+            
+                    const response = await fetch(process.env.BACKEND_URL + "/api/user-data", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+            
+                    if (!response.ok) {
+                        throw new Error(`Status: ${response.status}`);
+                    }
+            
+                    const data = await response.json();
+                    setStore({ userData: data }); // Corregido para almacenar los datos del usuario correctamente
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            },
+            
             getUserPhotosData: async (user_id) => {
                 try {
                     const token = sessionStorage.getItem('token');
-
+            
                     if (!token) {
                         console.error("Token not found");
                         return;
                     }
-
+            
                     if (!user_id) {
                         console.error("User ID not found");
                         return;
                     }
-
+            
                     const response = await fetch(`${process.env.BACKEND_URL}/api/get-user-photos/${user_id}`, {
                         method: "GET",
                         headers: {
@@ -314,22 +361,39 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Authorization": `Bearer ${token}`
                         }
                     });
-
+            
                     if (!response.ok) {
                         throw new Error(`Status: ${response.status}`);
                     }
-
+            
                     const data = await response.json();
-
+            
                     // Verificar si se recibieron fotos
                     if (data && data.photos && data.photos.length > 0) {
-                        setStore({ userPhotosData: data.photos });
+                        setStore({ userPhotosData: data.photos }); // Corregido para almacenar las fotos del usuario correctamente
                     } else {
                         console.log("No se encontraron fotos para el usuario");
                     }
                 } catch (error) {
                     console.error("Error fetching user photos:", error);
                 }
+            },
+            toggleGlobalStyle: (className, targetSelector) => {
+                const isStyleActive = !getStore().isStyleActive;
+                const elements = document.querySelectorAll(targetSelector);
+            
+                if (isStyleActive) {
+                    elements.forEach(element => {
+                        element.classList.add(className);
+                    });
+                } else {
+                    elements.forEach(element => {
+                        element.classList.remove(className);
+                    });
+                }
+            
+                localStorage.setItem("isStyleActive", isStyleActive.toString());
+                setStore({ isStyleActive });
             },
         }
     };

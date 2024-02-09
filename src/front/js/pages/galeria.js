@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { PhotoCard } from "../component/PhotoCard";
-import { testData1, testData4, testData5, testData6 } from "../component/testData";
+import { PhotoCard1 } from "../component/PhotoCard1";
+import { testData1 } from "../component/testData";
 
 export const Galeria = () => {
   const { store, actions } = useContext(Context);
 
   // Combina los datos de testData1, testData4 y testData5 en un solo array
-  const allPhotos = [...testData1, ...testData4, ...testData5, testData6];
+  const allPhotos = [...testData1];
 
   // Define el número de tarjetas por fila y tarjetas por página
   const cardsPerRow = 3;
@@ -47,7 +47,7 @@ export const Galeria = () => {
         <div className="e-claro row justify-content-center">
           {currentPhotos.map((data, index) => (
             <div key={index} className={`col-md-${12 / cardsPerRow} mb-4`}>
-              {/* <PhotoCard {...data} style={{ maxWidth: "100%" }} /> */}
+              <PhotoCard1 {...data} style={{ maxWidth: "100%" }} />
             </div>
           ))}
         </div>

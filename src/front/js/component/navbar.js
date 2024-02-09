@@ -5,6 +5,7 @@ import { NavbarLoginAdmin } from "./navbarLoginAdmin";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { ScrollToTopButton, GoBackButton } from '../component/Buttons';
 
 export const Navbar = () => {
     const { store, actions } = useContext(Context);
@@ -67,7 +68,7 @@ export const Navbar = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/ranking-photo" className="nav-link active color-text-nav">
+                        <Link to="/top" className="nav-link active color-text-nav">
                             <i className="pe-2 fa-solid fa-store"></i>Ranking
                         </Link>
                     </li>
@@ -93,7 +94,6 @@ export const Navbar = () => {
             {/* Renderiza el componente del usuario o el administrador según el estado */}
             {store.isUserLoggedIn && <NavbarLogin onNavbarChange={() => actions.isUserLoggedIn(false)} />}
             {store.isAdminLoggedIn && <NavbarLoginAdmin onNavbarChange={() => actions.isAdminLoggedIn(false)} />}
-
 
         </nav >
     );
