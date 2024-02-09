@@ -20,6 +20,58 @@
     height: 75vh;
     object-fit: cover;
 }
+
+.img-rank {
+    width: 100px;
+    height: 75px;
+    object-fit: cover;
+}
+
+/* .photo-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .photo-card {
+    width: calc(33.333% - 20px); 
+    max-width: 250px; 
+    margin-bottom: 20px;
+  }
+  
+  .photo-card .card-img-top {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+  } */
+  
+  
+
+.img-rank1 {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+.div-rank {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-center;
+    color: white;
+    border-radius: 5%;
+    background-color: #2B2B2B;
+    margin: 10px;
+    align-content: center;
+}
+.go-back-btn {
+    position: fixed;
+    left: 20px;
+    top: 150px;
+    z-index: 9999;
+
+}
+
 .color-back{
     background: #2B2B2B;
 }
@@ -103,14 +155,6 @@ linear-gradient(128.15deg, #59FF7E 49.75%, #377DF7 136.56%);
     color:rgb(192, 192, 192); /* Establece el color al pasar el ratón sobre el enlace */
     text-decoration: underline
   }
-
-.nav-link {
-    transition: transform 0.3s ease;
-}
-
-.nav-link:hover {
-    transform: scale(1.1);
-}
 
  /* Estilo inicial para los enlaces en vistaProfile */
 .select{
@@ -217,6 +261,13 @@ body, html {
         width: 90%;
         margin-top: 0vh;
     }
+    .photo-card-container {
+        justify-content: center;
+      }
+      .photo-card {
+        width: 100%; /* Tarjetas de ancho completo en dispositivos móviles */
+      }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1650px) {

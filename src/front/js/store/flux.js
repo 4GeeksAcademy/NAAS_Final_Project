@@ -1,4 +1,5 @@
 import React from "react";
+import { testData1 } from "../component/testData";
 
 const getState = ({ getStore, getActions, setStore }) => {
     const isUserAlreadyRegistered = (event_id, userEvents) => {
@@ -34,11 +35,96 @@ const getState = ({ getStore, getActions, setStore }) => {
             userDataById: [],
             userPhotosData: [],
             allPhotosData: [],
+            eventPhotos: [],
+            top: [],
+            newFavorites: {},
+            topLikedPhotos: [],
+
         },
         actions: {
             exampleFunction: () => {
                 getActions().changeColor1(0, "green");
             },
+
+            fetchTopLikedPhotos: async () => {
+                try {
+                  // Realizar la llamada a la API para obtener las 5 fotos más votadas
+                  const response = await fetch(`${process.env.BACKEND_URL}/api/top`);
+                  if (!response.ok) {
+                    throw new Error('Error fetching top liked photos');
+                  }
+                  const data = await response.json();
+                  
+                  // Actualizar el estado del store con las 5 fotos más votadas
+                  setStore({ topLikedPhotos: data });
+                } catch (error) {
+                  console.error('Error fetching top liked photos:', error);
+                }
+              },
+            
+            
+            
+            
+           updateFavorites : (newFavorites) => {
+                setStore({ ...store, favorites: newFavorites });
+            },
+              
+              
+            updatePhotoLikes: async (photoId, newLikesData) => {
+                try {
+                    const token = sessionStorage.getItem('token');
+                    if (!token) {
+                        console.error("Token no encontrado en sessionStorage");
+                        return;
+                    }
+            
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/update-photo-likes/${photoId}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                        body: JSON.stringify(newLikesData),
+                    });
+            
+                    if (!response.ok) {
+                        throw new Error(`Status: ${response.status}`);
+                    }
+            
+                    const updatedPhotoData = await response.json();
+                    console.log("Datos de la foto actualizados con éxito:", updatedPhotoData);
+                } catch (error) {
+                    console.error("Error al actualizar los likes de la foto:", error);
+                    throw error;
+                }
+            },
+            
+            toggleGlobalStyle: (className, targetSelector) => {
+                const isStyleActive = !getStore().isStyleActive;
+                const elements = document.querySelectorAll(targetSelector);
+            
+                if (isStyleActive) {
+                    elements.forEach(element => {
+                        element.classList.add(className);
+                    });
+                } else {
+                    elements.forEach(element => {
+                        element.classList.remove(className);
+                    });
+                }
+            
+                localStorage.setItem("isStyleActive", isStyleActive.toString());
+                setStore({ isStyleActive });
+            },
+            loadTestData1: () => {
+                // Simplemente establece los datos de testData1 en el almacén bajo la propiedad 'top'
+                setStore({ top: testData1 });
+            },
+            // Dentro de tu archivo de contexto o flux
+setTestData : (updatedTestData) => {
+    // Actualiza el estado de testData con el nuevo valor
+    setStore({ testData: updatedTestData });
+  },
             addFavoritePhoto: (photo) => {
                 const store = getStore();
                 const updatedFavorites = store.favorites.some((fav) => fav.index === photo.index)
@@ -381,6 +467,82 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
+            getEventPhotos: async (event_id) => {
+                try {
+                    const token = sessionStorage.getItem('token')
+
+                    if (!token) {
+                        console.error("token not found");
+                        return
+                    }
+
+                    if (!event_id) {
+                        console.log("event_id not found")
+                        return
+                    }
+
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/get-event-photos/${event_id}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            console.log("Event photos not found");
+                            // Si no se encuentran fotos para el evento, establecer eventPhotos como un array vacío
+                            setStore({ eventPhotos: [] });
+                            return;
+                        }
+                        throw new Error(`Status": ${response.status}`);
+                    }
+
+                    const data = await response.json()
+                    if (data && data.photos && data.photos.length > 0) {
+                        setStore({ eventPhotos: data.photos })
+
+                    } else {
+                        console.log("photos and data not found")
+                    }
+                } catch (error) {
+                    console.error("Error fetching event photos:", error)
+                }
+            },
+            setEventPhotos: (photos) => {
+                setStore({ eventPhotos: photos });
+            },
+            deletePhotoById: async (photoId) => {
+                try {
+                    const token = sessionStorage.getItem('token');
+                    if (!token) {
+                        console.error("Token not found");
+                        return;
+                    }
+
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/delete-photo/${photoId}`,{
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    })
+                    if (!response.ok) {
+                        throw new Error(`Status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log(data.msg)
+                    return data
+                } catch (error) {
+                    console.error("Error deleting photo:", error);
+                    throw error
+                }
+            },
+            setUserPhotosData: (photosData) => {
+                setStore({ userPhotosData: photosData });
+              },
         }
     }
 }

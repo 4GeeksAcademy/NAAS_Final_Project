@@ -41,7 +41,7 @@ export const AboutUs = () => {
                             Tu generosidad nos ayuda a mantener esta comunidad viva y en crecimiento. Cada donación, por pequeña que sea, contribuye a financiar eventos, premios y mejoras en nuestra plataforma para que podamos seguir inspirando y apoyando a la comunidad fotográfica. Únete a nosotros y sé parte de este viaje emocionante para promover la fotografía como forma de expresión y conexión.
                         </p>
                         <div className='d-flex justify-content-center'>
-                            <a href='https://www.buymeacoffee.com/snapify'>
+                            <a href='https://www.buymeacoffee.com/snapify'target='_blank'>
                                 <button type='button' className='btn about-us-btn text-white rounded-pill px-4 py-2'>¡Apóyenos!</button>
                             </a>
                         </div>

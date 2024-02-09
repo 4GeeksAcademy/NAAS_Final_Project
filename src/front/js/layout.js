@@ -31,6 +31,8 @@ import CreateEvent from "./pages/CreateEvent";
 import UpdateEvent from "./pages/UpdateEvent";
 import PhotoDetail from "./pages/PhotoDetail";
 import { AboutUs } from "./pages/AboutUs";
+import { TopLikedPhotos } from "./pages/TopLikedPhotos";
+
 
 const Layout = () => {
     const { store, actions } = useContext(Context);
@@ -56,7 +58,7 @@ const Layout = () => {
                         <Route element={<SignUpForm />} path="/signUp" />
                         <Route element={<ContactForm />} path="/contact" />
                         <Route element={<VistaProfile />} path="/vistaProfile" />
-                        <Route element={<PhotoDetail />} path="/photo-detail/:photoUrl" />
+                        <Route element={<PhotoDetail />} path="/photo-detail/:index" />
                         <Route element={<Ranking title="Top fotografias" description="Explore las fotografías de la comunidad mejor clasificados en la galería" />} path="/ranking-photo" />
                         <Route element={<Ranking title="Top creadores" description="Explore a los artistas de la comunidad mejor clasificados en la galería" />} path="/ranking-user" />
                         <Route element={<TermsAndConditions />} path="/terms" />
@@ -67,6 +69,7 @@ const Layout = () => {
                         <Route element={<CreateEvent />} path="/create-event" />
                         <Route element={<UpdateEvent />} path="/update-event" />
                         <Route element={<AboutUs />} path="/about-us" />
+                        <Route element={<TopLikedPhotos />} path="/top" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
@@ -78,3 +81,4 @@ const Layout = () => {
 };
 
 export default injectContext(Layout);
+

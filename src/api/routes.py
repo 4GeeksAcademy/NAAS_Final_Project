@@ -214,7 +214,8 @@ def get_photoData(photo_id):
             'description': photo.description,
             'category_id': photo.category_id,
             'user_id': photo.user_id,
-            'event_id': photo.event_id
+            'event_id': photo.event_id,
+            'like': photo.like
         }
 
         return jsonify({'msg': 'ok', 'photo': photo_data}), 200
@@ -249,7 +250,8 @@ def get_user_photos(user_id):
                 'description': photo.description,
                 'category_id': photo.category_id,
                 'user_id': photo.user_id,
-                'event_id': photo.event_id
+                'event_id': photo.event_id,
+                'like': photo.like
                           })
 
         return jsonify({'msg': 'ok', 'photos': serialized_photos}), 200
@@ -261,7 +263,6 @@ def get_user_photos(user_id):
 @api.route('/get-all-photos', methods=['GET'])
 def get_all_photos():
     try:
-       
         all_photos = Photos.query.all()
 
         if not all_photos:
@@ -276,7 +277,8 @@ def get_all_photos():
                 'description': photo.description,
                 'category_id': photo.category_id,
                 'user_id': photo.user_id,
-                'event_id': photo.event_id
+                'event_id': photo.event_id,
+                'like': photo.like
             })
 
         return jsonify({'msg': 'ok', 'photos': serialized_photos}), 200
@@ -633,3 +635,62 @@ def deactivate_account():
     db.session.commit()
 
     return jsonify({'msg': 'Account deactivated successfully!'}), 200
+
+
+    #actualizar datos de la foto(like)
+@api.route('/update-photo-likes/<int:photo_id>', methods=['PUT'])
+@jwt_required()
+def update_photo_like(photo_id):
+    try:
+        new_likes_data = request.json
+        photo = Photos.query.get(photo_id)
+
+        if not photo:
+            return jsonify({'msg': 'Photo not found'}), 404
+        
+        # Actualiza los likes de la foto
+        photo.like = new_likes_data.get('like', photo.like)  # Utiliza 'like' en lugar de 'likes'
+        db.session.commit()
+
+        updated_photo_data = {
+            'id': photo.id,
+            'name': photo.name,
+            'img_url': photo.img_url,
+            'description': photo.description,
+            'like': photo.like,  # Cambiado de 'likes' a 'like'
+        }
+
+        return jsonify(updated_photo_data), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+# Ruta para obtener las 5 fotos más votadas
+@api.route('/top', methods=['GET'])
+def get_top_liked_photos():
+    try:
+        # Consulta las 5 fotos más votadas ordenadas de menor a mayor
+        top_liked_photos = Photos.query.order_by(Photos.like.asc()).limit(5).all()
+
+        if not top_liked_photos:
+            return jsonify({'msg': 'No top liked photos found'}), 404
+
+        # Invierte la lista para obtener el orden de mayor a menor
+        top_liked_photos = top_liked_photos[::-1]
+
+        serialized_photos = []
+        for photo in top_liked_photos:
+            serialized_photos.append({
+                'id': photo.id,
+                'name': photo.name,
+                'img_url': photo.img_url,
+                'description': photo.description,
+                'like': photo.like,
+            })
+
+        return jsonify({'msg': 'ok', 'topLikedPhotos': serialized_photos}), 200
+
+    except Exception as e:
+        return jsonify({'msg': str(e)}), 500

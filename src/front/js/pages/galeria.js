@@ -35,7 +35,7 @@ export const Galeria = () => {
   };
 
   return (
-    <div className="e-claro container-fluid color-back mobile-column vista">
+    <div className="e-claro ">
       <div className="e-claro container-fluid color-back d-flex-column p-5 color-text">
         <h1 className="text-center pt-2 mt-5">Navegar En La Galeria</h1>
         <h3 className="text-center pt-2">Explore más de 50.000 Fotografías en nuestra galeria libre</h3>
@@ -46,13 +46,12 @@ export const Galeria = () => {
       </div>
       <div className="e-claro mobile-column container color-back2 p-2">
         <div className="e-claro row justify-content-center">
-          
-            <div  className={`col-md-${12 / cardsPerRow} mb-4`}>
-              {/* <PhotoCard {...data} style={{ maxWidth: "100%" }} /> */}
-              
-              <PhotoCardGallery/>
-            </div>
-             </div>
+          <div className={`col-md-${12 / cardsPerRow} mb-4`}>
+            {/* <PhotoCard {...data} style={{ maxWidth: "100%" }} /> */}
+            {/* Pasar las fotos como una propiedad al componente PhotoCardGallery */}
+            <PhotoCardGallery photos={store.allPhotosData}/>
+          </div>
+        </div>
       </div>
       <nav aria-label="Page navigation example" className="p-3">
         <ul className="pagination justify-content-center">

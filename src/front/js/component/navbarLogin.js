@@ -4,6 +4,7 @@ import { Modal, Button } from "react-bootstrap"
 import "../../styles/background.css";
 import rigoImageUrl from "../../img/logo1.jpeg";
 import { Context } from "../store/appContext";
+import { ScrollToTopButton, GoBackButton } from '../component/Buttons';
 
 
 export const NavbarLogin = () => {
@@ -76,7 +77,7 @@ export const NavbarLogin = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/ranking-photo" className="nav-link active color-text-nav">
+            <Link to="/top" className="nav-link active color-text-nav">
               <i className="pe-2 fa-solid fa-store"></i>Ranking
             </Link>
           </li>
@@ -197,6 +198,10 @@ export const NavbarLogin = () => {
           </div>
         </div>
       </div>
+      <div>
+            {/* Botón para volver a la página anterior */}
+            <GoBackButton />
+            </div>
     </nav>
   );
 };

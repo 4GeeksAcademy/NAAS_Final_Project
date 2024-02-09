@@ -6,6 +6,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
+
 export const Navbar = () => {
     const { store, actions } = useContext(Context);
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -67,7 +68,7 @@ export const Navbar = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/ranking-photo" className="nav-link active color-text-nav">
+                        <Link to="/top" className="nav-link active color-text-nav">
                             <i className="pe-2 fa-solid fa-store"></i>Ranking
                         </Link>
                     </li>
