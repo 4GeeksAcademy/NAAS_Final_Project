@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 export const PhotoCard = (props) => {
   const { store, actions } = useContext(Context);
 
- 
 
   useEffect(() => {
     const fetchUserDataAndPhotos = async () => {
@@ -27,7 +26,7 @@ export const PhotoCard = (props) => {
     };
     
     // Si store.userData.id está definido, entonces llamar a fetchUserDataAndPhotos
-    if (store.userData.id) {
+    if (store.userData.id ) {
       fetchUserDataAndPhotos();
     } else {
       // Si userData.id no está definido, llamar a getUserData para obtenerlo
@@ -38,7 +37,8 @@ export const PhotoCard = (props) => {
   return (
 
     <div className="d-flex justify-content-center mx-2 bg-gra" style={{gap:"20px", flexWrap: "wrap"}}>
-     {store.userPhotosData.map((photo, index) => (
+    {store.userPhotosData.length > 0 ? (
+     store.userPhotosData.map((photo, index) => (
       <div key={index} className="card mb-2" style={{ width: "17rem" }}>
         <img src={photo.img_url} className="card-img-top" alt={`Photo ${index}`} />
         <div className="card-body color-back px-3">
@@ -87,24 +87,16 @@ export const PhotoCard = (props) => {
           </div>
         </div>
       </div>
-    ))}
+    ))) : (
+      <div className="text-center mt-5">
+                <p style={{color: "white"}}>Aún no tienes fotos subidas</p>
+            </div>
+    )}
   </div>
   
   );
 };
 
 
-// PhotoCard.propTypes = {
-//   photo: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   likes: PropTypes.number.isRequired,
-//   favorites: PropTypes.number.isRequired,
-//   photoUrl: PropTypes.string.isRequired, // Asegúrate de incluir photoUrl en las PropTypes
-// };
 
-
-// PhotoCard.defaultProps = {
-//   likes: 0,
-//   favorites: 0,
-// };
 

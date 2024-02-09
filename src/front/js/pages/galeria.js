@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { PhotoCard } from "../component/PhotoCard";
 import { testData1, testData4, testData5, testData6 } from "../component/testData";
+import { PhotoCardGallery } from "../component/PhotoCardGallery";
 
 export const Galeria = () => {
   const { store, actions } = useContext(Context);
 
   // Combina los datos de testData1, testData4 y testData5 en un solo array
-  const allPhotos = [...testData1, ...testData4, ...testData5, testData6];
+  // const allPhotos = [...testData1, ...testData4, ...testData5, testData6];
 
   // Define el número de tarjetas por fila y tarjetas por página
   const cardsPerRow = 3;
@@ -21,7 +22,7 @@ export const Galeria = () => {
   const endIndex = startIndex + cardsPerPage;
 
   // Filtra las fotos para mostrar solo el lote actual
-  const currentPhotos = allPhotos.slice(startIndex, endIndex);
+  // const currentPhotos = allPhotos.slice(startIndex, endIndex);
 
   // Función para cambiar a la siguiente página
   const nextPage = () => {
@@ -45,12 +46,13 @@ export const Galeria = () => {
       </div>
       <div className="e-claro mobile-column container color-back2 p-2">
         <div className="e-claro row justify-content-center">
-          {currentPhotos.map((data, index) => (
-            <div key={index} className={`col-md-${12 / cardsPerRow} mb-4`}>
+          
+            <div  className={`col-md-${12 / cardsPerRow} mb-4`}>
               {/* <PhotoCard {...data} style={{ maxWidth: "100%" }} /> */}
+              
+              <PhotoCardGallery/>
             </div>
-          ))}
-        </div>
+             </div>
       </div>
       <nav aria-label="Page navigation example" className="p-3">
         <ul className="pagination justify-content-center">
@@ -69,12 +71,12 @@ export const Galeria = () => {
               2
             </a>
           </li>
-          {/* Agrega más elementos de paginación según sea necesario */}
+          {/* Agrega más elementos de paginación según sea necesario
           <li className={`page-item ${endIndex >= allPhotos.length && "disabled"}`}>
             <a className="page-link" href="#" onClick={nextPage}>
               Siguiente
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>
