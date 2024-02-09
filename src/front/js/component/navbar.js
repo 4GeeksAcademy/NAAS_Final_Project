@@ -55,10 +55,10 @@ export const Navbar = () => {
                     </h4>
                 </div>
                 {/* Resto del contenido del Layout */}
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <button type="button" class="btn btn-outline-dark" onClick={handleToggleStyle}>Claro</button>
-                    <button type="button" class="btn btn-outline-dark" onClick={handleToggleStyle1}>Daltónico</button>
-                    <button type="button" class="btn btn-outline-dark" onClick={handleToggleStyle2}>Flash</button>
+                <div className="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" className="btn btn-outline-dark" onClick={handleToggleStyle}>Claro</button>
+                    <button type="button" className="btn btn-outline-dark" onClick={handleToggleStyle1}>Daltónico</button>
+                    <button type="button" className="btn btn-outline-dark" onClick={handleToggleStyle2}>Flash</button>
                 </div>
                 <ul className="nav justify-content-center">
                     <li className="nav-item">
