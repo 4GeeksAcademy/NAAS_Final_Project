@@ -29,15 +29,11 @@
         transform: scale(1);
     }
 
-    45% {
-        transform: scale(1.05);
-    }
-
-    55% {
+    50% {
         transform: scale(0.98);
     }
 
-    100% {
+    75% {
         transform: scale(1.02);
     }
 }
