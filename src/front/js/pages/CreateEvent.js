@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
+import "../../styles/createvent.css";
+
 const CreateEvent = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -88,38 +90,45 @@ const CreateEvent = () => {
 
     return (
         <div className="container">
-            <h2>Crear Nuevo Evento</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Nombre:</label>
-                    <input type="text" className="form-control" name="name" value={formData.name} onChange={handleChange} required />
+            <div className='row justify-content-center mt-3 mb-3'>
+                <div className='col-lg-6'>
+                    <div className='card p-5 shadow rounded custom-form text-white' style={{ backgroundColor: '#212529', borderRadius: '15px' }}>
+                        <h2 className='text-center mb-4 card-title' style={{ color: '#F75101', fontWeight: 'bold' }}>Crear Nuevo Evento</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>Nombre:</label>
+                                <input type="text" className="form-control custom-input" placeholder='Nombre del Evento' name="name" value={formData.name} onChange={handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label>Descripción:</label>
+                                <textarea className="form-control custom-input" name="description" placeholder='Descripción del Evento' value={formData.description} onChange={handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label>Categoría:</label>
+                                <select className="form-control custom-input" name="category_id" value={formData.category_id} onChange={handleChange} required>
+                                    <option value="">Selecciona una Categoría</option>
+                                    {categories.map(category => (
+                                        <option key={category.id} value={category.id}>
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label>Fecha de inicio:</label>
+                                <input type="datetime-local" className="form-control custom-input" name="start_date" value={formData.start_date} onChange={handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label>Fecha de fin:</label>
+                                <input type="datetime-local" className="form-control custom-input" name="end_date" value={formData.end_date} onChange={handleChange} required />
+                            </div>
+                            <div className='d-grid'>
+                                <button type="submit" className="btn btn-primary btn-block custom-btn mt-2">Crear Evento</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label>Descripción:</label>
-                    <textarea className="form-control" name="description" value={formData.description} onChange={handleChange} required />
-                </div>
-                <div className="form-group">
-                    <label>Categoría:</label>
-                    <select className="form-control" name="category_id" value={formData.category_id} onChange={handleChange} required>
-                        <option value="">Selecciona una categoría</option>
-                        {categories.map(category => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Fecha de inicio:</label>
-                    <input type="datetime-local" className="form-control" name="start_date" value={formData.start_date} onChange={handleChange} required />
-                </div>
-                <div className="form-group">
-                    <label>Fecha de fin:</label>
-                    <input type="datetime-local" className="form-control" name="end_date" value={formData.end_date} onChange={handleChange} required />
-                </div>
-
-                <button type="submit" className="btn btn-primary">Crear Evento</button>
-            </form>
+            </div>
         </div>
     );
 };

@@ -2,6 +2,9 @@
 
     General Styles used on every website (Don't Repeat Yourself)
 */
-body, html {
+body,
+html {
     overflow-y: auto;
 }
+
+
