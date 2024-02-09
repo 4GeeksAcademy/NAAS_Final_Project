@@ -53,13 +53,13 @@ const Login = ({ onLogin }) => {
 
         // Llama a la función proporcionada para actualizar el navbar
         onLogin(userRole);
-        
+
         console.log('Login successful!', responseJson);
         console.log('Token expiration in minutes:', expirationMinutes);
-        
+
         navigate("/vistaProfile")
         console.log('Inicio de sesión exitoso!', responseJson);
-        
+
       } else {
         toast.error(`${responseJson.msg}`);
         console.error('Error en el login:', responseJson.msg);
@@ -71,74 +71,74 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className='container d-flex justify-content-center mobile-column vista'>
-    <div className='contaniner-fluid d-flex justify-content-center color-back mobile-column'>
-      <div className='container-fluid d-flex-column mobile-column'>
-        <div className='container-fluid color-grad3 rounded-3'>
-          <div className="container d-flex-column text-center">
-            <div className=" color-text">
-              <h1 style={{ fontSize: "35px" }}>Bienvenido!</h1>
-              <h4 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h4>
-              <h2 className='color-text'>
-                Si aún no estas registrado
-                ingresa aquí
-              </h2>
-              <Link to="/signUp">
-                <button
-                  type="button"
-                  className="px-5 btn brd color-call color-text mb-5">
-                  <i className="pe-2 fa-solid fa-rocket"></i>Regístrese
-                </button>
-              </Link>
+    <div className='container d-flex justify-content-center mobile-column vista mb-3'>
+      <div className='contaniner-fluid d-flex justify-content-center color-back mobile-column' style={{ padding: '10px' }}>
+        <div className='container-fluid d-flex-column mobile-column p-4'>
+          <div className='container-fluid color-grad3 rounded-3'>
+            <div className="container d-flex-column text-center">
+              <div className=" color-text">
+                <h1 style={{ fontSize: "35px" }}>Bienvenido!</h1>
+                <h4 className="p-5 color-text">Ingresa para explorar y compartir tus momentos fotográfico</h4>
+                <h2 className='color-text'>
+                  Si aún no estas registrado
+                  ingresa aquí
+                </h2>
+                <Link to="/signUp">
+                  <button
+                    type="button"
+                    className="px-5 btn brd color-call color-text mb-5">
+                    <i className="pe-2 fa-solid fa-rocket"></i>Regístrese
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="login-container no-pad p-5 mobile-column">
-        <form onSubmit={handleSubmit} className="login-form mobile-column">
-          <h2 className='title'>Iniciar sesión</h2>
-          <div className="mb-3">
-            <div className="input-icon">
-              <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Dirección de correo electrónico"
-                value={formData.email}
-                onChange={handleChange}
+        <div className="login-container no-pad p-5 mobile-column mb-4">
+          <form onSubmit={handleSubmit} className="login-form mobile-column">
+            <h2 className='title'>Iniciar sesión</h2>
+            <div className="mb-3">
+              <div className="input-icon">
+                <i className="fa-regular fa-envelope" style={{ color: "#7f7f7f" }} />
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder="Dirección de correo electrónico"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
+              </div>
             </div>
-          </div>
 
-          <div className="mb-3">
-            <div className="input-icon">
-              <i className="fa-solid fa-lock" style={{ color: "#7f7f7f" }} />
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Contraseña"
-                value={formData.password}
-                onChange={handleChange}
+            <div className="mb-3">
+              <div className="input-icon">
+                <i className="fa-solid fa-lock" style={{ color: "#7f7f7f" }} />
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Contraseña"
+                  value={formData.password}
+                  onChange={handleChange}
                 />
+              </div>
             </div>
-          </div>
 
-          <button type="submit" className="btn confirm-btn">
-            Confirmar
-          </button>
-          <div className="mb-3">
-            <Link to={"/forgot-password"}>
+            <button type="submit" className="btn confirm-btn">
+              Confirmar
+            </button>
+            <div className="mb-3">
+              <Link to={"/forgot-password"}>
 
-              <button type="button" className="btn btn-link forgot-password-btn">
-                Olvidé mi contraseña
-              </button>
-            </Link>
-          </div>
-        </form>
+                <button type="button" className="btn btn-link forgot-password-btn">
+                  Olvidé mi contraseña
+                </button>
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

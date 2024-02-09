@@ -18,15 +18,15 @@ export const Landing = () => {
                     <h1>Descubre Una Comunidad De Artistas</h1>
                     <h4 className="p-3">Para fotógrafos aficionados y profesionales, con categorías que abarcan desde retratos hasta fotografía de paisajes.</h4>
                     <Link to="/signUp">
-                    <button
-                        type="button"
-                        className="px-5 btn brd color-call color-text m-3">
-                        <i className="pe-2 fa-solid fa-rocket"></i>Comienza Aquí
-                    </button>
+                        <button
+                            type="button"
+                            className="px-5 btn brd color-call color-text m-3">
+                            <i className="pe-2 fa-solid fa-rocket"></i>Comienza Aquí
+                        </button>
                     </Link>
                 </div>
                 <div className="">
-                    <img src={testData3[10].fotoUrl} className="card-img-top" alt="Photo" />
+                    <img src={testData3[10].fotoUrl} className="card-img-top p-3" alt="Photo" />
                 </div>
             </div>
             <div className="e-claro mobile-column d-flex px-5 py-5 color-back container-fluid justify-content-between">
@@ -35,11 +35,11 @@ export const Landing = () => {
                     <h3 className="e-claro color-text px-5">Descubra Cómo Empezar</h3>
                 </div>
                 <Link to="/tips">
-                <button
-                    type="button"
-                    className="e-claro px-5 btn btn-outline-success color-text brd mt-5">
-                    <i className="pe-2 fa-solid fa-rocket"></i>Ver Consejos
-                </button>
+                    <button
+                        type="button"
+                        className="e-claro px-5 btn btn-outline-success color-text brd mt-5">
+                        <i className="pe-2 fa-solid fa-rocket"></i>Ver Consejos
+                    </button>
                 </Link>
             </div>
             <div className="e-claro mobile-column d-flex justify-content-around color-back color-text container-fluid">
@@ -81,11 +81,11 @@ export const Landing = () => {
                         <h3 className="e-claro color-text px-5">Consulte Nuestra Colección De Tendencias Actualizada Semanalmente</h3>
                     </div>
                     <Link to="/galeria">
-                    <button
-                        type="button"
-                        className="e-claro px-5 btn btn-outline-success color-text brd mt-5">
-                        <i className="pe-2 fa-solid fa-rocket"></i>Ver Colecciones
-                    </button>
+                        <button
+                            type="button"
+                            className="e-claro px-5 btn btn-outline-success color-text brd mt-5">
+                            <i className="pe-2 fa-solid fa-rocket"></i>Ver Colecciones
+                        </button>
                     </Link>
                 </div>
                 <div className="e-claro mobile-column d-flex justify-content-around color-back color-text container-fluid">
@@ -151,11 +151,11 @@ export const Landing = () => {
                     <h3 className="e-claro color-text px-5">Consulte A Los Creadores Mejor Calificados En Snapify</h3>
                 </div>
                 <Link to="/ranking-user">
-                <button
-                    type="button"
-                    className="e-claro px-5 btn btn-outline-success color-text brd mt-5">
-                    <i className="pe-2 fa-solid fa-rocket"></i>Ver Rankings
-                </button>
+                    <button
+                        type="button"
+                        className="e-claro px-5 btn btn-outline-success color-text brd mt-5">
+                        <i className="pe-2 fa-solid fa-rocket"></i>Ver Rankings
+                    </button>
                 </Link>
             </div>
             <div className="e-claro color-back pb-5 d-flex justify-content-evenly flex-wrap pt-3">
@@ -163,7 +163,7 @@ export const Landing = () => {
                     <ArtistCard key={index} {...data} />
                 ))}
             </div>
-           
+
             <div className="e-claro mobile-column container-fluid color-back justify-content-around align-items-center">
                 <div className="e-claro d-flex rounded-3 color-text color-back2 container align-items-center">
                     <div className="ghost e-claro">
@@ -173,10 +173,10 @@ export const Landing = () => {
                         <h2>Únase A Nuestro Boletín Semanal</h2>
                         <h4 className="e-claro p-3">Obtenga Promociones Y Actualizaciones Exclusivas Directamente En Su Bandeja De Entrada.</h4>
                         <div className="e-claro input-group d-flex align-items-baseline">
-						<input type="text" className="form-control" placeholder="Introduzca su correo electrónico aquí" aria-label="Enter your email here">
-						</input>
-						<button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscríbete</button>
-					</div>
+                            <input type="text" className="form-control" placeholder="Introduzca su correo electrónico aquí" aria-label="Enter your email here">
+                            </input>
+                            <button type="button" className=" btn rounded color-call color-text"><i className="pe-2 fa-regular fa-envelope"></i>Suscríbete</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,9 +187,9 @@ export const Landing = () => {
                     <div className="e-claro position-absolute d-flex-column justify-content-center text-center m-5 top-0 end-0">
                         <h1>Magic Mushrooms</h1>
                         <Link to="/events">
-                        <button type="button" className="px-5 btn rounded color-call color-text">
-                            <i className="pe-2 fa-regular fa-eye"></i>Ver Evento
-                        </button>
+                            <button type="button" className="px-5 btn rounded color-call color-text">
+                                <i className="pe-2 fa-regular fa-eye"></i>Ver Evento
+                            </button>
                         </Link>
                         {/* <Timer/> */}
                     </div>

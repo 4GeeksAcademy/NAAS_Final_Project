@@ -46,12 +46,13 @@ export const Navbar = () => {
             <div className="container-fluid">
                 <div className="d-flex pt-2">
                     <h4>
-                        <img
-                            src={rigoImageUrl}
-                            alt="logo"
-                            style={{ width: '40px', borderRadius: '100%', marginRight: '10px' }}
-                        />
-                        <Link to="/" className="color-text-nav text-decoration-none ">SNAPIFY</Link>
+                        <Link to="/" className="color-text-nav text-decoration-none ">
+                            <img
+                                src={rigoImageUrl}
+                                alt="logo"
+                                style={{ width: '40px', borderRadius: '100%', marginRight: '10px' }}
+                            />
+                            SNAPIFY</Link>
                     </h4>
                 </div>
                 {/* Resto del contenido del Layout */}
