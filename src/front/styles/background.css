@@ -17,7 +17,36 @@
     border: solid 5px rgb(0, 0, 0) !important
 }
 
-/* Estilos para el modo claro */
+/* Estilos para botones */
+
+.btn {
+    transition: transform 0.3s ease;
+    animation: pulsate 2.5s ease-in-out infinite;
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.05);
+    }
+
+    55% {
+        transform: scale(0.98);
+    }
+
+    100% {
+        transform: scale(1.02);
+    }
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+
 
 /* Estilos de Imágenes */
 
@@ -59,9 +88,55 @@
 
 .color-call {
     background: #64C247;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-/* Icon Color */
+.color-call::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #64C247, #FE5201);
+    z-index: -1;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.color-call:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.pulsate {
+    animation: pulsate 1.5s infinite alternate;
+}
+
+@keyframes pulsate {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+
+/* Icon Color and Style */
+.fa-rocket {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .fa-rocket {
+    transform: rotate(0deg);
+}
+
 
 .color-icon {
     color: #7f7f7f
