@@ -134,7 +134,13 @@ export const NavbarLoginAdmin = () => {
                                         Crear Eventos
                                     </Link>
                                 </li>
-                                <li><a className="dropdown-item" href="#"><i className="pe-2 color-text fa-solid fa-pen-to-square"></i>Modificar Eventos</a></li>
+                                <li>
+                                    
+                                    <Link to="/update-event" className="dropdown-item">
+                                        <i className="pe-2 color-text fa-solid fa-pen-to-square"></i>
+                                        Modificar Eventos
+                                    </Link>
+                                </li>
                             </ul>
                         </li>
                     </ul>
