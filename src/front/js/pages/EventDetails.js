@@ -87,7 +87,7 @@ const EventsDetails = () => {
                 </div>
                 <div className="e-claro d-flex flex-column" style={{ marginTop: "30px" }}>
                     <Timer endDate={currentEvent.end_date} />
-                    {isUserJoined ? (
+                    {/* {isUserJoined ? (
                         <button
                             className="btn color-call button-event"
                             onClick={handleJoinOrLeaveEvent}
@@ -103,7 +103,7 @@ const EventsDetails = () => {
 
                             {store.joiningEvent ? "Uniéndome..." : "Unirme"}
                         </button>
-                    )}
+                    )} */}
                     <Link to="/terms">
                         <button className="btn button-event" style={{ background: "#FE5201" }}>Bases y condiciones</button>
                     </Link>

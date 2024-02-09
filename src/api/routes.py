@@ -266,8 +266,9 @@ def get_user_photos(user_id):
         
         user_photos = Photos.query.filter_by(user_id=user_id).all()
 
+        # Si no hay fotos para el usuario, devolver un mensaje indicando que no se encontraron fotos
         if not user_photos:
-            return jsonify({'msg': 'No photos found for the user'}), 404
+            return jsonify({'msg': 'No photos found for the user'}), 200
 
         # Serializar cada objeto de foto
         serialized_photos = []
@@ -280,12 +281,13 @@ def get_user_photos(user_id):
                 'category_id': photo.category_id,
                 'user_id': photo.user_id,
                 'event_id': photo.event_id
-                          })
+            })
 
         return jsonify({'msg': 'ok', 'photos': serialized_photos}), 200
 
     except Exception as e:
         return jsonify({'msg': str(e)}), 500
+    
 #traer fotos por id del evento
 @api.route('/get-event-photos/<int:event_id>', methods=['GET'])
 @jwt_required()
@@ -294,7 +296,7 @@ def get_event_photos(event_id):
         event_photos = Photos.query.filter_by(event_id=event_id).all()
 
         if not event_photos:
-            return jsonify({'msg': 'No se encontraron fotos'}),404
+            return jsonify({'msg': 'No hay fotos disponibles para el evento con ID {}'.format(event_id)}), 200
         
         serialized_photos = []
         for photo in event_photos:
@@ -308,14 +310,10 @@ def get_event_photos(event_id):
                 'event_id': photo.event_id
             })
 
-        return jsonify({'msg': 'ok', 'photos': serialized_photos}),200
+        return jsonify({'msg': 'ok', 'photos': serialized_photos}), 200
     
     except Exception as e:
-        return jsonify({'msg': str(e)}),500
-
-
-
-
+        return jsonify({'error': 'Error al procesar la solicitud: {}'.format(str(e))}), 500
 
 
 #traer todas las fotos de la bbdd (para galeria)

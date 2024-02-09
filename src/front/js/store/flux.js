@@ -385,18 +385,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getEventPhotos: async (event_id) => {
                 try {
-                    const token = sessionStorage.getItem('token')
-
+                    const token = sessionStorage.getItem('token');
+            
                     if (!token) {
-                        console.error("token not found");
-                        return
+                        console.error("Token not found");
+                        return;
                     }
-
+            
                     if (!event_id) {
-                        console.log("event_id not found")
-                        return
+                        console.log("Event_id not found");
+                        return;
                     }
-
+            
                     const response = await fetch(`${process.env.BACKEND_URL}/api/get-event-photos/${event_id}`, {
                         method: "GET",
                         headers: {
@@ -404,7 +404,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Authorization": `Bearer ${token}`
                         }
                     });
-
+            
                     if (!response.ok) {
                         if (response.status === 404) {
                             console.log("Event photos not found");
@@ -414,16 +414,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                         throw new Error(`Status": ${response.status}`);
                     }
-
-                    const data = await response.json()
+            
+                    const data = await response.json();
                     if (data && data.photos && data.photos.length > 0) {
-                        setStore({ eventPhotos: data.photos })
-
+                        setStore({ eventPhotos: data.photos });
                     } else {
-                        console.log("photos and data not found")
+                        console.log("Photos and data not found");
                     }
                 } catch (error) {
-                    console.error("Error fetching event photos:", error)
+                    console.error("Error fetching event photos:", error);
                 }
             },
             setEventPhotos: (photos) => {
