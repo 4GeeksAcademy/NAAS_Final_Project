@@ -259,7 +259,6 @@ def get_user_photos(user_id):
     
 #traer todas las fotos de la bbdd (para galeria)
 @api.route('/get-all-photos', methods=['GET'])
-@jwt_required()
 def get_all_photos():
     try:
        
@@ -525,7 +524,8 @@ def get_user_joined_events():
         return jsonify(serialized_events), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
+    
+#traer datos del usuario por el token
 @api.route('/user-data', methods=['GET'])
 @jwt_required() 
 def get_user_data():
@@ -542,6 +542,23 @@ def get_user_data():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+#traer datos del usuario por user_id
+@api.route('/user-data/<int:user_id>', methods=['GET'])
+def get_user_data_by_id(user_id):
+    try:
+        user_data = User_data.query.filter_by(user_id=user_id).first()
+
+        if not user_data:
+            return jsonify({'msg': 'Datos del usuario no encontrados'}), 404
+
+        serialized_user_data = user_data.serialize()
+
+        return jsonify(serialized_user_data), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 
 @api.route('/update-user-data', methods=['PUT'])
 @jwt_required() 

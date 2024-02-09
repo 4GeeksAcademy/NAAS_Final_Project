@@ -31,7 +31,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             leavingEvent: false,
             userJoinedEvent: false,
             userData: [],
+            userDataById: [],
             userPhotosData: [],
+            allPhotosData: [],
         },
         actions: {
             exampleFunction: () => {
@@ -263,6 +265,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error:", error);
                 }
             },
+            getUserDataById: async (user_id) => {
+                try {
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/user-data/${user_id}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                        }
+                    });
+            
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status}`);
+                    }
+            
+                    const data = await response.json();
+                    setStore({ userDataById: data });
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            },
+
+
             updateUserData: async (UserData) => {
                 try {
                     const token = sessionStorage.getItem('token');
@@ -324,6 +347,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     // Verificar si se recibieron fotos
                     if (data && data.photos && data.photos.length > 0) {
                         setStore({ userPhotosData: data.photos });
+                        
                     } else {
                         console.log("No se encontraron fotos para el usuario");
                     }
@@ -331,8 +355,33 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error fetching user photos:", error);
                 }
             },
-        }
-    };
-};
+            getAllPhotosWithData: async () => {
+                try {
+                    
 
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/get-all-photos`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                    
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Error fetching photos');
+                    }
+
+                    const data = await response.json();
+        
+                    setStore({ allPhotosData: data.photos })
+                
+                } catch (error) {
+                    console.error('Error fetching photos:', error);
+
+                }
+
+            },
+        }
+    }
+}
 export default getState;
